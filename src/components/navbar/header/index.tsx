@@ -1,6 +1,8 @@
 import { Box, Container, Flex } from '@chakra-ui/react'
 import Image from 'next/image'
 
+import LogoSvg from '@/assets/svg/LogoSvg'
+
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
 import FilterHead from '../filter-header'
@@ -16,6 +18,7 @@ const Header = () => {
 				top='0'
 				right='0'
 				w='100%'
+				zIndex='30'
 			>
 				<Container maxW={CONTAINER_WIDTH}>
 					<Flex
@@ -37,11 +40,15 @@ const Header = () => {
 					pt='40px'
 					pb='70px'
 				>
-					<Image
-						src='/logo.svg'
+					{/* <Image
+						src='/logo.png'
 						alt='Logo'
 						width={157}
 						height={46}
+					/> */}
+					<LogoSvg
+						width='157'
+						height='46'
 					/>
 				</Flex>
 			</Container>

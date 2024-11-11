@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Container, Flex, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
@@ -8,7 +10,11 @@ import SliderImage from '@/assets/img/slider-image.jpeg'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
+import { useFullWindowSize } from '@/hooks/useFullHeight'
+
 const IdealCity = () => {
+	const { clientWidth } = useFullWindowSize()
+	console.log(clientWidth)
 	return (
 		<Box mt='125px'>
 			<Container maxW={CONTAINER_WIDTH}>
@@ -28,10 +34,14 @@ const IdealCity = () => {
 			>
 				<Flex
 					gap='6'
-					px={{ xl: '30px', base: '4' }}
+					px={{
+						xl: `${(clientWidth - parseInt(CONTAINER_WIDTH)) / 2 + 16}px`,
+						base: '4'
+					}}
 				>
 					{[1, 2, 3, 4, 5, 6, 7].map(el => (
 						<Flex
+							key={el}
 							flexDirection='column'
 							alignItems='center'
 						>

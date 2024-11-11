@@ -10,6 +10,7 @@ import {
 import { PropsWithChildren, useState } from 'react'
 import { Toaster } from 'sonner'
 
+import Footer from '@/components/navbar/footer'
 import Header from '@/components/navbar/header'
 
 export function Providers({ children }: PropsWithChildren) {
@@ -31,9 +32,11 @@ export function Providers({ children }: PropsWithChildren) {
 				<Box
 					mx='auto'
 					minH={'100vh'}
+					pb={{ md: '100px', base: '60px' }}
 				>
 					{children}
 				</Box>
+				<Footer />
 				<Toaster
 					theme='light'
 					position='top-center'
