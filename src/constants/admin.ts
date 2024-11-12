@@ -1,9 +1,9 @@
-export const PHONE_NUMBER = '+996332123456'
+export const PHONE_NUMBER = '+971 54 204 4777'
 
 export const WHATSAPP_NUMBER = PHONE_NUMBER
 
-export const EMAIL_ADDRESS = 'agrico@gmail.com'
-export const INSTAGRAM = 'agrico'
+export const EMAIL_ADDRESS = 'info@vs-realestate.com'
+export const INSTAGRAM = 'vsadigoff'
 
 export const LOCATION = 'Бишкек, Улица Ибраимова, 64/2'
 

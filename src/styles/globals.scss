@@ -3,27 +3,26 @@
 @import 'swiper';
 
 .phone-input {
-	background: transparent !important;
-	margin-bottom: 12px;
-	border-radius: 16px !important;
-	border: 1px solid #1a1d201f !important;
+	background: #ffffff !important;
+	border-radius: 32px !important;
+	border: 1px solid #3331394d !important;
 	input {
 		width: 100%;
 		font-size: 16px !important;
-		line-height: 22px !important;
+		line-height: 16.94px !important;
 		font-weight: 400 !important;
 		color: #232d37 !important;
 		background: transparent !important;
-		height: 56px !important;
+		height: 50px !important;
 		border: none !important;
-		border-top-right-radius: 16px !important;
-		border-bottom-right-radius: 16px !important;
+		border-top-right-radius: 32px !important;
+		border-bottom-right-radius: 32px !important;
 		overflow: hidden;
 	}
 	.react-international-phone-country-selector {
 		button {
-			border-top-left-radius: 16px !important;
-			border-bottom-left-radius: 16px !important;
+			border-top-left-radius: 32px !important;
+			border-bottom-left-radius: 32px !important;
 			overflow: hidden;
 			height: 100%;
 			width: 55px;

@@ -11,7 +11,6 @@ export interface IInputComponentProps {
 	value?: string
 	handleChange?: (value: string) => void
 	required?: boolean
-	title?: string
 }
 
 const PhoneInputComponent = ({
@@ -19,8 +18,7 @@ const PhoneInputComponent = ({
 	placeholder = 'Номер',
 	value,
 	handleChange,
-	required = true,
-	title = 'Номер телефона'
+	required = true
 }: IInputComponentProps) => {
 	const countries = defaultCountries.filter(country => {
 		const { iso2 } = parseCountry(country)
@@ -28,8 +26,7 @@ const PhoneInputComponent = ({
 	})
 	return (
 		<PhoneInput
-			defaultCountry='kg'
-			// countries={countries}
+			defaultCountry='ae'
 			name={name}
 			value={value}
 			required={required}
