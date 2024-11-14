@@ -1,0 +1,46 @@
+.burger-active {
+	div:nth-child(1) {
+		transform: rotate(45deg) translateY(16.6px);
+		margin-left: 11px;
+	}
+	div:nth-child(2) {
+		opacity: 0;
+		transform: translateX(-10px);
+	}
+	div:nth-child(3) {
+		transform: rotate(-45deg) translateY(-16.6px);
+		margin-left: 11px;
+	}
+}
+
+.animate-button {
+	overflow: hidden;
+	position: relative;
+	&::after {
+		position: absolute;
+		content: '';
+		height: 100%;
+		width: 0;
+		right: 0;
+		top: 0;
+		opacity: 0;
+		// background: #69c311;
+		transition: 1s;
+		z-index: 1;
+	}
+	&:focus {
+		.arrow {
+			// transform: translateX(-100%);
+			position: relative;
+			z-index: 2;
+		}
+		&::after {
+			width: 100%;
+			opacity: 1;
+		}
+		p {
+			// padding-left: 50px;
+			transition: 0.5s;
+		}
+	}
+}

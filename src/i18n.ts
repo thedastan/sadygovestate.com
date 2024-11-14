@@ -9,17 +9,17 @@ export const locales_data: ILocale[] = [
 	{
 		name: 'english',
 		locale: EnumIntl.ENGLISH,
-		short_name: 'Eng'
+		short_name: 'ENG'
 	},
 	{
 		name: 'arabic',
 		locale: EnumIntl.ARABIC,
-		short_name: 'عربي'
+		short_name: 'AR'
 	},
 	{
 		name: 'русский',
 		locale: EnumIntl.RUSSIAN,
-		short_name: 'Рус'
+		short_name: 'RU'
 	}
 ]
 

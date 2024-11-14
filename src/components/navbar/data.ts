@@ -62,5 +62,5 @@ export const SocialMediaIcons = {
 	TELEGRAM: FaTelegramPlane,
 	WHATSAPP: RiWhatsappFill,
 	PHONE: RiPhoneFill,
-	YOUTUBE: RiInstagramFill
+	YOUTUBE: RiYoutubeFill
 }

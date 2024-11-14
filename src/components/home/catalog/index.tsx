@@ -1,12 +1,19 @@
+'use client'
+
 import { Container, Flex, SimpleGrid } from '@chakra-ui/react'
+import Link from 'next/link'
 import { GoArrowUpRight } from 'react-icons/go'
 
 import CatalogCard from '@/components/ui/cards/catalog-card'
 import TitleComponent from '@/components/ui/texts/TitleComponent'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
+import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
+
+import useTypedLocale from '@/hooks/useLocale'
 
 const CatalogHome = () => {
+	const locale = useTypedLocale()
 	return (
 		<Container
 			maxW={CONTAINER_WIDTH}
@@ -17,17 +24,19 @@ const CatalogHome = () => {
 				alignItems='center'
 			>
 				<TitleComponent query='объектов'>Каталог объектов</TitleComponent>
-				<Flex
-					alignItems='center'
-					justifyContent='center'
-					w='44px'
-					h='44px'
-					rounded='50%'
-					border='1px solid #DFDFDF'
-					color='#000000'
-				>
-					<GoArrowUpRight fontSize='34px' />
-				</Flex>
+				<Link href={DASHBOARD_PAGES.CATALOG(locale)}>
+					<Flex
+						alignItems='center'
+						justifyContent='center'
+						w='44px'
+						h='44px'
+						rounded='50%'
+						border='1px solid #DFDFDF'
+						color='#000000'
+					>
+						<GoArrowUpRight fontSize='34px' />
+					</Flex>
+				</Link>
 			</Flex>
 
 			<SimpleGrid

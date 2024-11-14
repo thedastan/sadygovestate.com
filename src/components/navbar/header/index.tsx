@@ -1,5 +1,4 @@
 import { Box, Container, Flex } from '@chakra-ui/react'
-import Image from 'next/image'
 
 import LogoSvg from '@/assets/svg/LogoSvg'
 
@@ -29,7 +28,7 @@ const Header = () => {
 					>
 						<BurgerMenu />
 						<FilterHead />
-						<Box w='100px' />
+						<Box w='60px' />
 					</Flex>
 				</Container>
 			</Flex>
@@ -40,12 +39,6 @@ const Header = () => {
 					pt='40px'
 					pb='70px'
 				>
-					{/* <Image
-						src='/logo.png'
-						alt='Logo'
-						width={157}
-						height={46}
-					/> */}
 					<LogoSvg
 						width='157'
 						height='46'

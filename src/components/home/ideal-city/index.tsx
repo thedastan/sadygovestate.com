@@ -14,7 +14,6 @@ import { useFullWindowSize } from '@/hooks/useFullHeight'
 
 const IdealCity = () => {
 	const { clientWidth } = useFullWindowSize()
-	console.log(clientWidth)
 	return (
 		<Box mt='125px'>
 			<Container maxW={CONTAINER_WIDTH}>
