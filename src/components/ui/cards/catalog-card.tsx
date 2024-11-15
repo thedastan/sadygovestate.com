@@ -15,6 +15,8 @@ import useTypedLocale from '@/hooks/useLocale'
 import Description from '../texts/Description'
 import Title from '../texts/Title'
 
+import CharacteristicsCard from './characteristic-card'
+
 const CatalogCard = () => {
 	const locale = useTypedLocale()
 	return (
@@ -58,7 +60,6 @@ const CatalogCard = () => {
 							</Text>
 						</Flex>
 					</Flex>
-
 					<Description
 						mt='18px'
 						fontSize='18px'
@@ -72,52 +73,25 @@ const CatalogCard = () => {
 						gap='1'
 						justifyContent='space-between'
 					>
-						<GrayCatalogCard
+						<CharacteristicsCard
 							icon={CatalogBedIcon}
 							text='2'
+							isMini={true}
 						/>
-						<GrayCatalogCard
+						<CharacteristicsCard
 							icon={CatalogBathroomIcon}
 							text='1'
+							isMini={true}
 						/>
-						<GrayCatalogCard
+						<CharacteristicsCard
 							icon={CatalogArtboardIcon}
 							text='2,800 sqft / 3,000 sqmt'
+							isMini={true}
 						/>
 					</Flex>
 				</Box>
 			</Link>
 		</Box>
-	)
-}
-
-interface GrayCatalogCardProps {
-	icon: () => JSX.Element
-	text: string
-}
-function GrayCatalogCard(props: GrayCatalogCardProps) {
-	return (
-		<Flex
-			alignItems='center'
-			px='3'
-			py='1'
-			rounded='100px'
-			h='28px'
-			gap='6px'
-			bg='#F2F2F2'
-		>
-			<props.icon />
-			<Text
-				fontWeight='400'
-				fontSize='14px'
-				lineHeight='16.1px'
-				letterSpacing='1px'
-				color='#333139'
-				whiteSpace='nowrap'
-			>
-				{props.text}
-			</Text>
-		</Flex>
 	)
 }
 
