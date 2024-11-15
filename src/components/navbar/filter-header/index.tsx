@@ -21,7 +21,7 @@ const FilterHead = () => {
 		>
 			<FilterCard
 				icon={LocationIconSvg}
-				list={[]}
+				list={['Россия', 'ОАЭ', 'Саудовская Аравия', 'ОАЭ', 'Таиланд']}
 				placeholder='Выберите страну'
 				title='Страна'
 			/>

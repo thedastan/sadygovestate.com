@@ -2,6 +2,7 @@ import { Box, Container, Divider, Flex, Stack, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 
 import Title from '@/components/ui/texts/Title'
+import Title32 from '@/components/ui/texts/Title32'
 
 import {
 	EMAIL_ADDRESS,
@@ -29,27 +30,15 @@ const Footer = () => {
 				<Box>
 					<LogoSvg />
 					<Flex
+						mt='8'
 						flexDirection='column'
 						alignItems='start'
-						fontSize='32px'
-						lineHeight='36.8px'
-						color='#3F3F3F'
 					>
 						<Link href={`tel:${PHONE_NUMBER}`}>
-							<Text
-								mt='8'
-								fontWeight='700'
-							>
-								{PHONE_NUMBER}
-							</Text>
+							<Title32 fontWeight='700'>{PHONE_NUMBER}</Title32>
 						</Link>
 						<Link href={EMAIL_ADDRESS_LINK}>
-							<Text
-								mt='14px'
-								fontWeight='400'
-							>
-								{EMAIL_ADDRESS}
-							</Text>
+							<Title32 mt='14px'>{EMAIL_ADDRESS}</Title32>
 						</Link>
 						<Text
 							mt='32px'

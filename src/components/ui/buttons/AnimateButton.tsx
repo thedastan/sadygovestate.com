@@ -19,10 +19,12 @@ const AnimateButton = ({
 	const [theme, setTheme] = useState(isLight)
 	const ref = useRef<any>(null)
 	const width = ref.current?.offsetWidth ? ref.current?.offsetWidth : 0
+
 	return (
 		<Button
 			ref={ref}
 			onFocus={() => setTheme(!theme)}
+			onBlur={() => setTheme(!!isLight)}
 			className='animate-button'
 			transition='.4s'
 			w='100%'
@@ -42,6 +44,7 @@ const AnimateButton = ({
 			type={type}
 			isDisabled={disabled}
 			_focus={{ boxShadow: 'none' }}
+			position='relative'
 			sx={{
 				'&:focus': {
 					'.arrow': {
@@ -54,17 +57,29 @@ const AnimateButton = ({
 			<p>{children}</p>
 
 			<Flex
-				className='arrow'
-				alignItems='center'
-				justifyContent='center'
-				transition='.6s'
 				w='46px'
 				h='46px'
-				rounded='50%'
-				bg={theme ? '#4A4A4A' : '#FFFFFF'}
-				color={theme ? '#FFFFFF' : '#4A4A4A'}
+			/>
+			<Flex
+				position='absolute'
+				right='10px'
+				w='46px'
+				h='100%'
+				alignItems='center'
 			>
-				<GoArrowUpRight fontSize='22px' />
+				<Flex
+					className='arrow'
+					alignItems='center'
+					justifyContent='center'
+					transition='.6s'
+					w='46px'
+					h='46px'
+					rounded='50%'
+					bg={theme ? '#4A4A4A' : '#FFFFFF'}
+					color={theme ? '#FFFFFF' : '#4A4A4A'}
+				>
+					<GoArrowUpRight fontSize='22px' />
+				</Flex>
 			</Flex>
 		</Button>
 	)

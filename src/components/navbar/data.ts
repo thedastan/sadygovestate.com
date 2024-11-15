@@ -34,29 +34,6 @@ export const navbar = [
 	}
 ]
 
-export const social_contacts = [
-	{
-		name: 'Instagram',
-		href: INSTAGRAM_LINK,
-		icon: ''
-	},
-	{
-		name: 'Youtube',
-		href: YOUTUBE_LINK,
-		icon: ''
-	},
-	{
-		name: 'Telegram',
-		href: TELEGRAM_LINK,
-		icon: ''
-	},
-	{
-		name: 'Whatsapp',
-		href: WHATSAPP_LINK,
-		icon: ''
-	}
-]
-
 export const SocialMediaIcons = {
 	INSTAGRAM: RiInstagramFill,
 	TELEGRAM: FaTelegramPlane,
@@ -64,3 +41,26 @@ export const SocialMediaIcons = {
 	PHONE: RiPhoneFill,
 	YOUTUBE: RiYoutubeFill
 }
+
+export const social_contacts = [
+	{
+		name: 'Instagram',
+		href: INSTAGRAM_LINK,
+		icon: SocialMediaIcons.INSTAGRAM
+	},
+	{
+		name: 'Youtube',
+		href: YOUTUBE_LINK,
+		icon: SocialMediaIcons.YOUTUBE
+	},
+	{
+		name: 'Telegram',
+		href: TELEGRAM_LINK,
+		icon: SocialMediaIcons.TELEGRAM
+	},
+	{
+		name: 'Whatsapp',
+		href: WHATSAPP_LINK,
+		icon: SocialMediaIcons.WHATSAPP
+	}
+]

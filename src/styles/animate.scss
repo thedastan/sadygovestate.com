@@ -29,8 +29,8 @@
 		z-index: 1;
 	}
 	&:focus {
+		flex-direction: row-reverse;
 		.arrow {
-			// transform: translateX(-100%);
 			position: relative;
 			z-index: 2;
 		}
@@ -39,8 +39,8 @@
 			opacity: 1;
 		}
 		p {
-			// padding-left: 50px;
-			transition: 0.5s;
+			
+			padding-right: 10px;
 		}
 	}
 }

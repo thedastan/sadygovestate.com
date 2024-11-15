@@ -1,11 +1,13 @@
 'use client'
 
-import { Box, Stack, Text } from '@chakra-ui/react'
+import { Box, Stack } from '@chakra-ui/react'
 import { ChangeEvent, useState } from 'react'
 
+import AnimateButton from '../ui/buttons/AnimateButton'
 import InputComponent from '../ui/inputs/InputComponent'
 import PhoneInputComponent from '../ui/inputs/PhoneInputComponent'
 import Description from '../ui/texts/Description'
+import Title32 from '../ui/texts/Title32'
 
 const FeedbackForm = () => {
 	const [value, setValue] = useState({
@@ -35,15 +37,7 @@ const FeedbackForm = () => {
 				w='100%'
 				mx='auto'
 			>
-				<Text
-					fontWeight='400'
-					lineHeight='36.8px'
-					fontSize='32px'
-					color='#333139'
-					textAlign='center'
-				>
-					Онлайн-консультация
-				</Text>
+				<Title32 textAlign='center'>Онлайн-консультация</Title32>
 				<Description
 					fontSize='18px'
 					lineHeight='26px'
@@ -82,6 +76,13 @@ const FeedbackForm = () => {
 							as='textArea'
 						/>
 					</Stack>
+
+					<AnimateButton
+						type='submit'
+						mt='30px'
+					>
+						Забронировать консультацию
+					</AnimateButton>
 				</form>
 			</Box>
 		</Box>

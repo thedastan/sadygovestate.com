@@ -13,11 +13,13 @@ import { useRouter } from 'next/navigation'
 
 import AnimateButton from '@/components/ui/buttons/AnimateButton'
 
+import { PHONE_NUMBER, WHATSAPP_LINK } from '@/constants/admin'
+
 import { IntlType } from '@/types/intl.types'
 
 import useTypedLocale from '@/hooks/useLocale'
 
-import { navbar } from '../data'
+import { navbar, social_contacts } from '../data'
 
 import { locales_data } from '@/i18n'
 
@@ -105,103 +107,129 @@ const BurgerMenu = () => {
 				>
 					<Box
 						w='800px'
-						// transform={
-						// 	!isOpen
-						// 		? 'translateX(-800px) rotate(-45deg)'
-						// 		: 'translateX(0) rotate(0)'
-						// }
 						ml={isOpen ? '0' : '-800px'}
 						transition='.6s'
 						h='100%'
 						borderRightRadius='300px'
 						bg='#FFFFFF'
 					>
-						<Box
+						<Flex
 							w={drawerWidth}
 							h='100%'
 							pt='47px'
 							px='4'
+							flexDirection='column'
+							justifyContent='space-between'
 						>
-							<Flex
-								onClick={onClose}
-								cursor='pointer'
-								position='absolute'
-								left={isOpen ? '4' : '8'}
-								top={isOpen ? '47px' : '23px'}
-								zIndex='5'
-								transition='.6s'
-								justifyContent='center'
-								alignItems='center'
-								w='66px'
-								h='66px'
-								rounded='50%'
-								bg='#F2F2F2'
-							>
-								{BurgerSticks}
-							</Flex>
-
-							<Flex
-								ml={{ md: '80px', base: '0' }}
-								justifyContent='space-between'
-								alignItems='center'
-								gap='4'
-							>
-								<AnimateButton
-									maxW='218px'
-									isLight={true}
-								>
-									Связаться с нами
-								</AnimateButton>
+							<Box>
 								<Flex
-									border='1px solid #F2F2F2'
-									rounded='51px'
-									h='30px'
-									padding='2px'
+									onClick={onClose}
+									cursor='pointer'
+									position='absolute'
+									left={isOpen ? '4' : '8'}
+									top={isOpen ? '47px' : '23px'}
+									zIndex='5'
+									transition='.6s'
+									justifyContent='center'
+									alignItems='center'
+									w='66px'
+									h='66px'
+									rounded='50%'
+									bg='#F2F2F2'
 								>
-									{locales_data.map((el, idx) => (
-										<Button
-											key={idx}
-											onClick={() => changeIntl(el.locale)}
-											variant='none'
-											bg={
-												el.locale === localeActive ? '#F2F2F2' : 'transparent'
-											}
-											color='#121212'
-											lineHeight='16.1px'
-											fontWeight='400'
-											rounded='39px'
-											h='100%'
-											px={el.locale === localeActive ? '3' : '11.5px'}
-										>
-											{el.short_name}
-										</Button>
-									))}
+									{BurgerSticks}
 								</Flex>
-							</Flex>
 
-							<Stack
-								spacing='5'
-								mt={{ md: '68px', base: '48px' }}
-								alignItems='start'
-							>
-								{navbar.map((el, idx) => (
+								<Flex
+									ml={{ md: '80px', base: '0' }}
+									justifyContent='space-between'
+									alignItems='center'
+									gap='4'
+								>
 									<Link
-										key={idx}
-										href={el.path}
-										onClick={onClose}
+										href={WHATSAPP_LINK}
+										target='_blank'
 									>
-										<Text
-											fontSize='32px'
-											lineHeight='32px'
-											fontWeight='400'
-											color='#000000'
+										<AnimateButton
+											maxW='218px'
+											isLight={true}
 										>
-											{el.name}
-										</Text>
+											Связаться с нами
+										</AnimateButton>
 									</Link>
+									<Flex
+										border='1px solid #F2F2F2'
+										rounded='51px'
+										h='30px'
+										padding='2px'
+									>
+										{locales_data.map((el, idx) => (
+											<Button
+												key={idx}
+												onClick={() => changeIntl(el.locale)}
+												variant='none'
+												bg={
+													el.locale === localeActive ? '#F2F2F2' : 'transparent'
+												}
+												color='#121212'
+												lineHeight='16.1px'
+												fontWeight='400'
+												rounded='39px'
+												h='100%'
+												px={el.locale === localeActive ? '3' : '11.5px'}
+											>
+												{el.short_name}
+											</Button>
+										))}
+									</Flex>
+								</Flex>
+
+								<Stack
+									spacing='5'
+									mt={{ md: '68px', base: '48px' }}
+									alignItems='start'
+								>
+									{navbar.map((el, idx) => (
+										<Link
+											key={idx}
+											href={el.path}
+											onClick={onClose}
+										>
+											<Text
+												fontSize='32px'
+												lineHeight='32px'
+												fontWeight='400'
+												color='#000000'
+											>
+												{el.name}
+											</Text>
+										</Link>
+									))}
+								</Stack>
+							</Box>
+
+							<Flex
+								gap='25.2px'
+								mb='40px'
+							>
+								{social_contacts.map((el, idx) => (
+									<Flex
+										key={idx}
+										bg='#333139'
+										w='63px'
+										h='63px'
+										rounded='50%'
+										justifyContent='center'
+										alignItems='center'
+									>
+										<el.icon
+											color='#FFFFFF'
+											fontSize='30px'
+										/>
+									</Flex>
 								))}
-							</Stack>
-						</Box>
+							</Flex>
+						</Flex>
 					</Box>
 				</Box>
 			</Box>

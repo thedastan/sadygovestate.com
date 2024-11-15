@@ -19,6 +19,7 @@ import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
 import { SocialMediaIcons } from '../navbar/data'
 import Description from '../ui/texts/Description'
+import Title32 from '../ui/texts/Title32'
 
 const Countries = (props: { mt: ResponsiveValue<string> }) => {
 	const [activeCity, setActiveCity] = useState(0)
@@ -42,13 +43,8 @@ const Countries = (props: { mt: ResponsiveValue<string> }) => {
 						bg='#FFFFFF'
 						padding={'32px 30px 27px 32px'}
 					>
-						<Text
-							fontSize='32px'
-							lineHeight='36.8px'
-							color='#333139'
-						>
-							Абу-Даби
-						</Text>
+						<Title32>Абу-Даби</Title32>
+
 						<Description
 							mt='10px'
 							fontSize='18px'
