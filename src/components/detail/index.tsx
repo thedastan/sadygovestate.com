@@ -32,30 +32,39 @@ import TitleComponent from '../ui/texts/TitleComponent'
 
 const PropertyDetail = () => {
 	const { clientWidth } = useFullWindowSize()
+
+	const TitleDetailPage = (
+		<>
+			<TitleComponent>Люксовый жилой комплекс в Бангоке</TitleComponent>
+			<Flex
+				mt={{ md: '4', base: '3' }}
+				gap='3'
+				alignItems='center'
+			>
+				<FiMapPin fontSize='16px' />
+				<Description
+					fontSize='14px'
+					lineHeight='16.94px'
+				>
+					The Collection, St.Regis Resort, Saadiyat Island, Abu Dhabi
+				</Description>
+			</Flex>
+		</>
+	)
 	return (
 		<Box>
 			<Container maxW={CONTAINER_WIDTH}>
-				<Flex gap={{ xl: '52px', md: '24px', base: '34px' }}>
+				<Flex
+					gap={{ xl: '52px', md: '24px', base: '34px' }}
+					flexDirection={{ lg: 'row', base: 'column-reverse' }}
+				>
 					<Box
 						maxW='650px'
 						w={{ xl: '650px', base: '100%' }}
 					>
-						<TitleComponent>Люксовый жилой комплекс в Бангоке</TitleComponent>
+						<Box display={{ lg: 'block', base: 'none' }}>{TitleDetailPage}</Box>
 						<Flex
-							mt='4'
-							gap='3'
-							alignItems='center'
-						>
-							<FiMapPin fontSize='16px' />
-							<Description
-								fontSize='14px'
-								lineHeight='16.94px'
-							>
-								The Collection, St.Regis Resort, Saadiyat Island, Abu Dhabi
-							</Description>
-						</Flex>
-						<Flex
-							mt='43px'
+							mt={{ md: '43px', base: '0' }}
 							gap='30px'
 							alignItems='center'
 						>
@@ -73,7 +82,6 @@ const PropertyDetail = () => {
 								subtitle='Квартира'
 							/>
 						</Flex>
-
 						<Flex
 							my={{ md: '40px', base: '30px' }}
 							gap='6px'
@@ -97,7 +105,6 @@ const PropertyDetail = () => {
 							/>
 							<SaveAsPdfButton />
 						</Flex>
-
 						<Description
 							lineHeight='26px'
 							color='#12141D'
@@ -107,7 +114,6 @@ const PropertyDetail = () => {
 							города. Из окон открывается панорамный вид на город, создавая
 							атмосферу уюта и комфорта.
 						</Description>
-
 						<Box
 							mt='4'
 							bg='#F2F2F2'
@@ -128,7 +134,13 @@ const PropertyDetail = () => {
 						w='100%'
 					>
 						<Box
-							h='500px'
+							display={{ lg: 'none', base: 'block' }}
+							mb='3'
+						>
+							{TitleDetailPage}
+						</Box>
+						<Box
+							h={{ lg: '500px', base: '464px' }}
 							w='100%'
 							rounded='16px'
 							overflow='hidden'
@@ -137,32 +149,37 @@ const PropertyDetail = () => {
 								src={DefImage}
 								alt='Image'
 								className='full-image'
+								width={800}
+								height={500}
 							/>
 						</Box>
 
-						<SimpleGrid
+						<Flex
 							mt='14px'
-							spacing='14px'
-							columns={3}
+							overflow='auto'
+							className='unscroll'
+							w='100%'
 						>
-							{[1, 2, 3].map(el => (
-								<Box
-									key={el}
-									h='260px'
-									w='100%'
-									rounded='16px'
-									overflow='hidden'
-								>
-									<Image
-										src={DefImage}
-										alt='Image'
-										className='full-image'
-										width={257}
-										height={260}
-									/>
-								</Box>
-							))}
-						</SimpleGrid>
+							<Flex gap='14px'>
+								{[1, 2, 3, 4].map(el => (
+									<Box
+										key={el}
+										h={{ lg: '260px', sm: '180px', base: '113.75px' }}
+										w={{ xl: '100%', sm: '170px', base: '112.5px' }}
+										rounded='16px'
+										overflow='hidden'
+									>
+										<Image
+											src={DefImage}
+											alt='Image'
+											className='full-image'
+											width={257}
+											height={260}
+										/>
+									</Box>
+								))}
+							</Flex>
+						</Flex>
 					</Box>
 				</Flex>
 			</Container>
@@ -180,16 +197,20 @@ const PropertyDetail = () => {
 				className='unscroll'
 			>
 				<Flex
-					gap='6'
+					gap={{ md: '6', base: '3' }}
 					px={{
 						xl: `${(clientWidth - parseInt(CONTAINER_WIDTH)) / 2 + 16}px`,
 						base: '4'
 					}}
 				>
-					<CatalogCard />
-					<CatalogCard />
-					<CatalogCard />
-					<CatalogCard />
+					{[1, 2, 3, 4].map(el => (
+						<Box
+							key={el}
+							minW='357px'
+						>
+							<CatalogCard />
+						</Box>
+					))}
 				</Flex>
 			</Flex>
 		</Box>
@@ -253,7 +274,7 @@ function ListItem2(props: { children: string }) {
 		<Flex
 			alignItems='center'
 			gap='5'
-			pb='6'
+			pb={{ md: '6', base: '5' }}
 		>
 			<IoCheckmarkOutline
 				color='#333139'

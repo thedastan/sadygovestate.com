@@ -19,7 +19,7 @@ export default function HomePage() {
 			<Management />
 			<Employees />
 			<Reviews />
-			<Countries mt={{ md: '160px', base: '37px' }} />
+			<Countries mt={{ md: '160px', base: '0' }} />
 		</Box>
 	)
 }

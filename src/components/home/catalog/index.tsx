@@ -1,9 +1,10 @@
 'use client'
 
-import { Container, Flex, SimpleGrid } from '@chakra-ui/react'
+import { Container, Flex, SimpleGrid, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import { GoArrowUpRight } from 'react-icons/go'
 
+import CatalogGridComponent from '@/components/catalog/catalog-grid'
 import CatalogCard from '@/components/ui/cards/catalog-card'
 import TitleComponent from '@/components/ui/texts/TitleComponent'
 
@@ -22,6 +23,7 @@ const CatalogHome = () => {
 			<Flex
 				gap='14px'
 				alignItems='center'
+				justifyContent={{ sm: 'start', base: 'center' }}
 			>
 				<TitleComponent query='объектов'>Каталог объектов</TitleComponent>
 				<Link href={DASHBOARD_PAGES.CATALOG(locale)}>
@@ -39,15 +41,28 @@ const CatalogHome = () => {
 				</Link>
 			</Flex>
 
-			<SimpleGrid
-				mt='40px'
-				spacing='6'
-				columns={{ lg: 4, md: 3, base: 2 }}
+			<CatalogGridComponent />
+
+			<Flex
+				display={{ md: 'none', base: 'flex' }}
+				alignItems='center'
+				mt='30px'
+				color='#000000'
+				w='140px'
+				mx='auto'
+				gap='1'
 			>
-				{[1, 2, 3, 4, 5, 6, 7, 8].map(el => (
-					<CatalogCard key={el} />
-				))}
-			</SimpleGrid>
+				<Text
+					fontSize='14px'
+					textTransform='uppercase'
+					lineHeight='16.1px'
+					letterSpacing='0.7px'
+					fontWeight='400'
+				>
+					Все объекты
+				</Text>
+				<GoArrowUpRight fontSize='20px' />
+			</Flex>
 		</Container>
 	)
 }

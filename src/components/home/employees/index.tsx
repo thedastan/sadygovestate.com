@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Container, Flex } from '@chakra-ui/react'
 import Image from 'next/image'
 
@@ -11,46 +13,61 @@ import Employee5 from '@/assets/persons/employee-5.png'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
+import { useFullWindowSize } from '@/hooks/useFullHeight'
+
 const Employees = () => {
 	const list = [Employee1, Employee2, Employee3, Employee4, Employee5]
+	const { clientWidth } = useFullWindowSize()
 	return (
-		<Container maxW={CONTAINER_WIDTH}>
-			<TitleComponent
-				my={{ md: '140px', base: '60px' }}
-				maxW='991px'
-				mx='auto'
-				textAlign='center'
-				query={['инвестировать', 'по всему миру', 'вашим целям']}
-			>
-				Мы помогаем выгодно инвестировать в недвижимость по всему миру —
-				подбирая объекты, идеально отвечающие вашим целям и образу жизни.
-			</TitleComponent>
+		<Box>
+			<Container maxW={CONTAINER_WIDTH}>
+				<TitleComponent
+					my={{ md: '140px', base: '60px' }}
+					maxW='991px'
+					mx='auto'
+					textAlign='center'
+					query={['инвестировать', 'по всему миру', 'вашим целям']}
+				>
+					Мы помогаем выгодно инвестировать в недвижимость по всему миру —
+					подбирая объекты, идеально отвечающие вашим целям и образу жизни.
+				</TitleComponent>
+			</Container>
 			<Flex
-				h='509px'
-				gap='14px'
+				overflow='auto'
+				className='unscroll'
 			>
-				{list.map((image, idx) => (
-					<Flex
-						h='100%'
-						alignItems={idx % 2 === 0 ? 'end' : 'start'}
-					>
-						<Box
-							key={idx}
-							w='100%'
-							h='460px'
-							rounded='20px'
-							overflow='hidden'
+				<Flex
+					h={{ md: '509px', base: '317px' }}
+					gap={{ md: '14px', base: '8.74px' }}
+					px={{
+						xl: `${(clientWidth - parseInt(CONTAINER_WIDTH)) / 2 + 16}px`,
+						base: '4'
+					}}
+				>
+					{list.map((image, idx) => (
+						<Flex
+							h='100%'
+							w={{ md: '289px', base: '180.46px' }}
+							alignItems={idx % 2 === 0 ? 'end' : 'start'}
 						>
-							<Image
-								src={image}
-								alt='image'
-								className='full-image'
-							/>
-						</Box>
-					</Flex>
-				))}
+							<Box
+								key={idx}
+								w='100%'
+								h={{ md: '460px', base: '287px' }}
+								rounded='20px'
+								overflow='hidden'
+							>
+								<Image
+									src={image}
+									alt='image'
+									className='full-image'
+								/>
+							</Box>
+						</Flex>
+					))}
+				</Flex>
 			</Flex>
-		</Container>
+		</Box>
 	)
 }
 

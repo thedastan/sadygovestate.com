@@ -15,7 +15,7 @@ import { useFullWindowSize } from '@/hooks/useFullHeight'
 const IdealCity = () => {
 	const { clientWidth } = useFullWindowSize()
 	return (
-		<Box mt='125px'>
+		<Box mt={{ md: '125px', base: '60px' }}>
 			<Container maxW={CONTAINER_WIDTH}>
 				<Flex
 					justifyContent='space-between'
@@ -27,7 +27,7 @@ const IdealCity = () => {
 				</Flex>
 			</Container>
 			<Flex
-				mt='50px'
+				mt={{ md: '50px', base: '30px' }}
 				overflowX='auto'
 				className='unscroll'
 			>
@@ -45,8 +45,8 @@ const IdealCity = () => {
 							alignItems='center'
 						>
 							<Box
-								w='260px'
-								h='260px'
+								w={{ md: '260px', base: '180px' }}
+								h={{ md: '260px', base: '180px' }}
 								rounded='50%'
 								overflow='hidden'
 							>
@@ -57,18 +57,21 @@ const IdealCity = () => {
 								/>
 							</Box>
 							<Title
-								mt='5'
+								mt={{ md: '5', base: '3' }}
+								fontSize={{ md: '24px', base: '18px' }}
+								lineHeight={{ md: '27.6px', base: '20.7px' }}
 								fontWeight='400'
 								letterSpacing='auto'
 							>
 								Россия, Москва
 							</Title>
 							<Text
-								mt='3'
-								fontSize='18px'
-								lineHeight='20.7px'
+								mt={{ md: '3', base: '2.5' }}
+								fontSize={{ md: '18px', base: '14px' }}
+								lineHeight={{ md: '20.7px', base: '16.1px' }}
 								fontWeight='400'
 								color='#333139'
+								opacity='.7'
 							>
 								123 предложений
 							</Text>

@@ -13,10 +13,13 @@ const Reviews = () => {
 		<Container
 			maxW={CONTAINER_WIDTH}
 			mt={{ md: '140px', base: '60px' }}
+			px={{ sm: '4', base: '0' }}
 		>
 			<Flex
-				gap='5'
-				h='700px'
+				gap={{ md: '5', base: '37px' }}
+				h={{ lg: '700px', base: 'auto' }}
+				flexDirection={{ lg: 'row', base: 'column' }}
+				alignItems={{ lg: 'start', base: 'center' }}
 			>
 				<Box
 					maxW='650px'
@@ -26,7 +29,7 @@ const Reviews = () => {
 					<FeedbackForm />
 				</Box>
 				<Box
-					h='100%'
+					h='700px'
 					maxW='829px'
 					w='100%'
 					rounded='20px'
@@ -45,7 +48,7 @@ const Reviews = () => {
 						left='0'
 						w='100%'
 						overflow='hidden'
-						pl='5'
+						px={{ md: '20px 0', base: '4' }}
 					>
 						<ReviewCard />
 					</Flex>

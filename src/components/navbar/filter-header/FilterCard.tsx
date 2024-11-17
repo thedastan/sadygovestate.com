@@ -38,6 +38,8 @@ const FilterCard = (props: FilterCardProps) => {
 			gap='3'
 			h='44px'
 			ref={ref}
+			alignItems='center'
+			w={{ md: 'auto', base: '100%' }}
 		>
 			<Flex
 				bg='#FFFFFF1F'
@@ -58,7 +60,7 @@ const FilterCard = (props: FilterCardProps) => {
 				lineHeight='16.1px'
 				fontWeight='400'
 			>
-				<Text>{props.title}</Text>
+				<Text display={{ md: 'block', base: 'none' }}>{props.title}</Text>
 
 				<Popover
 					isOpen={isOpen}
@@ -71,12 +73,15 @@ const FilterCard = (props: FilterCardProps) => {
 						<Flex
 							onClick={onOpen}
 							gap='4'
-							opacity='.5'
+							opacity={{ md: '.5', base: '1' }}
 							cursor='pointer'
 							_active={{ opacity: '.4' }}
 						>
-							<Text>{props.placeholder}</Text>
-							<FaAngleDown />
+							<Text display={{ md: 'block', base: 'none' }}>
+								{props.placeholder}
+							</Text>
+							<Text display={{ md: 'none', base: 'block' }}>{props.title}</Text>
+							<FaAngleDown opacity='.5' />
 						</Flex>
 					</PopoverTrigger>
 					<PopoverContent
@@ -99,9 +104,9 @@ const FilterCard = (props: FilterCardProps) => {
 							spacing='0'
 							className={dm_sans.className}
 						>
-							{props.list.map(el => (
+							{props.list.map((el, idx) => (
 								<Flex
-									key={el}
+									key={idx}
 									onClick={() => onChange(el)}
 									cursor='pointer'
 									alignItems='center'

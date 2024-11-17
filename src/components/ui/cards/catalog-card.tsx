@@ -20,7 +20,11 @@ import CharacteristicsCard from './characteristic-card'
 const CatalogCard = () => {
 	const locale = useTypedLocale()
 	return (
-		<Box padding='6px'>
+		<Box
+			padding='6px'
+			maxW='357px'
+			w='100%'
+		>
 			<Link href={DASHBOARD_PAGES.DETAIL(locale, 1)}>
 				<Box
 					w='100%'
@@ -71,7 +75,7 @@ const CatalogCard = () => {
 					<Flex
 						mt='18px'
 						gap='1'
-						justifyContent='space-between'
+						flexWrap={{ md: 'nowrap', base: 'wrap' }}
 					>
 						<CharacteristicsCard
 							icon={CatalogBedIcon}

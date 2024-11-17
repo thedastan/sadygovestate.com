@@ -18,23 +18,42 @@ const Header = () => {
 				right='0'
 				w='100%'
 				zIndex='30'
+				bg={{ md: 'transparent', base: '#FFFFFF' }}
 			>
 				<Container maxW={CONTAINER_WIDTH}>
 					<Flex
-						mt='20px'
+						mt={{ md: '5', base: '0' }}
+						h={{ md: 'auto', base: '66px' }}
 						alignItems='center'
-						// gap='318px'
 						justifyContent='space-between'
 					>
 						<BurgerMenu />
-						<FilterHead />
-						<Box w='60px' />
+						<Box display={{ md: 'block', base: 'none' }}>
+							<FilterHead />
+						</Box>
+						<Box w={{ md: '60px', base: 'auto' }}>
+							<Box display={{ md: 'none', base: 'block' }}>
+								<LogoSvg
+									width='138'
+									height='52'
+								/>
+							</Box>
+						</Box>
 					</Flex>
 				</Container>
 			</Flex>
 
 			<Container maxW={CONTAINER_WIDTH}>
+				<Box
+					display={{ md: 'none', base: 'block' }}
+					mt='72px'
+					pb='40px'
+				>
+					<FilterHead />
+				</Box>
+
 				<Flex
+					display={{ md: 'flex', base: 'none' }}
 					justifyContent='end'
 					pt='40px'
 					pb='70px'

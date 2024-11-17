@@ -18,18 +18,20 @@ const PrimeRealEstate = () => {
 	return (
 		<Container
 			maxW={CONTAINER_WIDTH}
-			mt={{ md: '182px', base: '122px' }}
+			mt={{ lg: '182px', base: '122px' }}
+			px={{ lg: '4', base: '0' }}
 		>
 			<Flex
 				w='100%'
 				position='relative'
 			>
 				<Box
-					px='40px'
-					py='80px'
+					mt={{ lg: '0', base: '234px' }}
+					px={{ lg: '40px', base: '4' }}
+					py={{ lg: '80px', base: '41px' }}
 					w={{ lg: '45%', base: '100%' }}
 					bg='#F2F2F2'
-					rounded='20px'
+					rounded={{ lg: '20px', base: '30px' }}
 					position='relative'
 					zIndex='1'
 				>
@@ -39,8 +41,9 @@ const PrimeRealEstate = () => {
 
 					<List
 						styleType='disc'
-						mt='40px'
-						pb='5'
+						mt={{ md: '40px', base: '5' }}
+						pl='4'
+						pb={{ md: '5', base: '0' }}
 					>
 						{list.map((el, idx) => (
 							<ListItem
@@ -85,15 +88,16 @@ const PrimeRealEstate = () => {
 					position='absolute'
 					zIndex='0'
 					right='0'
-					h='100%'
-					alignItems='center'
 					top='0'
+					w={{ lg: 'auto', base: '100%' }}
+					h='100%'
+					alignItems={{ lg: 'center', base: 'start' }}
 				>
 					<Box
-						maxW='885px'
+						maxW={{ lg: '885px', base: '100%' }}
 						w='100%'
-						maxH='577px'
-						rounded='20px'
+						h={{ lg: '577px', base: '297px' }}
+						rounded={{ lg: '20px', base: '30px' }}
 						overflow='hidden'
 					>
 						<Image

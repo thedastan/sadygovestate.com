@@ -9,8 +9,8 @@ const ReviewCard = () => {
 			bg='#FFFFFF'
 			rounded='20px'
 			border='1px solid var(--Gray, #F2F2F2)'
-			px='5'
-			py='18.5px'
+			px={{ md: '5', base: '4' }}
+			py={{ md: '18.5px', base: '5' }}
 			maxW='742px'
 		>
 			<Flex gap='3'>

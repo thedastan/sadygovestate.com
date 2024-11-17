@@ -35,12 +35,20 @@ const Management = () => {
 		<Container
 			maxW={CONTAINER_WIDTH}
 			mt={{ md: '140px', base: '60px' }}
+			px={{ sm: '4', base: '0' }}
 		>
-			<TitleComponent>Руководство</TitleComponent>
+			<TitleComponent
+				textAlign={{ md: 'start', base: 'center' }}
+				px={{ sm: '0', base: '4' }}
+			>
+				Руководство
+			</TitleComponent>
 			<SimpleGrid
 				mt={{ md: '40px', base: '30px' }}
-				columns={3}
-				spacing='5'
+				columns={{ md: 3, base: 1 }}
+				spacing='30px 20px'
+				maxW={{ md: '100%', base: '440px' }}
+				mx='auto'
 			>
 				{management.map((el, idx) => (
 					<ManagementCard

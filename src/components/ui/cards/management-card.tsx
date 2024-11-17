@@ -14,15 +14,15 @@ export interface IManagementCard {
 const ManagementCard = (props: IManagementCard) => {
 	return (
 		<Box
-			px='6'
-			pt='29px'
-			pb='54px'
+			px={{ md: '6', base: '4' }}
+			pt={{ md: '29px', base: '5' }}
+			pb={{ md: '54px', base: '30px' }}
 			bg='#F2F2F2'
 			rounded='20px'
 		>
 			<Box
 				w='100%'
-				h='289px'
+				h={{ md: '289px', base: '263px' }}
 				rounded='12px'
 				overflow='hidden'
 			>
@@ -32,7 +32,7 @@ const ManagementCard = (props: IManagementCard) => {
 					className='full-image'
 				/>
 			</Box>
-			<Title mt='7'>{props.full_name}</Title>
+			<Title mt={{ md: '7', base: '26px' }}>{props.full_name}</Title>
 			<Description
 				mt='3'
 				opacity='.7'

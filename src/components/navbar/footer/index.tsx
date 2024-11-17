@@ -24,6 +24,7 @@ const Footer = () => {
 		>
 			<Flex
 				justifyContent='space-between'
+				flexDirection={{ md: 'row', base: 'column' }}
 				pr={{ xl: '250px', lg: '100px', base: '0' }}
 				gap='92px'
 			>
@@ -43,8 +44,8 @@ const Footer = () => {
 						<Text
 							mt='32px'
 							fontWeight='400'
-							fontSize='13px'
-							lineHeight='14.95px'
+							fontSize={{ md: '13px', base: '16px' }}
+							lineHeight={{ md: '14.95px', base: '18.4px' }}
 						>
 							Свяжитесь с нами для получения дополнительной информации и
 							поддержки.
@@ -98,15 +99,17 @@ const Footer = () => {
 			<Divider
 				h='1px'
 				bg='#D9D9D9'
-				mt='19px'
-				mb='33px'
+				mt={{ md: '19px', base: '4' }}
+				mb={{ md: '33px', base: '15px' }}
 			/>
 
 			<Flex
 				justifyContent='space-between'
+				flexDirection={{ sm: 'row', base: 'column' }}
 				fontWeight='400'
-				fontSize='18px'
-				lineHeight='20.7px'
+				fontSize={{ md: '18px', base: '14px' }}
+				lineHeight={{ md: '20.7px', base: '16px' }}
+				gap='3'
 			>
 				<Text color='#8A8989'>© 2024 Viktor Sadygov</Text>
 				<Text color='#8B8B8B'>Политика конфиденциальности</Text>

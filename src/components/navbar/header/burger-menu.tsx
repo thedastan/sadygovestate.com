@@ -142,9 +142,12 @@ const BurgerMenu = () => {
 
 								<Flex
 									ml={{ md: '80px', base: '0' }}
+									mr={{ md: '0', base: '110px' }}
+									mt={{ md: '0', base: '20px' }}
 									justifyContent='space-between'
-									alignItems='center'
-									gap='4'
+									flexDirection={{ md: 'row', base: 'column-reverse' }}
+									alignItems={{ md: 'center', base: 'end' }}
+									gap={{ md: '4', base: '41px' }}
 								>
 									<Link
 										href={WHATSAPP_LINK}
@@ -162,6 +165,7 @@ const BurgerMenu = () => {
 										rounded='51px'
 										h='30px'
 										padding='2px'
+										mr={{ md: '0', base: '-20px' }}
 									>
 										{locales_data.map((el, idx) => (
 											<Button
@@ -209,7 +213,7 @@ const BurgerMenu = () => {
 							</Box>
 
 							<Flex
-								gap='25.2px'
+								gap={{ md: '25.2px', base: '5' }}
 								mb='40px'
 							>
 								{social_contacts.map((el, idx) => (

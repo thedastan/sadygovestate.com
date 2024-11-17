@@ -7,8 +7,8 @@ interface Props extends ChakraProps {
 const TitleComponent = ({
 	children,
 	fontWeight = '400',
-	fontSize = '50px',
-	lineHeight = '57.5px',
+	fontSize = { md: '50px', base: '28px' },
+	lineHeight = { md: '57.5px', base: '32.2px' },
 	color = '#333139',
 	query = '',
 

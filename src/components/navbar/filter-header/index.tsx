@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react'
+import { Divider, Flex } from '@chakra-ui/react'
 
 import DollarIconSvg from '@/assets/svg/DollarIconSvg'
 import HouseIconSvg from '@/assets/svg/HouseIconSvg'
@@ -11,25 +11,47 @@ const FilterHead = () => {
 		<Flex
 			bg='#4A4A4A'
 			border='1px solid #FFFFFF33'
-			py='11px'
-			px='40px'
+			py={{ md: '11px', base: '14px' }}
+			px={{ md: '10', sm: '5', base: '4' }}
 			maxW='768px'
 			w='100%'
 			gap='3'
 			justifyContent='space-between'
-			rounded='100px'
+			flexDirection={{ md: 'row', base: 'column' }}
+			rounded={{ md: '100px', base: '20px' }}
 		>
-			<FilterCard
-				icon={LocationIconSvg}
-				list={['Россия', 'ОАЭ', 'Саудовская Аравия', 'ОАЭ', 'Таиланд']}
-				placeholder='Выберите страну'
-				title='Страна'
-			/>
-			<FilterCard
-				icon={DollarIconSvg}
-				list={[]}
-				placeholder='Ценовой диапазон'
-				title='Цена'
+			<Flex
+				gap='3'
+				alignItems='center'
+			>
+				<FilterCard
+					icon={LocationIconSvg}
+					list={['Россия', 'ОАЭ', 'Саудовская Аравия', 'ОАЭ', 'Таиланд']}
+					placeholder='Выберите страну'
+					title='Страна'
+				/>
+				<Divider
+					mx='1'
+					orientation='vertical'
+					display={{ md: 'none', base: 'block' }}
+					bg='#FFFFFF'
+					opacity='.2'
+					w='1px'
+					h='35.5px'
+				/>
+				<FilterCard
+					icon={DollarIconSvg}
+					list={[]}
+					placeholder='Ценовой диапазон'
+					title='Цена'
+				/>
+			</Flex>
+			<Divider
+				display={{ md: 'none', base: 'block' }}
+				bg='#FFFFFF'
+				opacity='.2'
+				w='100%'
+				h='1px'
 			/>
 			<FilterCard
 				icon={HouseIconSvg}
