@@ -1,5 +1,5 @@
 export enum EnumIntl {
-	ARABIC = 'sa',
+	ARABIC = 'ar',
 	ENGLISH = 'en',
 	RUSSIAN = 'ru'
 }

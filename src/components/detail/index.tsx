@@ -1,19 +1,10 @@
 'use client'
 
-import {
-	Box,
-	Button,
-	Container,
-	Divider,
-	Flex,
-	List,
-	SimpleGrid
-} from '@chakra-ui/react'
+import { Box, Button, Container, Divider, Flex } from '@chakra-ui/react'
 import Image from 'next/image'
 import { FiMapPin } from 'react-icons/fi'
 import { IoCheckmarkOutline } from 'react-icons/io5'
 
-import DefImage from '@/assets/img/slider-image.jpeg'
 import CatalogBathroomIcon from '@/assets/svg/CatalogBathroomIcon'
 import CatalogBedIcon from '@/assets/svg/CatalogBedIcon'
 import CatalogGarageIcon from '@/assets/svg/CatalogGarageIcon'
@@ -23,6 +14,8 @@ import SaveIcon from '@/assets/svg/SaveIcon'
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
 import { useFullWindowSize } from '@/hooks/useFullHeight'
+import useTypedLocale from '@/hooks/useLocale'
+import { usePropertyDetail } from '@/hooks/useProperties'
 
 import CatalogCard from '../ui/cards/catalog-card'
 import CharacteristicsCard from '../ui/cards/characteristic-card'
@@ -30,12 +23,16 @@ import Description from '../ui/texts/Description'
 import Title32 from '../ui/texts/Title32'
 import TitleComponent from '../ui/texts/TitleComponent'
 
-const PropertyDetail = () => {
-	const { clientWidth } = useFullWindowSize()
+import DetailSkeleton from './detail-skeleton'
 
-	const TitleDetailPage = (
+const PropertyDetail = ({ paramId }: { paramId: string }) => {
+	const { clientWidth } = useFullWindowSize()
+	const locale = useTypedLocale()
+	const { data, isLoading } = usePropertyDetail(paramId)
+
+	const TitleDetailPage = !!data && (
 		<>
-			<TitleComponent>Люксовый жилой комплекс в Бангоке</TitleComponent>
+			<TitleComponent>{data[`name_${locale}`]}</TitleComponent>
 			<Flex
 				mt={{ md: '4', base: '3' }}
 				gap='3'
@@ -46,11 +43,16 @@ const PropertyDetail = () => {
 					fontSize='14px'
 					lineHeight='16.94px'
 				>
-					The Collection, St.Regis Resort, Saadiyat Island, Abu Dhabi
+					{data[`description_${locale}`]}
 				</Description>
 			</Flex>
 		</>
 	)
+
+	if (isLoading) {
+		return <DetailSkeleton />
+	}
+	if (!data) return null
 	return (
 		<Box>
 			<Container maxW={CONTAINER_WIDTH}>
@@ -69,7 +71,7 @@ const PropertyDetail = () => {
 							alignItems='center'
 						>
 							<PropertyParams
-								title='$200,000'
+								title={`$${data.price}`}
 								subtitle='цена'
 								isFirst={true}
 							/>
@@ -77,28 +79,36 @@ const PropertyDetail = () => {
 								title='150m2'
 								subtitle='площадь'
 							/>
-							<PropertyParams
-								title='2022г'
-								subtitle='Квартира'
-							/>
+							{!!data?.year && (
+								<PropertyParams
+									title={`${data.year}г`}
+									subtitle='Квартира'
+								/>
+							)}
 						</Flex>
 						<Flex
 							my={{ md: '40px', base: '30px' }}
 							gap='6px'
 							flexWrap={{ xl: 'nowrap', base: 'wrap' }}
 						>
-							<CharacteristicsCard
-								icon={CatalogBedIcon}
-								text='3 спальни'
-							/>
-							<CharacteristicsCard
-								icon={CatalogBathroomIcon}
-								text='3 ванных'
-							/>
-							<CharacteristicsCard
-								icon={CatalogGarageIcon}
-								text='гостиная'
-							/>
+							{!!data?.bed_room && (
+								<CharacteristicsCard
+									icon={CatalogBedIcon}
+									text={`${data.bed_room} спальни`}
+								/>
+							)}
+							{!!data?.bath && (
+								<CharacteristicsCard
+									icon={CatalogBathroomIcon}
+									text={`${data.bath} ванных`}
+								/>
+							)}
+							{!!data?.living_room && (
+								<CharacteristicsCard
+									icon={CatalogGarageIcon}
+									text='гостиная'
+								/>
+							)}
 							<CharacteristicsCard
 								icon={CatalogPersonIcon}
 								text='5-7 человек'
@@ -109,10 +119,7 @@ const PropertyDetail = () => {
 							lineHeight='26px'
 							color='#12141D'
 						>
-							Просторная квартира площадью 150 м² с тремя спальнями и гостиной,
-							расположена на 10-м этаже современного жилого комплекса в центре
-							города. Из окон открывается панорамный вид на город, создавая
-							атмосферу уюта и комфорта.
+							{data[`description_${locale}`]}
 						</Description>
 						<Box
 							mt='4'
@@ -146,7 +153,7 @@ const PropertyDetail = () => {
 							overflow='hidden'
 						>
 							<Image
-								src={DefImage}
+								src={data.main_image || ''}
 								alt='Image'
 								className='full-image'
 								width={800}
@@ -161,16 +168,16 @@ const PropertyDetail = () => {
 							w='100%'
 						>
 							<Flex gap='14px'>
-								{[1, 2, 3, 4].map(el => (
+								{data.prop_image?.map(el => (
 									<Box
-										key={el}
+										key={el.id}
 										h={{ lg: '260px', sm: '180px', base: '113.75px' }}
 										w={{ xl: '100%', sm: '170px', base: '112.5px' }}
 										rounded='16px'
 										overflow='hidden'
 									>
 										<Image
-											src={DefImage}
+											src={el.image}
 											alt='Image'
 											className='full-image'
 											width={257}
@@ -208,7 +215,7 @@ const PropertyDetail = () => {
 							key={el}
 							minW='357px'
 						>
-							<CatalogCard />
+							{/* <CatalogCard /> */}
 						</Box>
 					))}
 				</Flex>

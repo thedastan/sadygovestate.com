@@ -16,16 +16,22 @@ import Description from '../texts/Description'
 import Title from '../texts/Title'
 
 import CharacteristicsCard from './characteristic-card'
+import { IProperty } from '@/models/property.model'
 
-const CatalogCard = () => {
+interface CatalogCardProps {
+	el: IProperty
+}
+const CatalogCard = ({ el }: CatalogCardProps) => {
 	const locale = useTypedLocale()
 	return (
 		<Box
 			padding='6px'
-			maxW='357px'
 			w='100%'
+			rounded='22px'
+			_hover={{ bg: '#EFEFEF' }}
+			transition='.2s'
 		>
-			<Link href={DASHBOARD_PAGES.DETAIL(locale, 1)}>
+			<Link href={DASHBOARD_PAGES.DETAIL(locale, el.id)}>
 				<Box
 					w='100%'
 					h='240px'
@@ -33,7 +39,9 @@ const CatalogCard = () => {
 					overflow='hidden'
 				>
 					<Image
-						src={DefImage}
+						src={el.main_image}
+						width={345}
+						height={240}
 						alt='Image'
 						className='full-image'
 					/>
@@ -48,7 +56,7 @@ const CatalogCard = () => {
 						justifyContent='space-between'
 						alignItems='center'
 					>
-						<Title>от $200,000</Title>
+						<Title>{`от $${el.price}`}</Title>
 						<Flex
 							gap='6px'
 							color='#333139'
@@ -60,16 +68,17 @@ const CatalogCard = () => {
 								fontSize='14px'
 								lineHeight='16.1px'
 							>
-								Дубаи
+								{el[`city_${locale}`]}
 							</Text>
 						</Flex>
 					</Flex>
 					<Description
+						noOfLines={1}
 						mt='18px'
 						fontSize='18px'
 						lineHeight='21.78px'
 					>
-						Palm Jumeirah или Downtown Dubai
+						{el[`name_${locale}`]}
 					</Description>
 
 					<Flex
@@ -77,19 +86,23 @@ const CatalogCard = () => {
 						gap='1'
 						flexWrap={{ md: 'nowrap', base: 'wrap' }}
 					>
-						<CharacteristicsCard
-							icon={CatalogBedIcon}
-							text='2'
-							isMini={true}
-						/>
-						<CharacteristicsCard
-							icon={CatalogBathroomIcon}
-							text='1'
-							isMini={true}
-						/>
+						{!!el.bed_room && (
+							<CharacteristicsCard
+								icon={CatalogBedIcon}
+								text={el.bed_room}
+								isMini={true}
+							/>
+						)}
+						{!!el.bath && (
+							<CharacteristicsCard
+								icon={CatalogBathroomIcon}
+								text={el.bath}
+								isMini={true}
+							/>
+						)}
 						<CharacteristicsCard
 							icon={CatalogArtboardIcon}
-							text='2,800 sqft / 3,000 sqmt'
+							text={`${el.sqft} sqft / ${el.sqmt} sqmt`}
 							isMini={true}
 						/>
 					</Flex>

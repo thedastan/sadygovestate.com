@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
 import { useFullWindowSize } from '@/hooks/useFullHeight'
+import { useProperties } from '@/hooks/useProperties'
 
 import CatalogCard from '../ui/cards/catalog-card'
 import TitlePages from '../ui/texts/TitlePages'
@@ -21,6 +22,7 @@ const filter_list = [
 ]
 const Catalog = () => {
 	const [filterActive, setFilterActive] = useState(filter_list[0])
+	const { data, isLoading } = useProperties()
 
 	const { clientWidth } = useFullWindowSize()
 	return (
@@ -78,7 +80,10 @@ const Catalog = () => {
 				</Flex>
 			</Flex>
 			<Container maxW={CONTAINER_WIDTH}>
-				<CatalogGridComponent />
+				<CatalogGridComponent
+					data={data}
+					isLoading={isLoading}
+				/>
 			</Container>
 		</Box>
 	)

@@ -4,9 +4,15 @@ import DollarIconSvg from '@/assets/svg/DollarIconSvg'
 import HouseIconSvg from '@/assets/svg/HouseIconSvg'
 import LocationIconSvg from '@/assets/svg/LocationIconSvg'
 
+import { useCountries } from '@/hooks/useCountries'
+import { useTypes } from '@/hooks/useProperties'
+
 import FilterCard from './FilterCard'
 
 const FilterHead = () => {
+	const { data: countries, isLoading } = useCountries()
+
+	const { data: types, isLoading: isLoading2 } = useTypes()
 	return (
 		<Flex
 			bg='#4A4A4A'
@@ -26,7 +32,8 @@ const FilterHead = () => {
 			>
 				<FilterCard
 					icon={LocationIconSvg}
-					list={['Россия', 'ОАЭ', 'Саудовская Аравия', 'ОАЭ', 'Таиланд']}
+					list={countries}
+					isLoading={isLoading}
 					placeholder='Выберите страну'
 					title='Страна'
 				/>
@@ -55,7 +62,8 @@ const FilterHead = () => {
 			/>
 			<FilterCard
 				icon={HouseIconSvg}
-				list={[]}
+				list={types}
+				isLoading={isLoading2}
 				placeholder='Выберите тип'
 				title='Тип объекта'
 			/>

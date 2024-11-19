@@ -13,45 +13,47 @@ type Props = {
 	params: { id: string }
 }
 
-// export async function generateMetadata(
-// 	{ params }: Props,
-// 	parent: ResolvingMetadata
-// ): Promise<Metadata> {
-// 	const id = params.id
-// 	const property = await propertyService.getDetail(id)
+export async function generateMetadata(
+	{ params }: Props,
+	parent: ResolvingMetadata
+): Promise<Metadata> {
+	const id = params.id
+	const property = await propertyService.getDetail(id)
 
-// 	const previousImages = (await parent).openGraph?.images || []
+	const previousImages = (await parent).openGraph?.images || []
 
-// 	return {
-// 		title: property?.name,
-// 		description: SEO_KEY_WORDS,
-// 		openGraph: {
-// 			images: [`${property?.image}`, ...previousImages]
-// 		}
-// 	}
-// }
+	return {
+		title: `${property?.name_en} | ${property?.name_ar} | ${property?.name_ru}`,
+		description: `${property?.description_en} | ${property?.description_ar} | ${property?.description_ru}`,
+		openGraph: {
+			images: [`${property?.main_image}`, ...previousImages]
+		}
+	}
+}
 
 export default async function DetailPropertyPage({ params }: Props) {
-	// const product = await propertyService.getDetail(params.id)
+	const property = await propertyService.getDetail(params.id)
 
 	return (
 		<>
-			{/* <Head>
-				<title>{product.name}</title>
+			<Head>
+				<title>
+					{`${property?.name_en} | ${property?.name_ar} | ${property?.name_ru}`}
+				</title>
 				<meta
 					property='og:title'
 					name='title'
-					content={product.seo}
+					content={SEO_KEY_WORDS}
 					key='title'
 				/>
 				<meta
 					property='og:description'
 					name='description'
-					content={product.description}
+					content={`${property?.description_en} | ${property?.description_ar} | ${property?.description_ru}`}
 					key='description'
 				/>
-			</Head> */}
-			<PropertyDetail />
+			</Head>
+			<PropertyDetail paramId={params.id} />
 			<Countries mt={{ md: '158px', base: '60px' }} />
 		</>
 	)

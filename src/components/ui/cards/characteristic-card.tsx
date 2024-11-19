@@ -2,7 +2,7 @@ import { Flex, Text } from '@chakra-ui/react'
 
 interface CharacteristicsCardProps {
 	icon: () => JSX.Element
-	text: string
+	text: string | number
 	isMini?: boolean
 }
 export default function CharacteristicsCard(props: CharacteristicsCardProps) {

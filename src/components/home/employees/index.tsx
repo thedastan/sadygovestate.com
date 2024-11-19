@@ -3,6 +3,8 @@
 import { Box, Container, Flex } from '@chakra-ui/react'
 import Image from 'next/image'
 
+import Description from '@/components/ui/texts/Description'
+import Title from '@/components/ui/texts/Title'
 import TitleComponent from '@/components/ui/texts/TitleComponent'
 
 import Employee1 from '@/assets/persons/employee-1.png'
@@ -46,22 +48,74 @@ const Employees = () => {
 				>
 					{list.map((image, idx) => (
 						<Flex
+							key={idx}
 							h='100%'
 							w={{ md: '289px', base: '180.46px' }}
 							alignItems={idx % 2 === 0 ? 'end' : 'start'}
+							sx={{
+								'&:hover': {
+									'.employe-shadow': {
+										transform: 'translateY(0)'
+									},
+									'.employe-img': {
+										transform: 'scale(1.07)'
+									}
+								}
+							}}
 						>
 							<Box
-								key={idx}
 								w='100%'
 								h={{ md: '460px', base: '287px' }}
+								position='relative'
 								rounded='20px'
 								overflow='hidden'
 							>
-								<Image
-									src={image}
-									alt='image'
-									className='full-image'
-								/>
+								<Box
+									w='100%'
+									h='100%'
+									className='employe-img'
+									transition='.6s'
+								>
+									<Image
+										src={image}
+										alt='image'
+										className='full-image'
+									/>
+								</Box>
+
+								<Flex
+									position='absolute'
+									className='employe-shadow'
+									transform='translateY(130%)'
+									transition='.6s'
+									bottom='0'
+									left='0'
+									right='0'
+									w='100%'
+									h={{ md: '175px', base: '110px' }}
+									bg='linear-gradient(0deg,#000000 0%, rgba(0, 0, 0, 0) 100%)'
+									alignItems='end'
+									zIndex='2'
+								>
+									<Box padding={{ md: '5', base: '3' }}>
+										<Title
+											fontSize={{ md: '20px', base: '18px' }}
+											lineHeight={{ md: '23px', base: '20px' }}
+											color='#FFFFFF'
+										>
+											Фёдор Алямов
+										</Title>
+										<Description
+											mt='6px'
+											color='#FFFFFF'
+											fontSize={{ md: '16px', base: '12px' }}
+											lineHeight={{ md: '19.36px', base: '16px' }}
+											opacity='.7'
+										>
+											Региональный менеджер проектов
+										</Description>
+									</Box>
+								</Flex>
 							</Box>
 						</Flex>
 					))}

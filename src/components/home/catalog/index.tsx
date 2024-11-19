@@ -1,19 +1,20 @@
 'use client'
 
-import { Container, Flex, SimpleGrid, Text } from '@chakra-ui/react'
+import { Container, Flex, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import { GoArrowUpRight } from 'react-icons/go'
 
 import CatalogGridComponent from '@/components/catalog/catalog-grid'
-import CatalogCard from '@/components/ui/cards/catalog-card'
 import TitleComponent from '@/components/ui/texts/TitleComponent'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
 import useTypedLocale from '@/hooks/useLocale'
+import { useProperties } from '@/hooks/useProperties'
 
 const CatalogHome = () => {
+	const { data, isLoading } = useProperties()
 	const locale = useTypedLocale()
 	return (
 		<Container
@@ -41,7 +42,10 @@ const CatalogHome = () => {
 				</Link>
 			</Flex>
 
-			<CatalogGridComponent />
+			<CatalogGridComponent
+				data={data}
+				isLoading={isLoading}
+			/>
 
 			<Flex
 				display={{ md: 'none', base: 'flex' }}

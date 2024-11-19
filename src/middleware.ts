@@ -10,10 +10,10 @@ export default createMiddleware({
 	locales,
 
 	// Used when no locale matches
-	defaultLocale: EnumIntl.ENGLISH
+	defaultLocale: EnumIntl.RUSSIAN
 })
 
 export const config = {
 	// Match only internationalized pathnames
-	matcher: ['/', '/(en|ru|sa)/:path*']
+	matcher: ['/', '/(en|ru|ar)/:path*']
 }
