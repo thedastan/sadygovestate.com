@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react'
 import { Metadata, ResolvingMetadata } from 'next'
 import Head from 'next/head'
 

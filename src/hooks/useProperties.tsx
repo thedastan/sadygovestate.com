@@ -32,7 +32,7 @@ export function useStages() {
 export function useTypes() {
 	const { data, isLoading } = useQuery({
 		queryKey: ['types'],
-		queryFn: () => propertyService.getStages()
+		queryFn: () => propertyService.getTypes()
 	})
 
 	return { data, isLoading }

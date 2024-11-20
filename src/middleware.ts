@@ -1,7 +1,7 @@
 import createMiddleware from 'next-intl/middleware'
 
 import { LOCALES } from './i18n'
-import { EnumIntl } from './types/intl.types'
+import { EnumIntl } from './models/types/intl-types'
 
 const locales = LOCALES
 

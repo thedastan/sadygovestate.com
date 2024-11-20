@@ -38,3 +38,10 @@
 	height: 100%;
 	object-fit: cover;
 }
+
+.filter-active {
+	svg > path {
+		// fill: #4ad67d;
+		stroke: #4ad67d;
+	}
+}

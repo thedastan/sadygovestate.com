@@ -54,9 +54,13 @@ export interface PropImage {
 export interface IPropertyStage {
 	id: number
 	name_ru: string
+	name_ar: string
+	name_en: string
 }
 
 export interface IPropertyType {
 	id: number
 	name_ru: string
+	name_ar: string
+	name_en: string
 }

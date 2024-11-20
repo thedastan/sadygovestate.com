@@ -1,13 +1,6 @@
-export interface ICity {
-	id: number
-	cities: ICityList[]
-}
-
 export interface ICityList {
 	id: number
-	name_ru: string
-	name_en: string
-	name_ar: string
+	cities: ICity[]
 }
 
 export interface ICountry {
@@ -17,12 +10,15 @@ export interface ICountry {
 	name_ar: string
 	flag: string
 	image: string
+	cities: ICity[]
 }
 
-export interface IFilterListProps {
+export interface ICity {
 	id: number
 	name_ru: string
-	name_en?: string
-	name_ar?: string
-	flag?: string
+	name_en: string
+	name_ar: string
+	image: any
+	total_properties: number
 }
+

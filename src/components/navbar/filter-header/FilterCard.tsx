@@ -4,50 +4,47 @@ import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
-	Radio,
 	SkeletonText,
 	Stack,
 	Text,
 	useDisclosure,
 	useOutsideClick
 } from '@chakra-ui/react'
-import Image from 'next/image'
-import { useRef } from 'react'
+import { PropsWithChildren, useEffect, useRef } from 'react'
 import { FaAngleDown } from 'react-icons/fa6'
 
 import { dm_sans } from '@/constants/fonts/fonts'
 
-import useTypedLocale from '@/hooks/useLocale'
+import { IFilterValue } from '@/models/other.model'
 
-import { IFilterListProps } from '@/models/country.model'
-
-interface FilterCardProps {
+interface FilterCardProps extends PropsWithChildren {
 	icon: () => JSX.Element
 	title: string
 	placeholder: string
-	list: IFilterListProps[] | undefined
 	isLoading?: boolean
+	value: number | string | undefined
 }
 const FilterCard = (props: FilterCardProps) => {
 	const ref = useRef<any>(null)
 	const { isOpen, onOpen, onClose } = useDisclosure()
-	const locale = useTypedLocale()
-	const onChange = (item: any) => {
-		// props.onChange(item)
-		onClose()
-	}
 
 	useOutsideClick({
 		ref: ref,
 		handler: () => onClose()
 	})
+
+	const isActive = !!props.value
+
+	useEffect(() => {
+		if (isActive) onClose()
+	}, [props.value])
 	return (
 		<Flex
 			gap='3'
 			h='44px'
 			ref={ref}
 			alignItems='center'
-			w={{ md: 'auto', base: '100%' }}
+			w={{ lg: '210px', md: 'auto', base: '100%' }}
 		>
 			<Flex
 				bg='#FFFFFF1F'
@@ -56,6 +53,7 @@ const FilterCard = (props: FilterCardProps) => {
 				h='100%'
 				justifyContent='center'
 				alignItems='center'
+				className={isActive ? 'filter-active' : ''}
 			>
 				<props.icon />
 			</Flex>
@@ -85,7 +83,12 @@ const FilterCard = (props: FilterCardProps) => {
 					lineHeight='16.1px'
 					fontWeight='400'
 				>
-					<Text display={{ md: 'block', base: 'none' }}>{props.title}</Text>
+					<Text
+						display={{ md: 'block', base: 'none' }}
+						opacity={isActive ? '.5' : '1'}
+					>
+						{props.title}
+					</Text>
 
 					<Popover
 						isOpen={isOpen}
@@ -98,12 +101,15 @@ const FilterCard = (props: FilterCardProps) => {
 							<Flex
 								onClick={onOpen}
 								gap='4'
-								opacity={{ md: '.5', base: '1' }}
 								cursor='pointer'
 								_active={{ opacity: '.4' }}
+								mt='6px'
 							>
-								<Text display={{ md: 'block', base: 'none' }}>
-									{props.placeholder}
+								<Text
+									display={{ md: 'block', base: 'none' }}
+									opacity={isActive ? '1' : '.5'}
+								>
+									{isActive ? props.value : props.placeholder}
 								</Text>
 								<Text display={{ md: 'none', base: 'block' }}>
 									{props.title}
@@ -130,55 +136,7 @@ const FilterCard = (props: FilterCardProps) => {
 								spacing='0'
 								className={dm_sans.className}
 							>
-								{props.list?.map(el => (
-									<Flex
-										key={el.id}
-										onClick={() => onChange(el)}
-										cursor='pointer'
-										alignItems='center'
-										justifyContent='space-between'
-										w='100%'
-										h='40px'
-										pr='10px'
-										rounded='10px'
-										pl='4'
-										// bg={el.id === props.value?.id ? '#0000000A' : '#FFFFFF'}
-									>
-										<Flex
-											gap='2'
-											alignItems='center'
-										>
-											{!!el?.flag && (
-												<Box
-													w='24px'
-													h='17.14px'
-													rounded='3.43px'
-													overflow='hidden'
-												>
-													<Image
-														src={el?.flag}
-														alt='Flag'
-														className='full-image'
-														width={24}
-														height={4}
-													/>
-												</Box>
-											)}
-											<Text
-												color='#000000'
-												fontSize='14px'
-												lineHeight='24px'
-											>
-												{/* {el[`name_${locale}`]} */}
-												{el.name_ru}
-											</Text>
-										</Flex>
-										<Radio
-											colorScheme='green'
-											// isChecked={el.id === props.value?.id}
-										/>
-									</Flex>
-								))}
+								{props.children}
 							</Stack>
 						</PopoverContent>
 					</Popover>

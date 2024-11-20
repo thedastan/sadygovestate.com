@@ -52,16 +52,6 @@ const Employees = () => {
 							h='100%'
 							w={{ md: '289px', base: '180.46px' }}
 							alignItems={idx % 2 === 0 ? 'end' : 'start'}
-							sx={{
-								'&:hover': {
-									'.employe-shadow': {
-										transform: 'translateY(0)'
-									},
-									'.employe-img': {
-										transform: 'scale(1.07)'
-									}
-								}
-							}}
 						>
 							<Box
 								w='100%'
@@ -69,6 +59,16 @@ const Employees = () => {
 								position='relative'
 								rounded='20px'
 								overflow='hidden'
+								sx={{
+									'&:hover': {
+										'.employe-shadow': {
+											transform: 'translateY(0)'
+										},
+										'.employe-img': {
+											transform: 'scale(1.07)'
+										}
+									}
+								}}
 							>
 								<Box
 									w='100%'

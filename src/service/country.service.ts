@@ -1,6 +1,7 @@
 import { PUBLIC_API } from '@/api/interceptors'
 
-import { ICity, ICountry } from '@/models/country.model'
+import { ICityList, ICountry } from '@/models/country.model'
+import { IOffice } from '@/models/office.model'
 
 class CountryService {
 	private BASE_URL = 'property/'
@@ -13,8 +14,14 @@ class CountryService {
 		return response.data
 	}
 
+	async getOffice() {
+		const response = await PUBLIC_API.get<IOffice[]>(`${this.BASE_URL}office/`)
+
+		return response.data
+	}
+
 	async getCity(id: number) {
-		const response = await PUBLIC_API.get<ICity[]>(
+		const response = await PUBLIC_API.get<ICityList[]>(
 			`${this.BASE_URL}city/${id}/`
 		)
 

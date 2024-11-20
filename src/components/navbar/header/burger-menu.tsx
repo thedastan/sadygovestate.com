@@ -15,13 +15,12 @@ import AnimateButton from '@/components/ui/buttons/AnimateButton'
 
 import { PHONE_NUMBER, WHATSAPP_LINK } from '@/constants/admin'
 
-import { IntlType } from '@/types/intl.types'
-
 import useTypedLocale from '@/hooks/useLocale'
 
 import { navbar, social_contacts } from '../data'
 
 import { locales_data } from '@/i18n'
+import { IntlType } from '@/models/types/intl-types'
 
 const BurgerMenu = () => {
 	const { isOpen, onClose, onOpen } = useDisclosure()
@@ -142,11 +141,10 @@ const BurgerMenu = () => {
 
 								<Flex
 									ml={{ md: '80px', base: '0' }}
-									mr={{ md: '0', base: '110px' }}
 									mt={{ md: '0', base: '20px' }}
 									justifyContent='space-between'
 									flexDirection={{ md: 'row', base: 'column-reverse' }}
-									alignItems={{ md: 'center', base: 'end' }}
+									alignItems={{ md: 'center', base: 'start' }}
 									gap={{ md: '4', base: '41px' }}
 								>
 									<Link
@@ -165,7 +163,7 @@ const BurgerMenu = () => {
 										rounded='51px'
 										h='30px'
 										padding='2px'
-										mr={{ md: '0', base: '-20px' }}
+										ml={{ md: '0', base: '86px' }}
 									>
 										{locales_data.map((el, idx) => (
 											<Button

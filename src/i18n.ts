@@ -1,7 +1,7 @@
 import { getRequestConfig } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 
-import { EnumIntl, ILocale, IntlType } from './types/intl.types'
+import { EnumIntl, ILocale, IntlType } from './models/types/intl-types'
 
 // Can be imported from a shared config
 

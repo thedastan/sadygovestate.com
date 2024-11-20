@@ -10,19 +10,33 @@ import {
 	Text
 } from '@chakra-ui/react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaAngleRight } from 'react-icons/fa6'
 import { GoArrowUpRight } from 'react-icons/go'
 import { IconType } from 'react-icons/lib'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
+import { useOffices } from '@/hooks/useCountries'
+import useTypedLocale from '@/hooks/useLocale'
+
 import { SocialMediaIcons } from '../navbar/data'
 import Description from '../ui/texts/Description'
 import Title32 from '../ui/texts/Title32'
 
+import GoogleMap from './GoogleMap'
+import { IOffice } from '@/models/office.model'
+
 const Countries = (props: { mt: ResponsiveValue<string> }) => {
-	const [activeCity, setActiveCity] = useState(0)
+	const locale = useTypedLocale()
+	const [activeCity, setActiveCity] = useState<IOffice>()
+	const { data, isLoading } = useOffices()
+
+	useEffect(() => {
+		if (!!data?.length) {
+			setActiveCity(data[0])
+		}
+	}, [data])
 	return (
 		<Container
 			maxW={CONTAINER_WIDTH}
@@ -44,16 +58,20 @@ const Countries = (props: { mt: ResponsiveValue<string> }) => {
 						bg='#FFFFFF'
 						padding={{ md: '32px 30px 27px 32px', base: '30px 21px' }}
 					>
-						<Title32>Абу-Даби</Title32>
+						{activeCity && (
+							<>
+								<Title32>{activeCity[`city_${locale}`]}</Title32>
 
-						<Description
-							mt='10px'
-							fontSize={{ md: '18px', base: '16px' }}
-							lineHeight={{ md: '21.78px', base: '19.36px' }}
-							opacity='.65'
-						>
-							The Opus by OMNIYAT, Office 201, Al Amal St - Business Bay - Dubai
-						</Description>
+								<Description
+									mt='10px'
+									fontSize={{ md: '18px', base: '16px' }}
+									lineHeight={{ md: '21.78px', base: '19.36px' }}
+									opacity='.65'
+								>
+									{activeCity[`address_${locale}`]}
+								</Description>
+							</>
+						)}
 						<Stack
 							spacing='3px'
 							mt='3'
@@ -89,14 +107,7 @@ const Countries = (props: { mt: ResponsiveValue<string> }) => {
 						minH={{ md: '340px', base: '343px' }}
 						h={{ md: 'auto', base: '343px' }}
 					>
-						<iframe
-							src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7220.3424470099835!2d55.274348040869334!3d25.197447618821002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f682829c85c07%3A0xa5eda9fb3c93b69d!2z0JTRg9Cx0LDQuSDQnNC-0LvQuw!5e0!3m2!1sru!2skg!4v1731564482716!5m2!1sru!2skg&z=20'
-							className='full-image'
-							allowFullScreen={true}
-							loading='lazy'
-							referrerPolicy='no-referrer-when-downgrade'
-							tabIndex={0}
-						></iframe>
+						<GoogleMap map_link={activeCity?.map_link} />
 					</Box>
 				</Flex>
 
@@ -105,17 +116,14 @@ const Countries = (props: { mt: ResponsiveValue<string> }) => {
 					spacing={{ md: '20px 8px', base: '8px 0' }}
 					columns={{ xl: 5, md: 4, sm: 3, base: 2 }}
 				>
-					{Array(15)
-						.fill(0)
-						.map((el, idx) => (
-							<CityButtonCard
-								key={idx}
-								onClick={() => setActiveCity(idx)}
-								title='ОАЭ (АБУ-ДАБИ, ДУБАЙ)'
-								subtitle='The Opus by OMNIYAT, Office 201, Al Amal St - Business Bay - Dubai'
-								active={activeCity === idx}
-							/>
-						))}
+					{data?.map(el => (
+						<CityButtonCard
+							key={el.id}
+							el={el}
+							onClick={() => setActiveCity(el)}
+							active={el.id === activeCity?.id}
+						/>
+					))}
 				</SimpleGrid>
 			</Box>
 		</Container>
@@ -123,12 +131,12 @@ const Countries = (props: { mt: ResponsiveValue<string> }) => {
 }
 
 interface CityButtonCardProps {
-	title: string
-	subtitle: string
+	el: IOffice
 	active: boolean
 	onClick: () => void
 }
 function CityButtonCard(props: CityButtonCardProps) {
+	const locale = useTypedLocale()
 	return (
 		<Box
 			onClick={props.onClick}
@@ -150,7 +158,7 @@ function CityButtonCard(props: CityButtonCardProps) {
 					lineHeight='16.1px'
 					color='#333139'
 				>
-					{props.title}
+					{`${props.el[`country_${locale}`]} (${props.el[`city_${locale}`]})`}
 				</Text>
 				{props.active && (
 					<FaAngleRight
@@ -160,12 +168,13 @@ function CityButtonCard(props: CityButtonCardProps) {
 				)}
 			</Flex>
 			<Description
+				noOfLines={2}
 				mt='2'
 				fontSize='14px'
 				lineHeight='16.94px'
 				opacity='.65'
 			>
-				{props.subtitle}
+				{props.el[`address_${locale}`]}
 			</Description>
 		</Box>
 	)

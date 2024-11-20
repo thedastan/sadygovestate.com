@@ -1,4 +1,4 @@
-import { IntlType } from '@/types/intl.types'
+import { IntlType } from '@/models/types/intl-types'
 
 class DASHBOARD {
 	HOME = (locale: IntlType) => {

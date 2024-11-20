@@ -1,8 +1,16 @@
 'use client'
 
-import { Box, Container, Flex, Text } from '@chakra-ui/react'
+import {
+	Box,
+	Container,
+	Flex,
+	SkeletonCircle,
+	SkeletonText,
+	Text
+} from '@chakra-ui/react'
 import Image from 'next/image'
 
+import CountryCard from '@/components/ui/cards/country-card'
 import Title from '@/components/ui/texts/Title'
 import TitleComponent from '@/components/ui/texts/TitleComponent'
 
@@ -10,9 +18,11 @@ import SliderImage from '@/assets/img/slider-image.jpeg'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
+import { useCountries } from '@/hooks/useCountries'
 import { useFullWindowSize } from '@/hooks/useFullHeight'
 
 const IdealCity = () => {
+	const { data, isLoading } = useCountries()
 	const { clientWidth } = useFullWindowSize()
 	return (
 		<Box mt={{ md: '125px', base: '60px' }}>
@@ -38,48 +48,44 @@ const IdealCity = () => {
 						base: '4'
 					}}
 				>
-					{[1, 2, 3, 4, 5, 6, 7].map(el => (
-						<Flex
-							key={el}
-							flexDirection='column'
-							alignItems='center'
-						>
-							<Box
-								w={{ md: '260px', base: '180px' }}
-								h={{ md: '260px', base: '180px' }}
-								rounded='50%'
-								overflow='hidden'
-							>
-								<Image
-									src={SliderImage}
-									alt='Image'
-									className='full-image'
-								/>
-							</Box>
-							<Title
-								mt={{ md: '5', base: '3' }}
-								fontSize={{ md: '24px', base: '18px' }}
-								lineHeight={{ md: '27.6px', base: '20.7px' }}
-								fontWeight='400'
-								letterSpacing='auto'
-							>
-								Россия, Москва
-							</Title>
-							<Text
-								mt={{ md: '3', base: '2.5' }}
-								fontSize={{ md: '18px', base: '14px' }}
-								lineHeight={{ md: '20.7px', base: '16.1px' }}
-								fontWeight='400'
-								color='#333139'
-								opacity='.7'
-							>
-								123 предложений
-							</Text>
-						</Flex>
-					))}
+					{isLoading &&
+						[1, 2, 3, 4, 5].map(idx => <SkeletonCountries key={idx} />)}
+					{!isLoading &&
+						data?.map(el => (
+							<CountryCard
+								key={el.id}
+								el={el}
+							/>
+						))}
 				</Flex>
 			</Flex>
 		</Box>
+	)
+}
+
+function SkeletonCountries() {
+	return (
+		<Flex
+			flexDirection='column'
+			alignItems='center'
+			gap='4'
+		>
+			<SkeletonCircle
+				w={{ md: '260px', base: '180px' }}
+				h={{ md: '260px', base: '180px' }}
+			/>
+			<SkeletonText
+				mt='3'
+				w='70%'
+				noOfLines={1}
+				skeletonHeight={2}
+			/>
+			<SkeletonText
+				w='50%'
+				noOfLines={1}
+				skeletonHeight={2}
+			/>
+		</Flex>
 	)
 }
 

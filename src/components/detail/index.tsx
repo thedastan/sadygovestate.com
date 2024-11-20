@@ -43,7 +43,7 @@ const PropertyDetail = ({ paramId }: { paramId: string }) => {
 					fontSize='14px'
 					lineHeight='16.94px'
 				>
-					{data[`description_${locale}`]}
+					{data[`address_${locale}`]}
 				</Description>
 			</Flex>
 		</>
@@ -172,7 +172,7 @@ const PropertyDetail = ({ paramId }: { paramId: string }) => {
 									<Box
 										key={el.id}
 										h={{ lg: '260px', sm: '180px', base: '113.75px' }}
-										w={{ xl: '100%', sm: '170px', base: '112.5px' }}
+										w={{ xl: '250px', sm: '170px', base: '112.5px' }}
 										rounded='16px'
 										overflow='hidden'
 									>

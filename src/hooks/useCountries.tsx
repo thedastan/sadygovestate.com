@@ -11,7 +11,16 @@ export function useCountries() {
 	return { data, isLoading }
 }
 
-export function useCitys(id: number) {
+export function useOffices() {
+	const { data, isLoading } = useQuery({
+		queryKey: ['office'],
+		queryFn: () => countryService.getOffice()
+	})
+
+	return { data, isLoading }
+}
+
+export function useCities(id: number) {
 	const { data, isLoading } = useQuery({
 		queryKey: ['city', id],
 		queryFn: () => countryService.getCity(id)

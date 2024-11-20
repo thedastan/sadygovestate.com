@@ -1,18 +1,34 @@
 import { Divider, Flex } from '@chakra-ui/react'
+import { useDispatch } from 'react-redux'
 
 import DollarIconSvg from '@/assets/svg/DollarIconSvg'
 import HouseIconSvg from '@/assets/svg/HouseIconSvg'
 import LocationIconSvg from '@/assets/svg/LocationIconSvg'
 
+import { filterActions } from '@/store/slices/storage-slice'
+
+import { useAppSelector } from '@/hooks/useAppSelector'
 import { useCountries } from '@/hooks/useCountries'
+import { useCreatorPriceObject } from '@/hooks/useCreatorPriceObject'
+import useTypedLocale from '@/hooks/useLocale'
 import { useTypes } from '@/hooks/useProperties'
 
 import FilterCard from './FilterCard'
+import FilterSelectCard from './FilterSelectCard'
+import { ICountry } from '@/models/country.model'
+import { IPropertyType } from '@/models/property.model'
+
+const local_price = [50000, 100000, 150000, 200000, 250000]
 
 const FilterHead = () => {
+	const locale = useTypedLocale()
+	const dispatch = useDispatch()
+	const { country, price, type } = useAppSelector(s => s.storage)
+	const { price_list } = useCreatorPriceObject(local_price)
 	const { data: countries, isLoading } = useCountries()
-
 	const { data: types, isLoading: isLoading2 } = useTypes()
+	const country_key = `name_${locale}` as keyof ICountry
+	const type_key = `name_${locale}` as keyof IPropertyType
 	return (
 		<Flex
 			bg='#4A4A4A'
@@ -32,11 +48,22 @@ const FilterHead = () => {
 			>
 				<FilterCard
 					icon={LocationIconSvg}
-					list={countries}
 					isLoading={isLoading}
 					placeholder='Выберите страну'
 					title='Страна'
-				/>
+					value={country?.id ? (country[country_key] as string) : undefined}
+				>
+					{countries?.map(el => (
+						<FilterSelectCard
+							key={el.id}
+							onChange={() => dispatch(filterActions.setCountry(el))}
+							isActive={el.id === country.id}
+							flag={el.flag}
+						>
+							{el[country_key] as string}
+						</FilterSelectCard>
+					))}
+				</FilterCard>
 				<Divider
 					mx='1'
 					orientation='vertical'
@@ -48,10 +75,20 @@ const FilterHead = () => {
 				/>
 				<FilterCard
 					icon={DollarIconSvg}
-					list={[]}
 					placeholder='Ценовой диапазон'
 					title='Цена'
-				/>
+					value={price.text}
+				>
+					{price_list.map(el => (
+						<FilterSelectCard
+							key={el.value}
+							onChange={() => dispatch(filterActions.setPrice(el))}
+							isActive={el.value === price}
+						>
+							{el.text}
+						</FilterSelectCard>
+					))}
+				</FilterCard>
 			</Flex>
 			<Divider
 				display={{ md: 'none', base: 'block' }}
@@ -62,11 +99,21 @@ const FilterHead = () => {
 			/>
 			<FilterCard
 				icon={HouseIconSvg}
-				list={types}
 				isLoading={isLoading2}
 				placeholder='Выберите тип'
 				title='Тип объекта'
-			/>
+				value={type?.id ? type[type_key] : undefined}
+			>
+				{types?.map(el => (
+					<FilterSelectCard
+						key={el.id}
+						onChange={() => dispatch(filterActions.setType(el))}
+						isActive={el.id === type.id}
+					>
+						{el[type_key]}
+					</FilterSelectCard>
+				))}
+			</FilterCard>
 		</Flex>
 	)
 }
