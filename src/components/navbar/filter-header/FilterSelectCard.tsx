@@ -1,6 +1,11 @@
 import { Box, Flex, Radio, Text } from '@chakra-ui/react'
 import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
 import { PropsWithChildren } from 'react'
+
+import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
+
+import useTypedLocale from '@/hooks/useLocale'
 
 interface FilterSelectCardProps extends PropsWithChildren {
 	onChange: () => void
@@ -8,9 +13,19 @@ interface FilterSelectCardProps extends PropsWithChildren {
 	flag?: string
 }
 const FilterSelectCard = (props: FilterSelectCardProps) => {
+	const pathname = usePathname()
+	const { push } = useRouter()
+	const locale = useTypedLocale()
+	const onChange = () => {
+		if (pathname !== DASHBOARD_PAGES.CATALOG(locale)) {
+			push(DASHBOARD_PAGES.CATALOG(locale))
+		}
+
+		props.onChange()
+	}
 	return (
 		<Flex
-			onClick={props.onChange}
+			onClick={onChange}
 			cursor='pointer'
 			alignItems='center'
 			justifyContent='space-between'

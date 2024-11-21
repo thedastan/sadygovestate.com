@@ -67,7 +67,7 @@ const PropertyDetail = ({ paramId }: { paramId: string }) => {
 						<Box display={{ lg: 'block', base: 'none' }}>{TitleDetailPage}</Box>
 						<Flex
 							mt={{ md: '43px', base: '0' }}
-							gap='30px'
+							gap={{ md: '30px', sm: '5', base: '3' }}
 							alignItems='center'
 						>
 							<PropertyParams
@@ -232,7 +232,7 @@ function PropertyParams(props: {
 	return (
 		<Flex
 			alignItems='center'
-			gap='30px'
+			gap={{ md: '30px', sm: '5', base: '3' }}
 		>
 			{!props.isFirst && (
 				<Divider
@@ -243,7 +243,12 @@ function PropertyParams(props: {
 				/>
 			)}
 			<Box>
-				<Title32>{props.title}</Title32>
+				<Title32
+					fontSize={{ md: '32px', sm: '24px', base: '22px' }}
+					lineHeight={{ md: '36.8px', base: '27.6px' }}
+				>
+					{props.title}
+				</Title32>
 				<Description
 					mt='1'
 					fontSize='14px'

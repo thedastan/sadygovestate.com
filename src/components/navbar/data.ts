@@ -18,19 +18,19 @@ export const navbar = [
 	},
 	{
 		name: 'О компании',
-		path: '/'
+		path: '#about'
 	},
 	{
 		name: 'Объекты',
-		path: '/'
+		path: '#catalog'
 	},
 	{
 		name: 'Контакты',
-		path: '/'
+		path: '#address'
 	},
 	{
 		name: 'Награды и отзывы',
-		path: '/'
+		path: '#reviews'
 	}
 ]
 

@@ -6,10 +6,11 @@ export function useCreatorPriceObject(values: number[]) {
 	const locale: IntlType = useTypedLocale()
 
 	const price_list: IFilterValue[] = values.map((value, idx) => {
+		const deFormat = new Intl.NumberFormat('de-DE').format(value)
 		const keys: Record<EnumIntl, string> = {
-			[EnumIntl.RUSSIAN]: `до $${value}`,
-			[EnumIntl.ENGLISH]: `Up to $${value}`,
-			[EnumIntl.ARABIC]: `ما يصل إلى ${value} دولار`
+			[EnumIntl.RUSSIAN]: `до $${deFormat}`,
+			[EnumIntl.ENGLISH]: `Up to $${deFormat}`,
+			[EnumIntl.ARABIC]: `ما يصل إلى ${deFormat} دولار`
 		}
 		return {
 			value,

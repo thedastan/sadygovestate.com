@@ -14,6 +14,7 @@ const Reviews = () => {
 			maxW={CONTAINER_WIDTH}
 			mt={{ md: '140px', base: '60px' }}
 			px={{ sm: '4', base: '0' }}
+			id='reviews'
 		>
 			<Flex
 				gap={{ md: '5', base: '37px' }}

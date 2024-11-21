@@ -20,6 +20,7 @@ const CatalogHome = () => {
 		<Container
 			maxW={CONTAINER_WIDTH}
 			mt={{ md: '170px', base: '60px' }}
+			id='catalog'
 		>
 			<Flex
 				gap='14px'

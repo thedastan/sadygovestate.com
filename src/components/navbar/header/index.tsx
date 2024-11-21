@@ -1,14 +1,20 @@
 import { Box, Container, Flex } from '@chakra-ui/react'
+import { usePathname } from 'next/navigation'
 
 import LogoSvg from '@/assets/svg/LogoSvg'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
+import { DETAIL_PATH_KEY_WORD } from '@/config/pages/dashboard-url.config'
 
 import FilterHead from '../filter-header'
 
+import HeaderButtons from './HeaderButtons'
 import BurgerMenu from './burger-menu'
 
 const Header = () => {
+	const pathname = usePathname()
+	const inDetailPage = pathname.includes(DETAIL_PATH_KEY_WORD)
+
 	return (
 		<Box>
 			<Flex
@@ -25,11 +31,14 @@ const Header = () => {
 						mt={{ md: '5', base: '0' }}
 						h={{ md: 'auto', base: '66px' }}
 						alignItems='center'
-						justifyContent='space-between'
+						justifyContent={{
+							md: inDetailPage ? 'start' : 'space-between',
+							base: 'space-between'
+						}}
 					>
 						<BurgerMenu />
 						<Box display={{ md: 'block', base: 'none' }}>
-							<FilterHead />
+							{inDetailPage ? <HeaderButtons /> : <FilterHead />}
 						</Box>
 						<Box w={{ md: '60px', base: 'auto' }}>
 							<Box display={{ md: 'none', base: 'block' }}>
@@ -47,9 +56,9 @@ const Header = () => {
 				<Box
 					display={{ md: 'none', base: 'block' }}
 					mt='72px'
-					pb='40px'
+					pb={inDetailPage ? '30px' : '40px'}
 				>
-					<FilterHead />
+					{inDetailPage ? <HeaderButtons /> : <FilterHead />}
 				</Box>
 
 				<Flex

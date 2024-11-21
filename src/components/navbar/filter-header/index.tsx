@@ -18,7 +18,7 @@ import FilterSelectCard from './FilterSelectCard'
 import { ICountry } from '@/models/country.model'
 import { IPropertyType } from '@/models/property.model'
 
-const local_price = [50000, 100000, 150000, 200000, 250000]
+const local_price = [50000, 100000, 150000, 200000, 250000, 500000, 700000]
 
 const FilterHead = () => {
 	const locale = useTypedLocale()
@@ -83,7 +83,7 @@ const FilterHead = () => {
 						<FilterSelectCard
 							key={el.value}
 							onChange={() => dispatch(filterActions.setPrice(el))}
-							isActive={el.value === price}
+							isActive={el.value === price.value}
 						>
 							{el.text}
 						</FilterSelectCard>

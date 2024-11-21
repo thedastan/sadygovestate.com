@@ -1,3 +1,5 @@
+import { IFilterStateValue } from '@/store/slices/storage-slice'
+
 import { PUBLIC_API } from '@/api/interceptors'
 
 import {
@@ -10,10 +12,27 @@ import {
 class PropertyService {
 	private BASE_URL = 'property/property/'
 
-	async getAll(search?: string) {
-		const searchParam = !!search ? `?search=${search}` : ''
+	async getAll(params?: IFilterStateValue) {
+		const country = params?.country?.id ? `country=${params.country.id}` : ''
+		const type = params?.type?.id ? `tipo=${params.type.id}` : ''
+		const stage = params?.stage?.id ? `stage=${params.stage.id}` : ''
+		const max_price = params?.price?.value
+			? `max_price=${params.price.value}`
+			: ''
+
+		const arr = [country, type, stage, max_price].filter(el => !!el)
+		const filter_path = arr.length ? '?' + arr.join('&') : ''
+
 		const response = await PUBLIC_API.get<IProperty[]>(
-			`${this.BASE_URL + searchParam}`
+			this.BASE_URL + filter_path
+		)
+
+		return response.data
+	}
+
+	async getInvestment() {
+		const response = await PUBLIC_API.get<IProperty[]>(
+			this.BASE_URL + 'investment/'
 		)
 
 		return response.data

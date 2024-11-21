@@ -1,11 +1,22 @@
 import { useQuery } from '@tanstack/react-query'
 
+import { IFilterStateValue } from '@/store/slices/storage-slice'
+
 import { propertyService } from '@/service/property.service'
 
-export function useProperties() {
+export function useProperties(params?: IFilterStateValue) {
 	const { data, isLoading } = useQuery({
-		queryKey: ['properties-get'],
-		queryFn: () => propertyService.getAll()
+		queryKey: ['properties-get', params],
+		queryFn: () => propertyService.getAll(params)
+	})
+
+	return { data, isLoading }
+}
+
+export function useInvestmentProperties() {
+	const { data, isLoading } = useQuery({
+		queryKey: ['investment-get'],
+		queryFn: () => propertyService.getInvestment()
 	})
 
 	return { data, isLoading }

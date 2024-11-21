@@ -20,6 +20,7 @@ const PrimeRealEstate = () => {
 			maxW={CONTAINER_WIDTH}
 			mt={{ lg: '182px', base: '122px' }}
 			px={{ lg: '4', base: '0' }}
+			id='about'
 		>
 			<Flex
 				w='100%'
