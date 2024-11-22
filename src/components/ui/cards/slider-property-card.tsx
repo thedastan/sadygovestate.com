@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { attribute_From } from '@/config/intl-variables'
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
+import { formatToDE } from '@/hooks/useCreatorPriceObject'
 import useTypedLocale from '@/hooks/useLocale'
 
 import Title from '../texts/Title'
@@ -50,7 +51,7 @@ const SliderPropertyCard = ({ el }: SliderPropertyCardProps) => {
 						alignItems='center'
 						gap='1'
 					>
-						<Title>{`${attribute_From[locale]} $${el.price}`}</Title>
+						<Title whiteSpace='nowrap'>{`${attribute_From[locale]} $${formatToDE(el.price)}`}</Title>
 						<Flex
 							color='#333139'
 							alignItems='center'

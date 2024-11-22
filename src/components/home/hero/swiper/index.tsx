@@ -28,6 +28,7 @@ const HeroSwiper = ({ images }: { images: any[] }) => {
 			<Swiper
 				spaceBetween={50}
 				slidesPerView={1}
+				allowTouchMove={false}
 				autoplay={{
 					delay: 10000,
 					disableOnInteraction: false,

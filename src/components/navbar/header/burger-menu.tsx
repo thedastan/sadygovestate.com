@@ -218,16 +218,14 @@ const BurgerMenu = () => {
 									<Flex
 										key={idx}
 										bg='#333139'
-										w='63px'
-										h='63px'
+										w={{ sm: '63px', base: '45px' }}
+										h={{ sm: '63px', base: '45px' }}
+										fontSize={{ sm: '30px', base: '22px' }}
 										rounded='50%'
 										justifyContent='center'
 										alignItems='center'
 									>
-										<el.icon
-											color='#FFFFFF'
-											fontSize='30px'
-										/>
+										<el.icon color='#FFFFFF' />
 									</Flex>
 								))}
 							</Flex>

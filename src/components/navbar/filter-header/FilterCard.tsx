@@ -69,7 +69,7 @@ const FilterCard = (props: FilterCardProps) => {
 					<SkeletonText
 						mt='2'
 						noOfLines={1}
-						w='140px'
+						w={{ sm: '140px', base: '100px' }}
 						skeletonHeight='2'
 					/>
 				</Box>

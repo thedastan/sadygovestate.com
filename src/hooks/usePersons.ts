@@ -10,3 +10,12 @@ export function useEmployees() {
 
 	return { data, isLoading }
 }
+
+export function useReviews() {
+	const { data, isLoading } = useQuery({
+		queryKey: ['reviews'],
+		queryFn: () => personsService.getReviews()
+	})
+
+	return { data, isLoading }
+}

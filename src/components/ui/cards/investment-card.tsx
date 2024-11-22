@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { attribute_From } from '@/config/intl-variables'
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
+import { formatToDE } from '@/hooks/useCreatorPriceObject'
 import useTypedLocale from '@/hooks/useLocale'
 
 import Title from '../texts/Title'
@@ -47,7 +48,7 @@ const InvestmentCard = ({ el }: SliderPropertyCardProps) => {
 					<Title
 						fontWeight='700'
 						mt={{ md: '19px', base: '3' }}
-					>{`${attribute_From[locale]} $${el.price}`}</Title>
+					>{`${attribute_From[locale]} $${formatToDE(el.price)}`}</Title>
 					<Flex
 						justifyContent='space-between'
 						alignItems='center'

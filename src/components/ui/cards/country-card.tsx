@@ -1,6 +1,12 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { BsArrowRightShort } from 'react-icons/bs'
+import { useDispatch } from 'react-redux'
+
+import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
+
+import { filterActions } from '@/store/slices/storage-slice'
 
 import useTypedLocale from '@/hooks/useLocale'
 
@@ -13,9 +19,12 @@ interface CountryCardProps {
 }
 const CountryCard = ({ el }: CountryCardProps) => {
 	const locale = useTypedLocale()
-
+	const dispatch = useDispatch()
 	const cities_name = el.cities?.map(el => el[`name_${locale}`])
 
+	const getCountry = () => {
+		dispatch(filterActions.setCountry(el))
+	}
 	const total_properties = el.cities?.reduce(
 		(acc, el) => (acc += el.total_properties),
 		0
@@ -67,39 +76,45 @@ const CountryCard = ({ el }: CountryCardProps) => {
 					alignItems='center'
 					bg='#00000066'
 				>
-					<Flex
-						flexDirection='column'
-						alignItems='center'
-						gap='14px'
-						cursor='pointer'
-						_hover={{ textDecoration: 'underline', color: '#FFFFFF' }}
+					<Link
+						href={DASHBOARD_PAGES.CATALOG(locale)}
+						passHref
 					>
-						<Box
-							w='56px'
-							h='40px'
-							rounded='4px'
-							overflow='hidden'
-						>
-							<Image
-								src={el.flag}
-								width={56}
-								height={40}
-								alt='Image'
-								className='full-image'
-							/>
-						</Box>
 						<Flex
-							fontWeight='700'
-							fontSize='18px'
-							color='#FFFFFF'
-							lineHeight='20.7px'
-							gap='1'
+							as='a'
+							onClick={getCountry}
+							flexDirection='column'
 							alignItems='center'
+							gap='14px'
+							_hover={{ textDecoration: 'underline', color: '#FFFFFF' }}
 						>
-							Смотреть
-							<BsArrowRightShort fontSize='28px' />
+							<Box
+								w='56px'
+								h='40px'
+								rounded='4px'
+								overflow='hidden'
+							>
+								<Image
+									src={el.flag}
+									width={56}
+									height={40}
+									alt='Image'
+									className='full-image'
+								/>
+							</Box>
+							<Flex
+								fontWeight='700'
+								fontSize='18px'
+								color='#FFFFFF'
+								lineHeight='20.7px'
+								gap='1'
+								alignItems='center'
+							>
+								Смотреть
+								<BsArrowRightShort fontSize='28px' />
+							</Flex>
 						</Flex>
-					</Flex>
+					</Link>
 				</Flex>
 			</Box>
 			<Title
@@ -108,6 +123,7 @@ const CountryCard = ({ el }: CountryCardProps) => {
 				lineHeight={{ md: '27.6px', base: '20.7px' }}
 				fontWeight='400'
 				letterSpacing='auto'
+				textAlign='center'
 			>
 				{`${el[`name_${locale}`]}, ${cities_name?.join('/')}`}
 			</Title>

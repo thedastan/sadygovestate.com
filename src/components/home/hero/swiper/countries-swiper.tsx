@@ -25,7 +25,7 @@ const CountriesSwiper = () => {
 	return (
 		<SlideProvider
 			bgImage={active?.image}
-			title='Страны для выгодных покупок'
+			title='Выгодные страны для покупки'
 			path={DASHBOARD_PAGES.CATALOG(locale)}
 			isLoading={isLoading}
 		>

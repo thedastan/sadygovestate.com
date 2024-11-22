@@ -21,16 +21,8 @@ export const navbar = [
 		path: '#about'
 	},
 	{
-		name: 'Объекты',
+		name: 'Каталог',
 		path: '#catalog'
-	},
-	{
-		name: 'Контакты',
-		path: '#address'
-	},
-	{
-		name: 'Награды и отзывы',
-		path: '#reviews'
 	}
 ]
 

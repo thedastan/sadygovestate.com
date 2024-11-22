@@ -14,7 +14,7 @@ import useTypedLocale from '@/hooks/useLocale'
 import { useProperties } from '@/hooks/useProperties'
 
 const CatalogHome = () => {
-	const { data, isLoading } = useProperties()
+	const { data_main_page, isLoading } = useProperties()
 	const locale = useTypedLocale()
 	return (
 		<Container
@@ -44,29 +44,33 @@ const CatalogHome = () => {
 			</Flex>
 
 			<CatalogGridComponent
-				data={data}
+				data={data_main_page}
 				isLoading={isLoading}
 			/>
 
 			<Flex
 				display={{ md: 'none', base: 'flex' }}
-				alignItems='center'
 				mt='30px'
-				color='#000000'
-				w='140px'
-				mx='auto'
-				gap='1'
+				justifyContent='center'
 			>
-				<Text
-					fontSize='14px'
-					textTransform='uppercase'
-					lineHeight='16.1px'
-					letterSpacing='0.7px'
-					fontWeight='400'
-				>
-					Все объекты
-				</Text>
-				<GoArrowUpRight fontSize='20px' />
+				<Link href={DASHBOARD_PAGES.CATALOG(locale)}>
+					<Flex
+						color='#000000'
+						alignItems='center'
+						gap='1'
+					>
+						<Text
+							fontSize='14px'
+							textTransform='uppercase'
+							lineHeight='16.1px'
+							letterSpacing='0.7px'
+							fontWeight='400'
+						>
+							Все объекты
+						</Text>
+						<GoArrowUpRight fontSize='20px' />
+					</Flex>
+				</Link>
 			</Flex>
 		</Container>
 	)

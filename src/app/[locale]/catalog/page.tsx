@@ -4,7 +4,7 @@ import { NO_INDEX_PAGE } from '@/constants/seo/seo.constants'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-	title: 'Catalog | Каталог',
+	title: 'Catalog | Каталог | كتالوج ',
 	...NO_INDEX_PAGE
 }
 

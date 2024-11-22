@@ -1,7 +1,15 @@
 'use client'
 
-import { Box, Button, Container, Divider, Flex } from '@chakra-ui/react'
+import {
+	Box,
+	Button,
+	Container,
+	Divider,
+	Flex,
+	Spinner
+} from '@chakra-ui/react'
 import Image from 'next/image'
+import { useRef } from 'react'
 import { FiMapPin } from 'react-icons/fi'
 import { IoCheckmarkOutline } from 'react-icons/io5'
 
@@ -13,10 +21,13 @@ import SaveIcon from '@/assets/svg/SaveIcon'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
+import { useCreatePDF } from '@/hooks/useCreatePDF'
+import { formatToDE } from '@/hooks/useCreatorPriceObject'
 import { useFullWindowSize } from '@/hooks/useFullHeight'
 import useTypedLocale from '@/hooks/useLocale'
 import { usePropertyDetail } from '@/hooks/useProperties'
 
+import Countries from '../countries'
 import CatalogCard from '../ui/cards/catalog-card'
 import CharacteristicsCard from '../ui/cards/characteristic-card'
 import Description from '../ui/texts/Description'
@@ -29,7 +40,9 @@ const PropertyDetail = ({ paramId }: { paramId: string }) => {
 	const { clientWidth } = useFullWindowSize()
 	const locale = useTypedLocale()
 	const { data, isLoading } = usePropertyDetail(paramId)
+	const pdfRef = useRef<HTMLDivElement>(null)
 
+	const { createPDF, isLoadingPDF } = useCreatePDF()
 	const TitleDetailPage = !!data && (
 		<>
 			<TitleComponent>{data[`name_${locale}`]}</TitleComponent>
@@ -43,7 +56,7 @@ const PropertyDetail = ({ paramId }: { paramId: string }) => {
 					fontSize='14px'
 					lineHeight='16.94px'
 				>
-					{data[`address_${locale}`]}
+					{`${data[`district_${locale}`]}, ${data[`address_${locale}`]}`}
 				</Description>
 			</Flex>
 		</>
@@ -54,7 +67,7 @@ const PropertyDetail = ({ paramId }: { paramId: string }) => {
 	}
 	if (!data) return null
 	return (
-		<Box>
+		<Box ref={pdfRef}>
 			<Container maxW={CONTAINER_WIDTH}>
 				<Flex
 					gap={{ xl: '52px', md: '24px', base: '34px' }}
@@ -71,18 +84,18 @@ const PropertyDetail = ({ paramId }: { paramId: string }) => {
 							alignItems='center'
 						>
 							<PropertyParams
-								title={`$${data.price}`}
-								subtitle='цена'
+								title={`$${formatToDE(data.price)}`}
+								subtitle='стоимость'
 								isFirst={true}
 							/>
 							<PropertyParams
-								title='150m2'
+								title={`${data?.sqmt} m² - ${data?.sqft} f²`}
 								subtitle='площадь'
 							/>
 							{!!data?.year && (
 								<PropertyParams
-									title={`${data.year}г`}
-									subtitle='Квартира'
+									title={`${data.year?.slice(0, 4)}г`}
+									subtitle='сдан'
 								/>
 							)}
 						</Flex>
@@ -109,11 +122,16 @@ const PropertyDetail = ({ paramId }: { paramId: string }) => {
 									text='гостиная'
 								/>
 							)}
-							<CharacteristicsCard
-								icon={CatalogPersonIcon}
-								text='5-7 человек'
+							{!!data?.profitability && (
+								<CharacteristicsCard
+									icon={CatalogPersonIcon}
+									text={`${data.profitability} человек`}
+								/>
+							)}
+							<SaveAsPdfButton
+								onClick={() => createPDF(pdfRef, data[`name_${locale}`])}
+								isLoading={isLoadingPDF}
 							/>
-							<SaveAsPdfButton />
 						</Flex>
 						<Description
 							lineHeight='26px'
@@ -121,19 +139,19 @@ const PropertyDetail = ({ paramId }: { paramId: string }) => {
 						>
 							{data[`description_${locale}`]}
 						</Description>
-						<Box
-							mt='4'
-							bg='#F2F2F2'
-							rounded='14px'
-							pt='30px'
-							px='6'
-						>
-							<ListItem2>Рядом с метро и торговыми центрами</ListItem2>
-							<ListItem2>Открытая планировка</ListItem2>
-							<ListItem2>На 10-м этаже с видом на город</ListItem2>
-							<ListItem2>В 10 минутах от пляжа</ListItem2>
-							<ListItem2>Современный дизайн, премиальная отделка</ListItem2>
-						</Box>
+						{!!data[`advantage_${locale}`]?.length && (
+							<Box
+								mt='4'
+								bg='#F2F2F2'
+								rounded='14px'
+								pt='30px'
+								px='6'
+							>
+								{data[`advantage_${locale}`].map(el => (
+									<ListItem2 key={el.id}>{el.title}</ListItem2>
+								))}
+							</Box>
+						)}
 					</Box>
 
 					<Box
@@ -220,6 +238,7 @@ const PropertyDetail = ({ paramId }: { paramId: string }) => {
 					))}
 				</Flex>
 			</Flex>
+			<Countries mt={{ md: '158px', base: '60px' }} />
 		</Box>
 	)
 }
@@ -261,9 +280,12 @@ function PropertyParams(props: {
 	)
 }
 
-function SaveAsPdfButton() {
-	return (
+function SaveAsPdfButton(props: { onClick: () => void; isLoading: boolean }) {
+	return props.isLoading ? (
+		<Spinner />
+	) : (
 		<Button
+			onClick={props.onClick}
 			variant='none'
 			bg='#4A4A4A'
 			rounded='100px'

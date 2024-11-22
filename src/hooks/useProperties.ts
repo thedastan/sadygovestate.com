@@ -13,7 +13,8 @@ export function useProperties(
 		queryFn: () => propertyService.getAll(!!isInvestment, params)
 	})
 
-	return { data, isLoading }
+	const data_main_page = data?.filter(item => item.main_image)
+	return { data, isLoading, data_main_page }
 }
 
 export function usePropertyDetail(id: number | string) {

@@ -1,13 +1,17 @@
 import { Avatar, Box, Flex } from '@chakra-ui/react'
 import { FaStar } from 'react-icons/fa'
+import { FaRegStar } from 'react-icons/fa'
 
 import Description from '../texts/Description'
 
-const ReviewCard = () => {
+import { IReview } from '@/models/other.model'
+
+const ReviewCard = ({ el }: { el: IReview }) => {
 	return (
 		<Box
 			bg='#FFFFFF'
 			rounded='20px'
+			w={{ lg: '742px', sm: '600px', base: '450px' }}
 			border='1px solid var(--Gray, #F2F2F2)'
 			px={{ md: '5', base: '4' }}
 			py={{ md: '18.5px', base: '5' }}
@@ -28,7 +32,7 @@ const ReviewCard = () => {
 						fontWeight='600'
 						color='#12141D'
 					>
-						Liam Hyder
+						{el.full_name}
 					</Description>
 					<Description
 						color='#12141D'
@@ -46,13 +50,21 @@ const ReviewCard = () => {
 				gap='19px'
 			>
 				<Flex gap='2'>
-					{[1, 2, 3, 4, 5].map(star => (
-						<FaStar
-							color='#FFBF18'
-							key={star}
-							fontSize='15px'
-						/>
-					))}
+					{[1, 2, 3, 4, 5].map(star =>
+						star <= el.rating ? (
+							<FaStar
+								color='#FFBF18'
+								key={star}
+								fontSize='15px'
+							/>
+						) : (
+							<FaRegStar
+								key={star}
+								fontSize='15px'
+								opacity='.5'
+							/>
+						)
+					)}
 				</Flex>
 				<Description
 					color='#12141D'

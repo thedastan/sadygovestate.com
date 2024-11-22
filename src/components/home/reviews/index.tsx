@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Container, Flex } from '@chakra-ui/react'
 import Image from 'next/image'
 
@@ -8,7 +10,10 @@ import ReviewsBg from '@/assets/img/reviews-bg.jpeg'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
+import { useReviews } from '@/hooks/usePersons'
+
 const Reviews = () => {
+	const { data, isLoading } = useReviews()
 	return (
 		<Container
 			maxW={CONTAINER_WIDTH}
@@ -48,10 +53,20 @@ const Reviews = () => {
 						bottom='5'
 						left='0'
 						w='100%'
-						overflow='hidden'
-						px={{ md: '20px 0', base: '4' }}
+						overflow='auto'
+						className='unscroll'
 					>
-						<ReviewCard />
+						<Flex
+							gap='5'
+							px={{ md: '20px 0', base: '4' }}
+						>
+							{data?.map(el => (
+								<ReviewCard
+									key={el.id}
+									el={el}
+								/>
+							))}
+						</Flex>
 					</Flex>
 				</Box>
 			</Flex>

@@ -1,7 +1,6 @@
 import { Metadata, ResolvingMetadata } from 'next'
 import Head from 'next/head'
 
-import Countries from '@/components/countries'
 import PropertyDetail from '@/components/detail'
 
 import { SEO_KEY_WORDS } from '@/constants/seo/seo.constants'
@@ -32,7 +31,6 @@ export async function generateMetadata(
 
 export default async function DetailPropertyPage({ params }: Props) {
 	const property = await propertyService.getDetail(params.id)
-
 	return (
 		<>
 			<Head>
@@ -53,7 +51,6 @@ export default async function DetailPropertyPage({ params }: Props) {
 				/>
 			</Head>
 			<PropertyDetail paramId={params.id} />
-			<Countries mt={{ md: '158px', base: '60px' }} />
 		</>
 	)
 }

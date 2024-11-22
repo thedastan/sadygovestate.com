@@ -42,19 +42,21 @@ const Header = () => {
 					<Flex
 						mt={{ lg: '5', base: '0' }}
 						alignItems='center'
-						justifyContent={{
-							lg: inDetailPage ? 'start' : 'space-between',
-							base: 'space-between'
-						}}
+						justifyContent='space-between'
 					>
 						<Flex
 							justifyContent='start'
+							alignItems='center'
 							w={{ md: '157px', base: '138px' }}
 						>
 							<BurgerMenu />
+
+							{inDetailPage && <HeaderButtons />}
 						</Flex>
-						<Box display={{ lg: 'block', base: 'none' }}>
-							{inDetailPage ? <HeaderButtons /> : <FilterHead />}
+						<Box
+							display={{ lg: inDetailPage ? 'none' : 'block', base: 'none' }}
+						>
+							<FilterHead />
 						</Box>
 						<Link href={DASHBOARD_PAGES.HOME(locale)}>
 							<LogoSvg
@@ -68,7 +70,7 @@ const Header = () => {
 
 			<Container
 				maxW={CONTAINER_WIDTH}
-				h={{ lg: HEADER_HEIGHT, base: 'auto' }}
+				h={{ lg: parseInt(HEADER_HEIGHT) + 10 + 'px', base: 'auto' }}
 			>
 				<Box
 					display={{ lg: 'none', base: 'block' }}

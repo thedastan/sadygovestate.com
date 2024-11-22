@@ -10,6 +10,7 @@ import CatalogBedIcon from '@/assets/svg/CatalogBedIcon'
 
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
+import { formatToDE } from '@/hooks/useCreatorPriceObject'
 import useTypedLocale from '@/hooks/useLocale'
 
 import Description from '../texts/Description'
@@ -30,6 +31,11 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 			rounded='22px'
 			_hover={{ bg: '#EFEFEF' }}
 			transition='.2s'
+			sx={{
+				'&:hover': {
+					'.card-flag': { opacity: '1' }
+				}
+			}}
 		>
 			<Link href={DASHBOARD_PAGES.DETAIL(locale, el.id)}>
 				<Box
@@ -37,6 +43,7 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 					h='240px'
 					rounded='20px'
 					overflow='hidden'
+					position='relative'
 				>
 					<Image
 						src={el.main_image}
@@ -45,6 +52,27 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 						alt='Image'
 						className='full-image'
 					/>
+
+					<Box
+						position='absolute'
+						className='card-flag'
+						top='16.57px'
+						opacity='0'
+						transition='.4s'
+						right='14px'
+						w='46px'
+						h='32.86px'
+						rounded='6px'
+						overflow='hidden'
+					>
+						<Image
+							src={el.country_flag}
+							width={46}
+							height={33}
+							alt='Flag'
+							className='full-image'
+						/>
+					</Box>
 				</Box>
 
 				<Box
@@ -56,7 +84,7 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 						justifyContent='space-between'
 						alignItems='center'
 					>
-						<Title>{`от $${el.price}`}</Title>
+						<Title>{`от $${formatToDE(el.price)}`}</Title>
 						<Flex
 							gap='6px'
 							color='#333139'
