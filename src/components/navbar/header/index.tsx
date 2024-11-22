@@ -1,10 +1,20 @@
-import { Box, Container, Flex } from '@chakra-ui/react'
+import { Box, Container, Flex, useMediaQuery } from '@chakra-ui/react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import LogoSvg from '@/assets/svg/LogoSvg'
 
-import { CONTAINER_WIDTH } from '@/config/_variables.config'
-import { DETAIL_PATH_KEY_WORD } from '@/config/pages/dashboard-url.config'
+import {
+	CONTAINER_WIDTH,
+	HEADER_HEIGHT,
+	HEADER_HEIGHT_MINI
+} from '@/config/_variables.config'
+import {
+	DASHBOARD_PAGES,
+	DETAIL_PATH_KEY_WORD
+} from '@/config/pages/dashboard-url.config'
+
+import useTypedLocale from '@/hooks/useLocale'
 
 import FilterHead from '../filter-header'
 
@@ -13,8 +23,9 @@ import BurgerMenu from './burger-menu'
 
 const Header = () => {
 	const pathname = usePathname()
+	const locale = useTypedLocale()
 	const inDetailPage = pathname.includes(DETAIL_PATH_KEY_WORD)
-
+	const [isLargerThanMd] = useMediaQuery('(min-width: 768px)')
 	return (
 		<Box>
 			<Flex
@@ -24,54 +35,48 @@ const Header = () => {
 				right='0'
 				w='100%'
 				zIndex='30'
-				bg={{ md: 'transparent', base: '#FFFFFF' }}
+				h={{ lg: HEADER_HEIGHT, base: HEADER_HEIGHT_MINI }}
+				bg='#FFFFFF'
 			>
 				<Container maxW={CONTAINER_WIDTH}>
 					<Flex
-						mt={{ md: '5', base: '0' }}
-						h={{ md: 'auto', base: '66px' }}
+						mt={{ lg: '5', base: '0' }}
 						alignItems='center'
 						justifyContent={{
-							md: inDetailPage ? 'start' : 'space-between',
+							lg: inDetailPage ? 'start' : 'space-between',
 							base: 'space-between'
 						}}
 					>
-						<BurgerMenu />
-						<Box display={{ md: 'block', base: 'none' }}>
+						<Flex
+							justifyContent='start'
+							w={{ md: '157px', base: '138px' }}
+						>
+							<BurgerMenu />
+						</Flex>
+						<Box display={{ lg: 'block', base: 'none' }}>
 							{inDetailPage ? <HeaderButtons /> : <FilterHead />}
 						</Box>
-						<Box w={{ md: '60px', base: 'auto' }}>
-							<Box display={{ md: 'none', base: 'block' }}>
-								<LogoSvg
-									width='138'
-									height='52'
-								/>
-							</Box>
-						</Box>
+						<Link href={DASHBOARD_PAGES.HOME(locale)}>
+							<LogoSvg
+								width={isLargerThanMd ? '157' : '138'}
+								height={isLargerThanMd ? '46' : '40'}
+							/>
+						</Link>
 					</Flex>
 				</Container>
 			</Flex>
 
-			<Container maxW={CONTAINER_WIDTH}>
+			<Container
+				maxW={CONTAINER_WIDTH}
+				h={{ lg: HEADER_HEIGHT, base: 'auto' }}
+			>
 				<Box
-					display={{ md: 'none', base: 'block' }}
+					display={{ lg: 'none', base: 'block' }}
 					mt='72px'
 					pb={inDetailPage ? '30px' : '40px'}
 				>
 					{inDetailPage ? <HeaderButtons /> : <FilterHead />}
 				</Box>
-
-				<Flex
-					display={{ md: 'flex', base: 'none' }}
-					justifyContent='end'
-					pt='40px'
-					pb='70px'
-				>
-					<LogoSvg
-						width='157'
-						height='46'
-					/>
-				</Flex>
 			</Container>
 		</Box>
 	)

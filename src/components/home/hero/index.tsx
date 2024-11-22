@@ -12,6 +12,7 @@ const HomeHero = () => {
 			<HeroSwiper images={[SliderImage, SliderImage]} />
 
 			<Text
+				mt={{ md: '0', base: '30px' }}
 				maxW='247px'
 				fontWeight='400'
 				fontSize='18px'

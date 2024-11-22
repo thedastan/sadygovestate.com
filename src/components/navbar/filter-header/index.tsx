@@ -18,7 +18,9 @@ import FilterSelectCard from './FilterSelectCard'
 import { ICountry } from '@/models/country.model'
 import { IPropertyType } from '@/models/property.model'
 
-const local_price = [50000, 100000, 150000, 200000, 250000, 500000, 700000]
+const local_price = [
+	200000, 400000, 600000, 800000, 1000000, 2000000, 3000000, 4000000, 1000000
+]
 
 const FilterHead = () => {
 	const locale = useTypedLocale()
@@ -36,6 +38,7 @@ const FilterHead = () => {
 			py={{ md: '11px', base: '14px' }}
 			px={{ md: '10', sm: '5', base: '4' }}
 			maxW='768px'
+			mx='auto'
 			w='100%'
 			gap='3'
 			justifyContent='space-between'
@@ -45,6 +48,8 @@ const FilterHead = () => {
 			<Flex
 				gap='3'
 				alignItems='center'
+				w={{ lg: 'auto', md: '66%', base: 'auto' }}
+				justifyContent='space-between'
 			>
 				<FilterCard
 					icon={LocationIconSvg}

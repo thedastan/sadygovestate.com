@@ -12,7 +12,7 @@ import {
 class PropertyService {
 	private BASE_URL = 'property/property/'
 
-	async getAll(params?: IFilterStateValue) {
+	async getAll(isInvestment: boolean, params?: IFilterStateValue) {
 		const country = params?.country?.id ? `country=${params.country.id}` : ''
 		const type = params?.type?.id ? `tipo=${params.type.id}` : ''
 		const stage = params?.stage?.id ? `stage=${params.stage.id}` : ''
@@ -23,8 +23,9 @@ class PropertyService {
 		const arr = [country, type, stage, max_price].filter(el => !!el)
 		const filter_path = arr.length ? '?' + arr.join('&') : ''
 
+		const result_path = isInvestment ? 'investment/' + filter_path : filter_path
 		const response = await PUBLIC_API.get<IProperty[]>(
-			this.BASE_URL + filter_path
+			this.BASE_URL + result_path
 		)
 
 		return response.data
@@ -33,6 +34,14 @@ class PropertyService {
 	async getInvestment() {
 		const response = await PUBLIC_API.get<IProperty[]>(
 			this.BASE_URL + 'investment/'
+		)
+
+		return response.data
+	}
+
+	async getRecommended() {
+		const response = await PUBLIC_API.get<IProperty[]>(
+			this.BASE_URL + 'recommend/'
 		)
 
 		return response.data

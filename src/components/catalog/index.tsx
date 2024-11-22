@@ -18,12 +18,12 @@ import TitlePages from '../ui/texts/TitlePages'
 import CatalogGridComponent from './catalog-grid'
 import FilterCatalogHeader from './filter-catalog-header'
 
-const Catalog = () => {
+const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 	const dispatch = useDispatch()
 	const locale = useTypedLocale()
 
 	const storage = useAppSelector(s => s.storage)
-	const { data, isLoading } = useProperties(storage)
+	const { data, isLoading } = useProperties(storage, isInvestment)
 	const { data: types, isLoading: isLoading2 } = useTypes()
 	const { data: stages } = useStages()
 
@@ -35,7 +35,6 @@ const Catalog = () => {
 			rounded='100px'
 			px={{ sm: '10px', base: '1' }}
 			alignItems='center'
-			// justifyContent='space-around'
 			py={{ md: '2', base: '2.5' }}
 			gap={{ md: '1', sm: '7px', base: '3px' }}
 			h={{ md: '46px', base: '51px' }}
@@ -66,10 +65,12 @@ const Catalog = () => {
 		<Box>
 			<TitlePages
 				mb={{ md: '50px', base: '17px' }}
+				maxW='793px'
 				px='4'
 				textAlign='center'
+				mx='auto'
 			>
-				Каталог объектов
+				{isInvestment ? 'Инвестиционные объекты' : 'Каталог объектов'}
 			</TitlePages>
 
 			<FilterCatalogHeader />
@@ -114,6 +115,7 @@ const Catalog = () => {
 				<CatalogGridComponent
 					data={data}
 					isLoading={isLoading}
+					isInvestment={isInvestment}
 				/>
 			</Container>
 		</Box>

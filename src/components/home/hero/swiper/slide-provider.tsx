@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Flex, Skeleton, Text } from '@chakra-ui/react'
 import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 import { PropsWithChildren } from 'react'
@@ -7,15 +7,17 @@ import { GoArrowUpRight } from 'react-icons/go'
 import TitlePages from '@/components/ui/texts/TitlePages'
 
 interface SlideProviderProps extends PropsWithChildren {
-	bgImage: StaticImageData
+	bgImage: StaticImageData | string
 	title: string
 	path: string
+	isLoading?: boolean
 }
 const SlideProvider = ({
 	bgImage,
 	title,
 	path,
-	children
+	children,
+	isLoading
 }: SlideProviderProps) => {
 	return (
 		<>
@@ -59,23 +61,36 @@ const SlideProvider = ({
 				overflow='hidden'
 				w='100%'
 				position='relative'
+				rounded='20px'
 			>
-				<Image
-					src={bgImage}
-					alt='Image'
-					className='detail-image'
-				/>
+				{isLoading ? (
+					<Skeleton
+						w='100%'
+						h='100%'
+					/>
+				) : (
+					<Image
+						src={bgImage}
+						alt='Image'
+						width={1501}
+						height={450}
+						className='detail-image'
+					/>
+				)}
 
-				<Box
-					position='absolute'
-					left='0'
-					bottom='0'
-					right='0'
-					top='0'
-					cursor='pointer'
-				>
-					{children}
-				</Box>
+				{!isLoading && (
+					<Box
+						position='absolute'
+						left='0'
+						bottom='0'
+						right='0'
+						top='0'
+						h='100%'
+						bg='#00000042'
+					>
+						{children}
+					</Box>
+				)}
 			</Box>
 		</>
 	)

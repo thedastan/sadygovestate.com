@@ -11,14 +11,14 @@ const LogoSvg = ({
 		<svg
 			width={width}
 			height={height}
-			viewBox='0 0 182 54'
+			viewBox={`0 0 ${width} ${height}`}
 			fill='none'
 			xmlns='http://www.w3.org/2000/svg'
 			xmlnsXlink='http://www.w3.org/1999/xlink'
 		>
 			<rect
-				width='182'
-				height='54'
+				width={width}
+				height={height}
 				fill='url(#pattern0_143_3246)'
 			/>
 			<defs>

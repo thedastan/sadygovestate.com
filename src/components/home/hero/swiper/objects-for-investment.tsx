@@ -1,17 +1,63 @@
-import { Box } from '@chakra-ui/react'
+import { Flex, Skeleton } from '@chakra-ui/react'
+
+import SliderPropertyCard from '@/components/ui/cards/slider-property-card'
 
 import BgImage from '@/assets/img/slider-investment.jpeg'
+
+import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
+
+import useTypedLocale from '@/hooks/useLocale'
+import { useInvestmentProperties } from '@/hooks/useProperties'
 
 import SlideProvider from './slide-provider'
 
 const ObjectsForInvestment = () => {
+	const locale = useTypedLocale()
+	const { data, isLoading } = useInvestmentProperties()
+
 	return (
 		<SlideProvider
 			bgImage={BgImage}
-			path=''
+			path={DASHBOARD_PAGES.CATALOG_INVESTMENT(locale)}
 			title='Объекты для инвестиций'
 		>
-			<Box></Box>
+			<Flex
+				h='100%'
+				pb='5'
+				alignItems='end'
+			>
+				<Flex
+					w='100%'
+					justifyContent={{
+						lg: data?.length < 4 ? 'end' : 'start',
+						base: 'start'
+					}}
+					overflowX='auto'
+					className='unscroll'
+				>
+					<Flex
+						gap='4'
+						px={{ sm: '5', base: '4' }}
+						alignItems='start'
+					>
+						{isLoading
+							? [1, 2, 3].map(el => (
+									<Skeleton
+										key={el}
+										w={{ md: '284px', base: '260px' }}
+										h={{ md: '250px', base: '234px' }}
+										rounded='20px'
+									/>
+								))
+							: data?.map(el => (
+									<SliderPropertyCard
+										el={el}
+										key={el.id}
+									/>
+								))}
+					</Flex>
+				</Flex>
+			</Flex>
 		</SlideProvider>
 	)
 }

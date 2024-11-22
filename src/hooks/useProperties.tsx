@@ -4,10 +4,22 @@ import { IFilterStateValue } from '@/store/slices/storage-slice'
 
 import { propertyService } from '@/service/property.service'
 
-export function useProperties(params?: IFilterStateValue) {
+export function useProperties(
+	params?: IFilterStateValue,
+	isInvestment?: boolean
+) {
 	const { data, isLoading } = useQuery({
 		queryKey: ['properties-get', params],
-		queryFn: () => propertyService.getAll(params)
+		queryFn: () => propertyService.getAll(!!isInvestment, params)
+	})
+
+	return { data, isLoading }
+}
+
+export function usePropertyDetail(id: number | string) {
+	const { data, isLoading } = useQuery({
+		queryKey: ['property-detail', id],
+		queryFn: () => propertyService.getDetail(id)
 	})
 
 	return { data, isLoading }
@@ -22,10 +34,10 @@ export function useInvestmentProperties() {
 	return { data, isLoading }
 }
 
-export function usePropertyDetail(id: number | string) {
+export function useRecommendProperties() {
 	const { data, isLoading } = useQuery({
-		queryKey: ['property-detail', id],
-		queryFn: () => propertyService.getDetail(id)
+		queryKey: ['recommended-get'],
+		queryFn: () => propertyService.getRecommended()
 	})
 
 	return { data, isLoading }

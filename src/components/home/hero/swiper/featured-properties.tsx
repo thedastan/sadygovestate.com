@@ -1,17 +1,58 @@
-import { Box } from '@chakra-ui/react'
+import { Flex, Skeleton } from '@chakra-ui/react'
+
+import SliderPropertyCard from '@/components/ui/cards/slider-property-card'
 
 import BgImage from '@/assets/img/slider-recomended.jpeg'
+
+import { useRecommendProperties } from '@/hooks/useProperties'
 
 import SlideProvider from './slide-provider'
 
 const FeaturedProperties = () => {
+	const { data, isLoading } = useRecommendProperties()
 	return (
 		<SlideProvider
 			bgImage={BgImage}
 			path=''
 			title='Рекомендуемые недвижимости'
 		>
-			<Box></Box>
+			<Flex
+				h='100%'
+				pb='5'
+				alignItems='end'
+			>
+				<Flex
+					w='100%'
+					justifyContent={{
+						lg: data?.length < 4 ? 'end' : 'start',
+						base: 'start'
+					}}
+					overflowX='auto'
+					className='unscroll'
+				>
+					<Flex
+						gap='4'
+						px={{ sm: '5', base: '4' }}
+						alignItems='start'
+					>
+						{isLoading
+							? [1, 2, 3].map(el => (
+									<Skeleton
+										key={el}
+										w={{ md: '284px', base: '260px' }}
+										h={{ md: '250px', base: '234px' }}
+										rounded='20px'
+									/>
+								))
+							: data?.map(el => (
+									<SliderPropertyCard
+										el={el}
+										key={el.id}
+									/>
+								))}
+					</Flex>
+				</Flex>
+			</Flex>
 		</SlideProvider>
 	)
 }

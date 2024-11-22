@@ -8,6 +8,7 @@ import {
 	Stack,
 	Text,
 	useDisclosure,
+	useMediaQuery,
 	useOutsideClick
 } from '@chakra-ui/react'
 import { PropsWithChildren, useEffect, useRef } from 'react'
@@ -27,7 +28,7 @@ interface FilterCardProps extends PropsWithChildren {
 const FilterCard = (props: FilterCardProps) => {
 	const ref = useRef<any>(null)
 	const { isOpen, onOpen, onClose } = useDisclosure()
-
+	const [isLargerThanMiniMobile] = useMediaQuery('(min-width: 370px)')
 	useOutsideClick({
 		ref: ref,
 		handler: () => onClose()
@@ -100,7 +101,7 @@ const FilterCard = (props: FilterCardProps) => {
 						<PopoverTrigger>
 							<Flex
 								onClick={onOpen}
-								gap='4'
+								gap={{ sm: '4', base: '2' }}
 								cursor='pointer'
 								_active={{ opacity: '.4' }}
 								mt='6px'
@@ -111,8 +112,11 @@ const FilterCard = (props: FilterCardProps) => {
 								>
 									{isActive ? props.value : props.placeholder}
 								</Text>
-								<Text display={{ md: 'none', base: 'block' }}>
-									{props.title}
+								<Text
+									display={{ md: 'none', base: 'block' }}
+									whiteSpace={isLargerThanMiniMobile ? 'nowrap' : 'none'}
+								>
+									{isActive ? props.value : props.title}
 								</Text>
 								<FaAngleDown opacity='.5' />
 							</Flex>
@@ -122,7 +126,7 @@ const FilterCard = (props: FilterCardProps) => {
 							mt='19px'
 							border='none'
 							left='0'
-							maxH='260px'
+							maxH='267px'
 							rounded='13px'
 							bg='#FFFFFF'
 							boxShadow={'0px 8px 24px -6px #00000029'}

@@ -7,18 +7,15 @@ import Description from '@/components/ui/texts/Description'
 import Title from '@/components/ui/texts/Title'
 import TitleComponent from '@/components/ui/texts/TitleComponent'
 
-import Employee1 from '@/assets/persons/employee-1.png'
-import Employee2 from '@/assets/persons/employee-2.png'
-import Employee3 from '@/assets/persons/employee-3.png'
-import Employee4 from '@/assets/persons/employee-4.png'
-import Employee5 from '@/assets/persons/employee-5.png'
-
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
 import { useFullWindowSize } from '@/hooks/useFullHeight'
+import useTypedLocale from '@/hooks/useLocale'
+import { useEmployees } from '@/hooks/usePersons'
 
 const Employees = () => {
-	const list = [Employee1, Employee2, Employee3, Employee4, Employee5]
+	const { data, isLoading } = useEmployees()
+	const locale = useTypedLocale()
 	const { clientWidth } = useFullWindowSize()
 	return (
 		<Box>
@@ -46,9 +43,9 @@ const Employees = () => {
 						base: '4'
 					}}
 				>
-					{list.map((image, idx) => (
+					{data?.map((el, idx) => (
 						<Flex
-							key={idx}
+							key={el.id}
 							h='100%'
 							w={{ md: '289px', base: '180.46px' }}
 							alignItems={idx % 2 === 0 ? 'end' : 'start'}
@@ -57,7 +54,7 @@ const Employees = () => {
 								w='100%'
 								h={{ md: '460px', base: '287px' }}
 								position='relative'
-								rounded='20px'
+								rounded={{ md: '20px', base: '12.5px' }}
 								overflow='hidden'
 								sx={{
 									'&:hover': {
@@ -77,7 +74,9 @@ const Employees = () => {
 									transition='.6s'
 								>
 									<Image
-										src={image}
+										src={el.image}
+										width={289}
+										height={460}
 										alt='image'
 										className='full-image'
 									/>
@@ -103,7 +102,7 @@ const Employees = () => {
 											lineHeight={{ md: '23px', base: '20px' }}
 											color='#FFFFFF'
 										>
-											Фёдор Алямов
+											{el[`full_name_${locale}`]}
 										</Title>
 										<Description
 											mt='6px'
@@ -112,7 +111,7 @@ const Employees = () => {
 											lineHeight={{ md: '19.36px', base: '16px' }}
 											opacity='.7'
 										>
-											Региональный менеджер проектов
+											{el[`job_${locale}`]}
 										</Description>
 									</Box>
 								</Flex>

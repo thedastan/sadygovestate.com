@@ -13,6 +13,10 @@ export interface IProperty {
 	sqmt: number
 	main_image: string
 	main_page: boolean
+	country_flag: string
+	tipo: string
+	profitability: string | null
+	investment: boolean
 }
 
 export interface IPropertyDetail {
@@ -25,30 +29,37 @@ export interface IPropertyDetail {
 	description_en: string
 	description_ar: string
 	price: number
-	bed_room: any
-	bath: number
+	bed_room: number | null
+	bath: number | null
 	living_room: boolean
 	sqft: number
 	sqmt: number
 	prop_image: PropImage[]
 	main_image?: string
-	district_ru: any
-	district_en: any
-	district_ar: any
-	address_ru: any
-	address_en: any
-	address_ar: any
-	year: any
+	capacity: any
+	district_ru: string | null
+	district_en: string | null
+	district_ar: string | null
+	address_ru: string | null
+	address_en: string | null
+	address_ar: string | null
+	year: string | null
 	investment: boolean
 	profitability: any
-	advantage_ru: any[]
-	advantage_en: any[]
-	advantage_ar: any[]
+	advantage_ru: IAdvantage[]
+	advantage_en: IAdvantage[]
+	advantage_ar: IAdvantage[]
+	country_flag: string
 }
 
 export interface PropImage {
 	id: number
 	image: string
+}
+
+export interface IAdvantage {
+	id: number
+	title: string
 }
 
 export interface IPropertyStage {

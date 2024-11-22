@@ -22,15 +22,16 @@ const HeroSwiper = ({ images }: { images: any[] }) => {
 
 	return !images.length ? null : (
 		<Box
-			h='709px'
+			h={{ md: '709px', base: '620px' }}
 			position='relative'
 		>
 			<Swiper
 				spaceBetween={50}
 				slidesPerView={1}
 				autoplay={{
-					delay: 6000,
-					disableOnInteraction: false
+					delay: 10000,
+					disableOnInteraction: false,
+					pauseOnMouseEnter: true
 				}}
 				modules={[Pagination, Autoplay]}
 				pagination={pagination}

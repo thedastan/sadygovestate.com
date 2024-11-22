@@ -77,3 +77,17 @@ function convertToEmbedUrl(fullUrl: string) {
 
 	return `${baseEmbedUrl}${url.search}`
 }
+
+export function LoadingImage(
+	url: string | undefined,
+	setLoading: (a: boolean) => void
+) {
+	if (!!url) {
+		const image: HTMLImageElement = new Image()
+		setLoading(true)
+		image.src = url
+		image.onload = function () {
+			setLoading(false)
+		}
+	}
+}
