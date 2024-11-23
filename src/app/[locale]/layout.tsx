@@ -1,7 +1,8 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import type { Metadata } from 'next'
 
-import { arial } from '@/constants/fonts/fonts'
+import { arial, inter } from '@/constants/fonts/fonts'
+import YandexMetrika from '@/constants/seo/YandexMetrika'
 import { SITE_NAME } from '@/constants/seo/seo.constants'
 
 import ClientProvider from '../(providers)/ClientProvider'
@@ -37,7 +38,7 @@ export default async function RootLayout({
 	return (
 		<html lang={params.locale}>
 			<Head />
-			<body className={arial.className}>
+			<body className={inter.className}>
 				<ClientProvider
 					locale={params.locale}
 					messages={messages}
@@ -46,7 +47,7 @@ export default async function RootLayout({
 						<Providers>{children}</Providers>
 					</ChakraProvider>
 				</ClientProvider>
-				{/* <YandexMetrika /> */}
+				<YandexMetrika />
 			</body>
 		</html>
 	)

@@ -60,6 +60,20 @@
 			"hello": "Hello!",
 			"user_text": "I am interested in buying real estate in",
 			"phone": "Phone"
+		},
+		"placeholder": {
+			"name": "Name",
+			"message": "Message"
+		},
+		"Viktor": {
+			"full_name": "Victor Sadygov",
+			"post": "Founder and CEO of NÍKA ESTATE International",
+			"duty": "Sells real estate in 13 countries with offices in 11 cities. Member of the Russian Association AREA."
+		},
+		"Irina": {
+			"full_name": "Irina Ilyina",
+			"post": "CEO and co-owner of Nika Estate Turkey",
+			"duty": "Specialist in the field of investment in foreign, Turkish and Russian real estate."
 		}
 	}
 }

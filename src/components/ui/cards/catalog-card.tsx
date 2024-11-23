@@ -8,6 +8,7 @@ import CatalogArtboardIcon from '@/assets/svg/CatalogArtboardIcon'
 import CatalogBathroomIcon from '@/assets/svg/CatalogBathroomIcon'
 import CatalogBedIcon from '@/assets/svg/CatalogBedIcon'
 
+import { attribute_From } from '@/config/intl-variables'
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
 import { formatToDE } from '@/hooks/useCreatorPriceObject'
@@ -84,7 +85,7 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 						justifyContent='space-between'
 						alignItems='center'
 					>
-						<Title>{`от $${formatToDE(el.price)}`}</Title>
+						<Title>{`${attribute_From[locale]} $${formatToDE(el.price)}`}</Title>
 						<Flex
 							gap='6px'
 							color='#333139'

@@ -16,7 +16,12 @@ import Header from '@/components/navbar/header'
 
 import { store } from '@/store/store'
 
+import useTypedLocale from '@/hooks/useLocale'
+
+import { EnumIntl } from '@/models/types/intl-types'
+
 export function Providers({ children }: PropsWithChildren) {
+	const locale = useTypedLocale()
 	const [client] = useState(
 		new QueryClient({
 			defaultOptions: {
@@ -37,6 +42,7 @@ export function Providers({ children }: PropsWithChildren) {
 						mx='auto'
 						minH={'100vh'}
 						pb={{ md: '100px', base: '60px' }}
+						dir={locale === EnumIntl.ARABIC ? 'rtl' : 'ltr'}
 					>
 						{children}
 					</Box>

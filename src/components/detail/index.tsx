@@ -37,12 +37,13 @@ import Title32 from '../ui/texts/Title32'
 import TitleComponent from '../ui/texts/TitleComponent'
 
 import DetailSkeleton from './detail-skeleton'
+import { IDetailPropertyPayload } from '@/models/other.model'
 
-const PropertyDetail = ({ slug }: { slug: string }) => {
+const PropertyDetail = (params: IDetailPropertyPayload) => {
 	const { clientWidth } = useFullWindowSize()
 	const locale = useTypedLocale()
 	const t = useTranslations('Titles.detail')
-	const { data, isLoading } = usePropertyDetail(slug)
+	const { data, isLoading } = usePropertyDetail(params)
 	const pdfRef = useRef<HTMLDivElement>(null)
 
 	const { createPDF, isLoadingPDF } = useCreatePDF()
@@ -68,7 +69,7 @@ const PropertyDetail = ({ slug }: { slug: string }) => {
 	if (isLoading) {
 		return <DetailSkeleton />
 	}
-	if (!data) return null
+	if (!data) return <Description px='4'>Что то пошло не так...</Description>
 	return (
 		<Box ref={pdfRef}>
 			<Container maxW={CONTAINER_WIDTH}>
@@ -135,7 +136,7 @@ const PropertyDetail = ({ slug }: { slug: string }) => {
 								/>
 							)}
 							<SaveAsPdfButton
-								onClick={() => createPDF(pdfRef, slug)}
+								onClick={() => createPDF(pdfRef, data[`slug_${locale}`])}
 								isLoading={isLoadingPDF}
 							/>
 						</Flex>

@@ -2,56 +2,56 @@
 
 import { useEffect } from 'react'
 
-const YandexMetrika = () => {
-	// useEffect(() => {
-	// 	// @ts-ignore
-	// 	;(function (
-	// 		m: any,
-	// 		e: Document,
-	// 		t: string,
-	// 		r: string,
-	// 		i: string,
-	// 		k: HTMLScriptElement | null,
-	// 		a: HTMLScriptElement | null
-	// 	) {
-	// 		m[i] =
-	// 			m[i] ||
-	// 			function () {
-	// 				;(m[i].a = m[i].a || []).push(arguments)
-	// 			}
-	// 		// @ts-ignore
-	// 		m[i].l = (1 * new Date()) as any
-	// 		for (let j = 0; j < e.scripts.length; j++) {
-	// 			if (e.scripts[j].src === r) {
-	// 				return
-	// 			}
-	// 		}
-	// 		k = e.createElement(t) as HTMLScriptElement
-	// 		a = e.getElementsByTagName(t)[0] as HTMLScriptElement
-	// 		// @ts-ignore
-	// 		k.async = 1
-	// 		k.src = r
-	// 		a.parentNode?.insertBefore(k, a)
-	// 	})(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
-	// 	;(window as any).ym(97951921, 'init', {
-	// 		clickmap: true,
-	// 		trackLinks: true,
-	// 		accurateTrackBounce: true,
-	// 		webvisor: true,
-	// 		ecommerce: 'dataLayer'
-	// 	})
-	// }, [])
+declare global {
+	interface Window {
+		ym: (...args: any[]) => void
+	}
+}
+
+const YandexMetrika: React.FC = () => {
+	useEffect(() => {
+		// Проверяем, не добавлен ли уже скрипт
+		const scriptAlreadyAdded = Array.from(document.scripts).some(
+			script => script.src === 'https://mc.yandex.ru/metrika/tag.js'
+		)
+		if (scriptAlreadyAdded) return // Добавляем скрипт
+		;(function (m: any, e: Document, t: string, r: string, i: string) {
+			m[i] =
+				m[i] ||
+				function (...args: any[]) {
+					;(m[i].a = m[i].a || []).push(args)
+				}
+			// @ts-ignore
+			m[i].l = 1 * new Date()
+			const k: any = e.createElement(t),
+				a = e.getElementsByTagName(t)[0]
+			k.async = true
+			k.src = r
+			a?.parentNode?.insertBefore(k, a)
+		})(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
+
+		// Инициализация метрики
+		window.ym(99023592, 'init', {
+			clickmap: true,
+			trackLinks: true,
+			accurateTrackBounce: true,
+			webvisor: true
+		})
+	}, [])
 
 	return (
-		<noscript>
-			<div>
-				<img
-					src='https://mc.yandex.ru/watch/97951921'
-					style={{ position: 'absolute', left: '-9999px' }}
-					alt=''
-				/>
-			</div>
-		</noscript>
+		<>
+			{/* <noscript> для случаев, когда JS отключен */}
+			<noscript>
+				<div>
+					<img
+						src='https://mc.yandex.ru/watch/99023592'
+						style={{ position: 'absolute', left: '-9999px' }}
+						alt=''
+					/>
+				</div>
+			</noscript>
+		</>
 	)
 }
 

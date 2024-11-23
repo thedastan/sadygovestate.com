@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Text, useMediaQuery } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import { PropsWithChildren, useEffect, useState } from 'react'
 
@@ -17,6 +17,7 @@ const CountriesSwiper = () => {
 	const [isLoading, setLoading] = useState(true)
 	const { data } = useCountries()
 	const locale = useTypedLocale()
+	const [isLargerThanMd] = useMediaQuery('(min-width: 768px)')
 	const t = useTranslations('Titles')
 	useEffect(() => {
 		if (data?.length) {
@@ -45,7 +46,7 @@ const CountriesSwiper = () => {
 					gap='3'
 					px='3'
 				>
-					{active?.cities.map((el, idx) => (
+					{active?.cities?.slice(0, isLargerThanMd ? 4 : 2)?.map((el, idx) => (
 						<Box
 							key={el.id}
 							mt={{

@@ -46,11 +46,6 @@ export const social_contacts = [
 		icon: SocialMediaIcons.INSTAGRAM
 	},
 	{
-		name: 'Youtube',
-		href: YOUTUBE_LINK,
-		icon: SocialMediaIcons.YOUTUBE
-	},
-	{
 		name: 'Telegram',
 		href: TELEGRAM_LINK,
 		icon: SocialMediaIcons.TELEGRAM

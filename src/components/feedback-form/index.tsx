@@ -171,7 +171,7 @@ const FeedbackForm = () => {
 							handleChange={handleChange}
 							name='full_name'
 							value={value.full_name}
-							placeholder='Имя'
+							placeholder={t('placeholder.name')}
 						/>
 						<PhoneInputComponent
 							handleChange={phone => setValue({ ...value, phone })}
@@ -181,7 +181,7 @@ const FeedbackForm = () => {
 							handleChange={handleChange}
 							name='description'
 							value={value.description}
-							placeholder='Сообщение'
+							placeholder={t('placeholder.message')}
 							as='textArea'
 							required={false}
 						/>

@@ -3,11 +3,15 @@ export interface IFilterValue {
 	text: string
 }
 
-
 export interface IReview {
 	id: number
 	full_name: string
 	comment: string
 	rating: number
 	created_at: string
+}
+
+export interface IDetailPropertyPayload {
+	slug: string
+	locale: string
 }

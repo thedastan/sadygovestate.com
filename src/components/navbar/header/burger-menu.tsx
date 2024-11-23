@@ -14,7 +14,9 @@ import { useRouter } from 'next/navigation'
 
 import AnimateButton from '@/components/ui/buttons/AnimateButton'
 
-import { PHONE_NUMBER, WHATSAPP_LINK } from '@/constants/admin'
+import { WHATSAPP_LINK } from '@/constants/admin'
+
+import { DETAIL_PATH_KEY_WORD } from '@/config/pages/dashboard-url.config'
 
 import useTypedLocale from '@/hooks/useLocale'
 
@@ -29,10 +31,17 @@ const BurgerMenu = () => {
 	const { isOpen, onClose, onOpen } = useDisclosure()
 	const localeActive = useTypedLocale()
 	const pathname = usePathname()
+
 	const router = useRouter()
 	const t = useTranslations('Titles')
 	const changeIntl = (locale: IntlType) => {
-		router.replace(pathname.replace(localeActive, locale))
+		if (pathname.includes(DETAIL_PATH_KEY_WORD)) {
+			const path =
+				pathname.replace(localeActive, locale) + `?language=${locale}`
+			router.replace(path)
+		} else {
+			router.replace(pathname.replace(localeActive, locale))
+		}
 	}
 
 	const BurgerSticks = (
@@ -64,6 +73,20 @@ const BurgerMenu = () => {
 		sm: '360px',
 		base: '85vw'
 	}
+
+	const ContactButton = (
+		<Link
+			href={WHATSAPP_LINK}
+			target='_blank'
+		>
+			<AnimateButton
+				maxW='218px'
+				isLight={true}
+			>
+				{t('contact_us_short')}
+			</AnimateButton>
+		</Link>
+	)
 
 	return (
 		<>
@@ -152,17 +175,9 @@ const BurgerMenu = () => {
 									alignItems={{ md: 'center', base: 'start' }}
 									gap={{ md: '4', base: '41px' }}
 								>
-									<Link
-										href={WHATSAPP_LINK}
-										target='_blank'
-									>
-										<AnimateButton
-											maxW='218px'
-											isLight={true}
-										>
-											{t('contact_us_short')}
-										</AnimateButton>
-									</Link>
+									<Box display={{ md: 'block', base: 'none' }}>
+										{ContactButton}
+									</Box>
 									<Flex
 										border='1px solid #F2F2F2'
 										rounded='51px'
@@ -213,6 +228,12 @@ const BurgerMenu = () => {
 										</Link>
 									))}
 								</Stack>
+								<Box
+									display={{ md: 'none', base: 'block' }}
+									mt='40px'
+								>
+									{ContactButton}
+								</Box>
 							</Box>
 
 							<Flex
@@ -220,18 +241,23 @@ const BurgerMenu = () => {
 								mb='40px'
 							>
 								{social_contacts.map((el, idx) => (
-									<Flex
+									<Link
 										key={idx}
-										bg='#333139'
-										w={{ sm: '63px', base: '45px' }}
-										h={{ sm: '63px', base: '45px' }}
-										fontSize={{ sm: '30px', base: '22px' }}
-										rounded='50%'
-										justifyContent='center'
-										alignItems='center'
+										href={el.href}
+										target='_blank'
 									>
-										<el.icon color='#FFFFFF' />
-									</Flex>
+										<Flex
+											bg='#333139'
+											w={{ sm: '63px', base: '45px' }}
+											h={{ sm: '63px', base: '45px' }}
+											fontSize={{ sm: '30px', base: '22px' }}
+											rounded='50%'
+											justifyContent='center'
+											alignItems='center'
+										>
+											<el.icon color='#FFFFFF' />
+										</Flex>
+									</Link>
 								))}
 							</Flex>
 						</Flex>

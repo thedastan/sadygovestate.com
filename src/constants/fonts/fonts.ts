@@ -2,7 +2,7 @@ import { DM_Sans, Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 
 export const inter = Inter({
-	subsets: ['latin', 'cyrillic', 'latin-ext', 'greek'],
+	subsets: ['latin', 'cyrillic', 'latin-ext', 'greek', 'vietnamese'],
 	weight: ['300', '400', '500', '600', '700', '800', '900'],
 	display: 'swap'
 })

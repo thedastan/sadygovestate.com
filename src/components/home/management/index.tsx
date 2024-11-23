@@ -19,15 +19,15 @@ const Management = () => {
 	const management: IManagementCard[] = [
 		{
 			image: ViktorSadygov,
-			full_name: 'Виктор Садыгов',
-			post: 'Основатель и генеральный директор NÍKA ESTATE International',
-			duty: 'Реализует недвижимость в 13 странах с офисами в 11 городах. Член Российской ассоциации AREA.'
+			full_name: t('Viktor.full_name'),
+			post: t('Viktor.post'),
+			duty: t('Viktor.duty')
 		},
 		{
 			image: IrinaIlina,
-			full_name: 'Анастасия Тян',
-			post: 'Директор филиала ОАЭ',
-			duty: 'Руководитель филиалов Дубай и Абу-Даби'
+			full_name: t('Irina.full_name'),
+			post: t('Irina.post'),
+			duty: t('Irina.duty')
 		}
 	]
 	return (

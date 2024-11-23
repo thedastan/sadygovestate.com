@@ -84,6 +84,7 @@ const Footer = () => {
 						{social_contacts.map((el, idx) => (
 							<Link
 								href={el.href}
+								target='_blank'
 								key={idx}
 							>
 								<Title
