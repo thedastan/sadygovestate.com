@@ -5,7 +5,7 @@ export const WHATSAPP_NUMBER = PHONE_NUMBER
 export const EMAIL_ADDRESS = 'info@vs-realestate.com'
 export const INSTAGRAM = 'victor_sadygov_estate'
 
-export const LOCATION = 'Бишкек, Улица Ибраимова, 64/2'
+export const LOCATION = 'The Collection, St.Regis Resort, Saadiyat Island, Abu Dhabi'
 
 /// links
 
@@ -17,8 +17,8 @@ export const INSTAGRAM_LINK = `https://instagram.com/${INSTAGRAM}`
 export const FACEBOOK_LINK = ``
 export const YOUTUBE_LINK = ``
 
-export const TELEGRAM_LINK = `https://t.me/+996705045005`
+export const TELEGRAM_LINK = `https://t.me/`
 
-export const LOCATION_LINK = 'https://go.2gis.com/hawqt'
+export const LOCATION_LINK = 'https://maps.app.goo.gl/WbQbcDwFsFDJpSsi6'
 
 export const MOTION_WEB_LINK = 'https://www.motionweb.kg/'

@@ -79,23 +79,18 @@ const Countries = (props: { mt: ResponsiveValue<string> }) => {
 						>
 							<SocialMediaCard
 								icon={SocialMediaIcons.INSTAGRAM}
-								path=''
-								text='@nikaestate.moscow'
+								path='https://www.instagram.com/victor_sadygov_estate/'
+								text='@victor_sadygov_estate'
 								withoutBorder={true}
 							/>
 							<SocialMediaCard
-								icon={SocialMediaIcons.TELEGRAM}
-								path=''
-								text='@moskvadorogaya'
-							/>
-							<SocialMediaCard
 								icon={SocialMediaIcons.WHATSAPP}
-								path=''
+								path='https://wa.me/971542044777'
 								text='+971 54 204 4777'
 							/>
 							<SocialMediaCard
 								icon={SocialMediaIcons.PHONE}
-								path=''
+								path='tel:+971542044777'
 								text='+971 54 204 4777'
 								notBlank={true}
 							/>
