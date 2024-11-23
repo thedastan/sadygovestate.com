@@ -1,4 +1,5 @@
 import { Box, Flex, Skeleton, Text } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 import { PropsWithChildren } from 'react'
@@ -19,6 +20,7 @@ const SlideProvider = ({
 	children,
 	isLoading
 }: SlideProviderProps) => {
+	const t = useTranslations('Titles')
 	return (
 		<>
 			<Flex
@@ -48,7 +50,7 @@ const SlideProvider = ({
 								letterSpacing='1px'
 								fontWeight='400'
 							>
-								Подробнее
+								{t('read_more')}
 							</Text>
 						</Flex>
 					</Link>

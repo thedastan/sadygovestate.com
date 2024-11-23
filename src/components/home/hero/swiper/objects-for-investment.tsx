@@ -1,4 +1,5 @@
 import { Flex, Skeleton } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 
 import SliderPropertyCard from '@/components/ui/cards/slider-property-card'
 
@@ -14,12 +15,12 @@ import SlideProvider from './slide-provider'
 const ObjectsForInvestment = () => {
 	const locale = useTypedLocale()
 	const { data, isLoading } = useInvestmentProperties()
-
+	const t = useTranslations('Titles')
 	return (
 		<SlideProvider
 			bgImage={BgImage}
 			path={DASHBOARD_PAGES.CATALOG_INVESTMENT(locale)}
-			title='Объекты для инвестиций'
+			title={t('investment_properties')}
 		>
 			<Flex
 				h='100%'
@@ -29,7 +30,7 @@ const ObjectsForInvestment = () => {
 				<Flex
 					w='100%'
 					justifyContent={{
-						lg: data?.length < 4 ? 'end' : 'start',
+						lg: !!data && data?.length < 4 ? 'end' : 'start',
 						base: 'start'
 					}}
 					overflowX='auto'

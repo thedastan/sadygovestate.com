@@ -7,6 +7,7 @@ import {
 	Text,
 	useDisclosure
 } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
@@ -17,19 +18,23 @@ import { PHONE_NUMBER, WHATSAPP_LINK } from '@/constants/admin'
 
 import useTypedLocale from '@/hooks/useLocale'
 
-import { navbar, social_contacts } from '../data'
+import { social_contacts, useNavbar } from '../data'
 
 import { locales_data } from '@/i18n'
 import { IntlType } from '@/models/types/intl-types'
 
 const BurgerMenu = () => {
+	const navbar = useNavbar()
+
 	const { isOpen, onClose, onOpen } = useDisclosure()
 	const localeActive = useTypedLocale()
 	const pathname = usePathname()
 	const router = useRouter()
+	const t = useTranslations('Titles')
 	const changeIntl = (locale: IntlType) => {
 		router.replace(pathname.replace(localeActive, locale))
 	}
+
 	const BurgerSticks = (
 		<Stack
 			w='29.17px'
@@ -155,7 +160,7 @@ const BurgerMenu = () => {
 											maxW='218px'
 											isLight={true}
 										>
-											Связаться с нами
+											{t('contact_us_short')}
 										</AnimateButton>
 									</Link>
 									<Flex

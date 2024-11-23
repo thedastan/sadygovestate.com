@@ -23,7 +23,7 @@ const InvestmentCard = ({ el }: SliderPropertyCardProps) => {
 			bg='#FFFFFF'
 			padding={{ md: '0', base: '6px' }}
 		>
-			<Link href={DASHBOARD_PAGES.DETAIL(locale, el.id)}>
+			<Link href={DASHBOARD_PAGES.DETAIL(locale, el[`slug_${locale}`])}>
 				<Box
 					w='100%'
 					h={{ md: '378px', base: '240px' }}

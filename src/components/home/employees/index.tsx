@@ -1,6 +1,7 @@
 'use client'
 
 import { Box, Container, Flex } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import Description from '@/components/ui/texts/Description'
@@ -16,6 +17,8 @@ import { useEmployees } from '@/hooks/usePersons'
 const Employees = () => {
 	const { data, isLoading } = useEmployees()
 	const locale = useTypedLocale()
+	const t = useTranslations('Titles')
+
 	const { clientWidth } = useFullWindowSize()
 	return (
 		<Box>
@@ -25,10 +28,9 @@ const Employees = () => {
 					maxW='991px'
 					mx='auto'
 					textAlign='center'
-					query={['инвестировать', 'по всему миру', 'вашим целям']}
+					query={t('investment_help.query')}
 				>
-					Мы помогаем выгодно инвестировать в недвижимость по всему миру —
-					подбирая объекты, идеально отвечающие вашим целям и образу жизни.
+					{t('investment_help.title')}
 				</TitleComponent>
 			</Container>
 			<Flex

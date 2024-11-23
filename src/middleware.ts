@@ -10,7 +10,7 @@ export default createMiddleware({
 	locales,
 
 	// Used when no locale matches
-	defaultLocale: EnumIntl.RUSSIAN
+	defaultLocale: EnumIntl.ENGLISH
 })
 
 export const config = {

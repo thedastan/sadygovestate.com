@@ -10,8 +10,8 @@ class DASHBOARD {
 	CATALOG_INVESTMENT = (locale: IntlType) => {
 		return `/${locale}/catalog/investment`
 	}
-	DETAIL = (locale: IntlType, id: number) => {
-		return `/${locale}/property/${id}`
+	DETAIL = (locale: IntlType, slug: string) => {
+		return `/${locale}/property/${slug}`
 	}
 }
 

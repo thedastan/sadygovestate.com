@@ -7,6 +7,9 @@ export interface IProperty {
 	city_en: string
 	city_ar: string
 	price: number
+	slug_ru: string
+	slug_ar: string
+	slug_en: string
 	bed_room: any
 	bath: number
 	sqft: number
@@ -32,6 +35,9 @@ export interface IPropertyDetail {
 	bed_room: number | null
 	bath: number | null
 	living_room: boolean
+	slug_ru: string
+	slug_ar: string
+	slug_en: string
 	sqft: number
 	sqmt: number
 	prop_image: PropImage[]

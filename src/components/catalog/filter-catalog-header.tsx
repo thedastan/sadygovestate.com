@@ -18,7 +18,7 @@ const FilterCatalogHeader = () => {
 		dispatch(filterActions.resetFrom())
 	}
 
-	const isFilter = country?.id || price?.value | stage?.id | type?.id
+	const isFilter = country?.id || price?.value || stage?.id || type?.id
 	return !isFilter ? null : (
 		<Flex
 			justifyContent='center'
@@ -29,8 +29,8 @@ const FilterCatalogHeader = () => {
 				gap='19px'
 				alignItems='center'
 			>
-				{country?.id && (
-					<TitleComponent>{country[`name_${locale}`]}</TitleComponent>
+				{!!country?.id && (
+					<TitleComponent>{`${country[`name_${locale}`]}`}</TitleComponent>
 				)}
 
 				<Divider

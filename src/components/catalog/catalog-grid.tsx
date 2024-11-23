@@ -9,7 +9,7 @@ import { IProperty } from '@/models/property.model'
 
 interface CatalogGridComponentProps {
 	data?: IProperty[]
-	isLoading: boolean
+	isLoading?: boolean
 	isInvestment?: boolean
 }
 
@@ -23,12 +23,12 @@ const CatalogGridComponent = ({
 			<SimpleGrid
 				mt={{ md: '40px', base: '30px' }}
 				spacing={{
-					xl: isInvestment ? '40px 20px' : '6',
+					xl: !!isInvestment ? '40px 20px' : '6',
 					lg: '24px 16px',
 					base: '24px 8px'
 				}}
 				columns={
-					isInvestment
+					!!isInvestment
 						? { md: 2, base: 1 }
 						: { '2xl': 4, lg: 3, sm: 2, base: 1 }
 				}
@@ -36,6 +36,7 @@ const CatalogGridComponent = ({
 				{isLoading &&
 					[1, 2, 3, 4].map(index => <PropertySkeleton key={index} />)}
 				{!isLoading &&
+					!!data &&
 					data?.map(el =>
 						!isInvestment ? (
 							<CatalogCard

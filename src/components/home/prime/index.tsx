@@ -1,4 +1,7 @@
+'use client'
+
 import { Box, Container, Flex, List, ListItem, Text } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { GoArrowUpRight } from 'react-icons/go'
 
@@ -10,10 +13,11 @@ import DefImage from '@/assets/img/slider-image.jpeg'
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
 const PrimeRealEstate = () => {
+	const t = useTranslations('Titles')
 	const list = [
-		'Мы — команда профессионалов, стремящихся сделать покупку недвижимости удобными и безопасными.',
-		'Наш приоритет — ваши интересы и достижения целей в сфере недвижимости.',
-		'Предоставляем качественные услуги в сфере недвижимости, помогая клиентам найти идеальные объекты по всему миру.'
+		t('team_professionals'),
+		t('priority_client_goals'),
+		t('quality_services')
 	]
 	return (
 		<Container
@@ -37,7 +41,7 @@ const PrimeRealEstate = () => {
 					zIndex='1'
 				>
 					<TitleComponent query='Real Estate'>
-						12 Prime Real Estate
+						{t('prime_real_estate')}
 					</TitleComponent>
 
 					<List
@@ -81,7 +85,7 @@ const PrimeRealEstate = () => {
 							letterSpacing='1px'
 							fontWeight='400'
 						>
-							Связаться
+							{t('contact')}
 						</Text>
 					</Flex>
 				</Box>

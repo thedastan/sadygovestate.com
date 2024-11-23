@@ -1,4 +1,5 @@
 import { Divider, Flex } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import { useDispatch } from 'react-redux'
 
 import DollarIconSvg from '@/assets/svg/DollarIconSvg'
@@ -19,12 +20,14 @@ import { ICountry } from '@/models/country.model'
 import { IPropertyType } from '@/models/property.model'
 
 const local_price = [
-	200000, 400000, 600000, 800000, 1000000, 2000000, 3000000, 4000000, 1000000
+	200000, 400000, 600000, 800000, 1000000, 2000000, 3000000, 4000000, 5000000
 ]
 
 const FilterHead = () => {
 	const locale = useTypedLocale()
 	const dispatch = useDispatch()
+	const t = useTranslations('Titles')
+
 	const { country, price, type } = useAppSelector(s => s.storage)
 	const { price_list } = useCreatorPriceObject(local_price)
 	const { data: countries, isLoading } = useCountries()
@@ -54,8 +57,8 @@ const FilterHead = () => {
 				<FilterCard
 					icon={LocationIconSvg}
 					isLoading={isLoading}
-					placeholder='Выберите страну'
-					title='Страна'
+					placeholder={t('select_country')}
+					title={t('country')}
 					value={country?.id ? (country[country_key] as string) : undefined}
 				>
 					{countries?.map(el => (
@@ -80,8 +83,8 @@ const FilterHead = () => {
 				/>
 				<FilterCard
 					icon={DollarIconSvg}
-					placeholder='Ценовой диапазон'
-					title='Цена'
+					placeholder={t('price_range')}
+					title={t('price')}
 					value={price.text}
 				>
 					{price_list.map(el => (
@@ -105,8 +108,8 @@ const FilterHead = () => {
 			<FilterCard
 				icon={HouseIconSvg}
 				isLoading={isLoading2}
-				placeholder='Выберите тип'
-				title='Тип объекта'
+				placeholder={t('select_property_type')}
+				title={t('property_type')}
 				value={type?.id ? type[type_key] : undefined}
 			>
 				{types?.map(el => (

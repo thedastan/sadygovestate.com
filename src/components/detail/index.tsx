@@ -36,10 +36,10 @@ import TitleComponent from '../ui/texts/TitleComponent'
 
 import DetailSkeleton from './detail-skeleton'
 
-const PropertyDetail = ({ paramId }: { paramId: string }) => {
+const PropertyDetail = ({ slug }: { slug: string }) => {
 	const { clientWidth } = useFullWindowSize()
 	const locale = useTypedLocale()
-	const { data, isLoading } = usePropertyDetail(paramId)
+	const { data, isLoading } = usePropertyDetail(slug)
 	const pdfRef = useRef<HTMLDivElement>(null)
 
 	const { createPDF, isLoadingPDF } = useCreatePDF()

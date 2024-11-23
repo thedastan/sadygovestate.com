@@ -1,15 +1,17 @@
-import { Container, Text } from '@chakra-ui/react'
+'use client'
 
-import SliderImage from '@/assets/img/slider-image.jpeg'
+import { Container, Text } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
 import HeroSwiper from './swiper'
 
 const HomeHero = () => {
+	const t = useTranslations('Titles')
 	return (
 		<Container maxW={CONTAINER_WIDTH}>
-			<HeroSwiper images={[SliderImage, SliderImage]} />
+			<HeroSwiper />
 
 			<Text
 				mt={{ md: '0', base: '30px' }}
@@ -19,7 +21,7 @@ const HomeHero = () => {
 				lineHeight='20.7px'
 				color='#333139'
 			>
-				*-рекомендации от компании с быстрым ROI
+				{t('recommendations_roi')}
 			</Text>
 		</Container>
 	)

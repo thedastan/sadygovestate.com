@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import { PropsWithChildren, useEffect, useState } from 'react'
 
 import { LoadingImage } from '@/config/helpers'
@@ -15,7 +16,7 @@ const CountriesSwiper = () => {
 	const [isLoading, setLoading] = useState(true)
 	const { data } = useCountries()
 	const locale = useTypedLocale()
-
+	const t = useTranslations('Titles')
 	useEffect(() => {
 		if (data?.length) {
 			setActive(data[0])
@@ -24,8 +25,8 @@ const CountriesSwiper = () => {
 	}, [data])
 	return (
 		<SlideProvider
-			bgImage={active?.image}
-			title='Выгодные страны для покупки'
+			bgImage={active?.image || ''}
+			title={t('recommended_countries')}
 			path={DASHBOARD_PAGES.CATALOG(locale)}
 			isLoading={isLoading}
 		>
@@ -67,6 +68,7 @@ const CountriesSwiper = () => {
 					>
 						{data?.map(el => (
 							<TabCard
+								key={el.id}
 								onClick={() => setActive(el)}
 								isActive={el.id === active?.id}
 							>

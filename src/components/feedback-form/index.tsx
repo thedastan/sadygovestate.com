@@ -1,6 +1,7 @@
 'use client'
 
 import { Box, Stack } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import { ChangeEvent, useState } from 'react'
 
 import AnimateButton from '../ui/buttons/AnimateButton'
@@ -16,7 +17,7 @@ const FeedbackForm = () => {
 		description: '',
 		country: ''
 	})
-
+	const t = useTranslations('Titles')
 	const handleChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
@@ -37,14 +38,14 @@ const FeedbackForm = () => {
 				w='100%'
 				mx='auto'
 			>
-				<Title32 textAlign='center'>Онлайн-консультация</Title32>
+				<Title32 textAlign='center'>{t('online_consultation')}</Title32>
 				<Description
 					fontSize='18px'
 					lineHeight='26px'
 					textAlign='center'
 					mt='6px'
 				>
-					Форма для связи с менеджером
+					{t('contact_form')}
 				</Description>
 
 				<form>
@@ -81,7 +82,7 @@ const FeedbackForm = () => {
 						type='submit'
 						mt='30px'
 					>
-						Забронировать консультацию
+						{t('book_consultation')}
 					</AnimateButton>
 				</form>
 			</Box>

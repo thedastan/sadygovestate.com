@@ -1,11 +1,11 @@
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import { MutableRefObject, useState } from 'react'
+import { RefObject, useState } from 'react'
 
 export function useCreatePDF() {
 	const [isLoadingPDF, setLoading] = useState(false)
 	const createPDF = async (
-		ref: MutableRefObject<HTMLDivElement>,
+		ref: RefObject<HTMLDivElement>,
 		name: string | undefined = 'Detail'
 	) => {
 		setLoading(true) // Устанавливаем загрузку в true

@@ -76,12 +76,8 @@ const CountryCard = ({ el }: CountryCardProps) => {
 					alignItems='center'
 					bg='#00000066'
 				>
-					<Link
-						href={DASHBOARD_PAGES.CATALOG(locale)}
-						passHref
-					>
+					<Link href={DASHBOARD_PAGES.CATALOG(locale)}>
 						<Flex
-							as='a'
 							onClick={getCountry}
 							flexDirection='column'
 							alignItems='center'

@@ -1,4 +1,7 @@
+'use client'
+
 import { Container, SimpleGrid } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 
 import ManagementCard, {
 	IManagementCard
@@ -11,6 +14,8 @@ import IrinaIlina from '@/assets/img/Ирина Ильина.png'
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
 const Management = () => {
+	const t = useTranslations('Titles')
+
 	const management: IManagementCard[] = [
 		{
 			image: ViktorSadygov,
@@ -23,7 +28,7 @@ const Management = () => {
 			full_name: 'Анастасия Тян',
 			post: 'Директор филиала ОАЭ',
 			duty: 'Руководитель филиалов Дубай и Абу-Даби'
-		},
+		}
 	]
 	return (
 		<Container
@@ -35,7 +40,7 @@ const Management = () => {
 				textAlign={{ md: 'start', base: 'center' }}
 				px={{ sm: '0', base: '4' }}
 			>
-				Руководство
+				{t('management')}
 			</TitleComponent>
 			<SimpleGrid
 				mt={{ md: '40px', base: '30px' }}

@@ -12,3 +12,8 @@ export interface ILocale {
 	locale: IntlType
 	short_name: string
 }
+
+export interface PropsWithTitle {
+	title: string
+	query?: string
+}

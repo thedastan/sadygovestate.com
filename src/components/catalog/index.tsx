@@ -26,7 +26,6 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 	const { data, isLoading } = useProperties(storage, isInvestment)
 	const { data: types, isLoading: isLoading2 } = useTypes()
 	const { data: stages } = useStages()
-
 	const { clientWidth } = useFullWindowSize()
 
 	const StagesButtons = !stages ? null : (

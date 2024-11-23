@@ -1,4 +1,5 @@
 import { Flex, Skeleton } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 
 import SliderPropertyCard from '@/components/ui/cards/slider-property-card'
 
@@ -10,11 +11,12 @@ import SlideProvider from './slide-provider'
 
 const FeaturedProperties = () => {
 	const { data, isLoading } = useRecommendProperties()
+	const t = useTranslations('Titles')
 	return (
 		<SlideProvider
 			bgImage={BgImage}
 			path=''
-			title='Рекомендуемые недвижимости'
+			title={t('recommended_properties')}
 		>
 			<Flex
 				h='100%'
@@ -24,7 +26,7 @@ const FeaturedProperties = () => {
 				<Flex
 					w='100%'
 					justifyContent={{
-						lg: data?.length < 4 ? 'end' : 'start',
+						lg: !!data && data?.length < 4 ? 'end' : 'start',
 						base: 'start'
 					}}
 					overflowX='auto'

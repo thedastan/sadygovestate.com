@@ -25,7 +25,7 @@ const SliderPropertyCard = ({ el }: SliderPropertyCardProps) => {
 			bg='#FFFFFF'
 			transition='.2s'
 		>
-			<Link href={DASHBOARD_PAGES.DETAIL(locale, el.id)}>
+			<Link href={DASHBOARD_PAGES.DETAIL(locale, el[`slug_${locale}`])}>
 				<Box
 					w={{ md: '272px', base: '250px' }}
 					h='140px'

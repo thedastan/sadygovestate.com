@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { FaTelegramPlane } from 'react-icons/fa'
 import { RiInstagramFill } from 'react-icons/ri'
 import { RiWhatsappFill } from 'react-icons/ri'
@@ -11,20 +12,24 @@ import {
 	YOUTUBE_LINK
 } from '@/constants/admin'
 
-export const navbar = [
-	{
-		name: 'Главная',
-		path: '/'
-	},
-	{
-		name: 'О компании',
-		path: '#about'
-	},
-	{
-		name: 'Каталог',
-		path: '#catalog'
-	}
-]
+export function useNavbar() {
+	const t = useTranslations('Titles')
+
+	return [
+		{
+			name: t('home'),
+			path: '/'
+		},
+		{
+			name: t('about_us'),
+			path: '#about'
+		},
+		{
+			name: t('properties'),
+			path: '#catalog'
+		}
+	]
+}
 
 export const SocialMediaIcons = {
 	INSTAGRAM: RiInstagramFill,

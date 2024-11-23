@@ -1,1 +1,43 @@
-{}
+{
+	"Titles": {
+		"catalog": "Property catalog",
+		"contact_us": "Contact us for more information and support",
+		"home": "Home",
+		"about_us": "About Us",
+		"properties": "Properties",
+		"contacts": "Contacts",
+		"awards_and_reviews": "Awards and Reviews",
+		"country": "Country",
+		"select_country": "Select a country",
+		"price": "Price",
+		"price_range": "Price range",
+		"property_type": "Property type",
+		"select_property_type": "Select a type",
+		"contact_us_short": "Contact us",
+		"recommended_countries": "Countries for profitable purchases",
+		"recommendations_roi": "*-recommendations from the company with fast ROI",
+		"recommended_properties": "Recommended properties",
+		"investment_properties": "Properties for investment",
+		"read_more": "Read more",
+		"find_ideal_city": {
+			"title": "Find your ideal city",
+			"query": "ideal city"
+		},
+		"no_offers": "offers",
+		"all_properties": "ALL PROPERTIES",
+		"prime_real_estate": "12 Prime Real Estate",
+		"team_professionals": "We are a team of professionals striving to make property buying convenient and safe.",
+		"priority_client_goals": "Our priority is your interests and achieving your goals in real estate.",
+		"quality_services": "We provide quality real estate services, helping clients find perfect properties worldwide.",
+		"contact": "Contact",
+		"management": "Management",
+		"investment_help": {
+			"title": "We help you invest in real estate worldwide by selecting properties perfectly tailored to your goals and lifestyle.",
+			"query": ["invest", "worldwide", "your goals"]
+		},
+		"online_consultation": "Online consultation",
+		"contact_form": "Contact form with a manager",
+		"similar_properties": "Similar properties",
+		"book_consultation": "Book a consultation"
+	}
+}

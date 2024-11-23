@@ -1,4 +1,5 @@
 import { Box, Container, Divider, Flex, Stack, Text } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 
 import Title from '@/components/ui/texts/Title'
@@ -14,9 +15,12 @@ import LogoSvg from '@/assets/svg/LogoSvg'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
-import { navbar, social_contacts } from '../data'
+import { social_contacts, useNavbar } from '../data'
 
 const Footer = () => {
+	const navbar = useNavbar()
+	const t = useTranslations('Titles')
+
 	return (
 		<Container
 			maxW={CONTAINER_WIDTH}
@@ -47,8 +51,7 @@ const Footer = () => {
 							fontSize={{ md: '13px', base: '16px' }}
 							lineHeight={{ md: '14.95px', base: '18.4px' }}
 						>
-							Свяжитесь с нами для получения дополнительной информации и
-							поддержки.
+							{t('contact_us')}
 						</Text>
 					</Flex>
 				</Box>

@@ -1,5 +1,3 @@
-import { Box } from '@chakra-ui/react'
-
 import Countries from '@/components/countries'
 import CatalogHome from '@/components/home/catalog'
 import Employees from '@/components/home/employees'
@@ -11,7 +9,7 @@ import Reviews from '@/components/home/reviews'
 
 export default function HomePage() {
 	return (
-		<Box>
+		<>
 			<HomeHero />
 			<IdealCity />
 			<CatalogHome />
@@ -20,6 +18,6 @@ export default function HomePage() {
 			<Employees />
 			<Reviews />
 			<Countries mt={{ md: '160px', base: '0' }} />
-		</Box>
+		</>
 	)
 }

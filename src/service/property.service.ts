@@ -47,9 +47,9 @@ class PropertyService {
 		return response.data
 	}
 
-	async getDetail(id: string | number) {
+	async getDetail(slug: string) {
 		const response = await PUBLIC_API.get<IPropertyDetail>(
-			`${this.BASE_URL + id}/`
+			`${this.BASE_URL + slug}/`
 		)
 
 		return response.data

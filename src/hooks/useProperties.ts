@@ -17,10 +17,10 @@ export function useProperties(
 	return { data, isLoading, data_main_page }
 }
 
-export function usePropertyDetail(id: number | string) {
+export function usePropertyDetail(slug: string) {
 	const { data, isLoading } = useQuery({
-		queryKey: ['property-detail', id],
-		queryFn: () => propertyService.getDetail(id)
+		queryKey: ['property-detail', slug],
+		queryFn: () => propertyService.getDetail(slug)
 	})
 
 	return { data, isLoading }

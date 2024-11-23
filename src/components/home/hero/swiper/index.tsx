@@ -12,7 +12,7 @@ import CountriesSwiper from './countries-swiper'
 import FeaturedProperties from './featured-properties'
 import ObjectsForInvestment from './objects-for-investment'
 
-const HeroSwiper = ({ images }: { images: any[] }) => {
+const HeroSwiper = () => {
 	const pagination = {
 		clickable: true,
 		renderBullet: function (index: number, className: string) {
@@ -20,7 +20,7 @@ const HeroSwiper = ({ images }: { images: any[] }) => {
 		}
 	}
 
-	return !images.length ? null : (
+	return (
 		<Box
 			h={{ md: '709px', base: '620px' }}
 			position='relative'

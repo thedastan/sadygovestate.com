@@ -7,6 +7,7 @@ import {
 	SkeletonCircle,
 	SkeletonText
 } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 
 import CountryCard from '@/components/ui/cards/country-card'
 import TitleComponent from '@/components/ui/texts/TitleComponent'
@@ -18,6 +19,7 @@ import { useFullWindowSize } from '@/hooks/useFullHeight'
 
 const IdealCity = () => {
 	const { data, isLoading } = useCountries()
+	const t = useTranslations('Titles')
 	const { clientWidth } = useFullWindowSize()
 	return (
 		<Box mt={{ md: '125px', base: '60px' }}>
@@ -26,8 +28,9 @@ const IdealCity = () => {
 					justifyContent='space-between'
 					alignItems='center'
 				>
-					<TitleComponent query='идеальный город'>
-						Найдите cвой идеальный город
+					<TitleComponent 
+					query={t('find_ideal_city.query')}>
+						{t('find_ideal_city.title')}
 					</TitleComponent>
 				</Flex>
 			</Container>

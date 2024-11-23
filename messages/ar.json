@@ -1,0 +1,44 @@
+{
+	"Titles": {
+		"catalog": "كتالوج العقارات",
+		"contact_us": "تواصل معنا للحصول على المزيد من المعلومات والدعم",
+		"home": "الرئيسية",
+		"about_us": "عن الشركة",
+		"properties": "العقارات",
+		"contacts": "اتصل بنا",
+		"awards_and_reviews": "الجوائز والتقييمات",
+		"country": "الدولة",
+		"select_country": "اختر الدولة",
+		"price": "السعر",
+		"price_range": "نطاق السعر",
+		"property_type": "نوع العقار",
+		"select_property_type": "اختر النوع",
+		"contact_us_short": "تواصل معنا",
+		"recommended_countries": "الدول للاستثمارات المربحة",
+		"recommendations_roi": "توصيات من الشركة بعائد سريع على الاستثمار",
+		"recommended_properties": "العقارات الموصى بها",
+		"investment_properties": "عقارات للاستثمار",
+		"read_more": "المزيد",
+		"find_ideal_city": "ابحث عن مدينتك المثالية",
+		"find_ideal_city": {
+			"title": "ابحث عن مدينتك المثالية",
+			"query": "المدينة المثالية"
+		},
+		"no_offers": "0 عروض",
+		"all_properties": "جميع العقارات",
+		"prime_real_estate": "12 من أفضل العقارات",
+		"team_professionals": "نحن فريق من المحترفين نسعى لجعل شراء العقارات سهلاً وآمناً.",
+		"priority_client_goals": "أولويتنا هي مصالحكم وتحقيق أهدافكم في مجال العقارات.",
+		"quality_services": "نقدم خدمات عالية الجودة في مجال العقارات لمساعدة العملاء في العثور على العقارات المثالية حول العالم.",
+		"contact": "اتصل",
+		"management": "الإدارة",
+		"investment_help": {
+			"title": "نساعدك على الاستثمار في العقارات حول العالم باختيار عقارات تلبي أهدافك وأسلوب حياتك.",
+			"query": ["استثمر", "في جميع أنحاء العالم", "أهدافك"]
+		},
+		"online_consultation": "استشارة عبر الإنترنت",
+		"contact_form": "نموذج للتواصل مع المدير",
+		"similar_properties": "عقارات مشابهة",
+		"book_consultation": "احجز استشارة"
+	}
+}

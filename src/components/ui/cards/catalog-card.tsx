@@ -37,7 +37,7 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 				}
 			}}
 		>
-			<Link href={DASHBOARD_PAGES.DETAIL(locale, el.id)}>
+			<Link href={DASHBOARD_PAGES.DETAIL(locale, el[`slug_${locale}`])}>
 				<Box
 					w='100%'
 					h='240px'
