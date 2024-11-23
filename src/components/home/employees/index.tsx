@@ -28,7 +28,7 @@ const Employees = () => {
 					maxW='991px'
 					mx='auto'
 					textAlign='center'
-					query={t('investment_help.query')}
+					query={t('investment_help.query').split('/')}
 				>
 					{t('investment_help.title')}
 				</TitleComponent>
@@ -38,7 +38,7 @@ const Employees = () => {
 				className='unscroll'
 			>
 				<Flex
-					h={{ md: '509px', base: '317px' }}
+					h={!!data?.length ? { md: '509px', base: '317px' } : 'auto'}
 					gap={{ md: '14px', base: '8.74px' }}
 					px={{
 						xl: `${(clientWidth - parseInt(CONTAINER_WIDTH)) / 2 + 16}px`,

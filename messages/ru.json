@@ -14,6 +14,7 @@
 		"property_type": "Тип объекта",
 		"select_property_type": "Выберите тип",
 		"contact_us_short": "Связаться с нами",
+		"investment_objects": "Инвестиционные объекты",
 		"recommended_countries": "Выгодные страны для покупки",
 		"recommendations_roi": "*-рекомендации от компании с быстрым ROI",
 		"recommended_properties": "Рекомендуемые недвижимости",
@@ -23,7 +24,8 @@
 			"title": "Найдите свой идеальный город",
 			"query": "идеальный город"
 		},
-		"no_offers": "предложений",
+		"offers": "предложений",
+		"see_more": "Смотреть",
 		"all_properties": "ВСЕ ОБЪЕКТЫ",
 		"prime_real_estate": "12 Prime Real Estate",
 		"team_professionals": "Мы — команда профессионалов, стремящихся сделать покупку недвижимости удобной и безопасной.",
@@ -33,11 +35,25 @@
 		"management": "Руководство",
 		"investment_help": {
 			"title": "Мы помогаем выгодно инвестировать в недвижимость по всему миру — подбирая объекты, идеально отвечающие вашим целям и образу жизни.",
-			"query": ["инвестировать", "по всему миру", "вашим целям"]
+			"query": "инвестировать/по всему миру/вашим целям"
 		},
 		"online_consultation": "Онлайн-консультация",
 		"contact_form": "Форма для связи с менеджером",
 		"book_consultation": "Забронировать консультацию",
-		"similar_properties": "Похожие объекты"
+		"similar_properties": "Похожие объекты",
+		"empty": "Пусто",
+		"reset_filters": "Сбросить фильтры",
+		"all": "Все",
+		"detail": {
+			"price": "стоимость",
+			"square": "площадь",
+			"renting_out": "сдача",
+			"handed_over": "сдан",
+			"bedrooms": "спальни",
+			"bathrooms": "ванных",
+			"living_room": "гостиная",
+			"people": "человек",
+			"similar_objects": "Похожие объекты"
+		}
 	}
 }

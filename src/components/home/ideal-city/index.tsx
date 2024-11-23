@@ -28,8 +28,7 @@ const IdealCity = () => {
 					justifyContent='space-between'
 					alignItems='center'
 				>
-					<TitleComponent 
-					query={t('find_ideal_city.query')}>
+					<TitleComponent query={t('find_ideal_city.query')}>
 						{t('find_ideal_city.title')}
 					</TitleComponent>
 				</Flex>
@@ -53,6 +52,8 @@ const IdealCity = () => {
 							<CountryCard
 								key={el.id}
 								el={el}
+								offer_text={t('offer')}
+								watch_text={t('see_more')}
 							/>
 						))}
 				</Flex>

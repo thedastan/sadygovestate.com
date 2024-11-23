@@ -107,15 +107,12 @@ const Footer = () => {
 			/>
 
 			<Flex
-				justifyContent='space-between'
-				flexDirection={{ sm: 'row', base: 'column' }}
+				justifyContent='center'
 				fontWeight='400'
 				fontSize={{ md: '18px', base: '14px' }}
 				lineHeight={{ md: '20.7px', base: '16px' }}
-				gap='3'
 			>
 				<Text color='#8A8989'>© 2024 Viktor Sadygov</Text>
-				<Text color='#8B8B8B'>Политика конфиденциальности</Text>
 			</Flex>
 		</Container>
 	)

@@ -14,17 +14,18 @@
 		"property_type": "نوع العقار",
 		"select_property_type": "اختر النوع",
 		"contact_us_short": "تواصل معنا",
+		"investment_objects": "كائنات الاستثمار",
 		"recommended_countries": "الدول للاستثمارات المربحة",
 		"recommendations_roi": "توصيات من الشركة بعائد سريع على الاستثمار",
 		"recommended_properties": "العقارات الموصى بها",
 		"investment_properties": "عقارات للاستثمار",
 		"read_more": "المزيد",
-		"find_ideal_city": "ابحث عن مدينتك المثالية",
 		"find_ideal_city": {
 			"title": "ابحث عن مدينتك المثالية",
 			"query": "المدينة المثالية"
 		},
-		"no_offers": "0 عروض",
+		"offers": "عروض",
+		"see_more": "ينظر",
 		"all_properties": "جميع العقارات",
 		"prime_real_estate": "12 من أفضل العقارات",
 		"team_professionals": "نحن فريق من المحترفين نسعى لجعل شراء العقارات سهلاً وآمناً.",
@@ -34,11 +35,25 @@
 		"management": "الإدارة",
 		"investment_help": {
 			"title": "نساعدك على الاستثمار في العقارات حول العالم باختيار عقارات تلبي أهدافك وأسلوب حياتك.",
-			"query": ["استثمر", "في جميع أنحاء العالم", "أهدافك"]
+			"query": "استثمر/في جميع أنحاء العالم/أهدافك"
 		},
 		"online_consultation": "استشارة عبر الإنترنت",
 		"contact_form": "نموذج للتواصل مع المدير",
 		"similar_properties": "عقارات مشابهة",
-		"book_consultation": "احجز استشارة"
+		"book_consultation": "احجز استشارة",
+		"empty": "فارغ",
+		"reset_filters": "إعادة تعيين المرشحات",
+		"all": "الكل",
+		"detail": {
+			"price": "سعر",
+			"square": "مربع",
+			"renting_out": "تأجير",
+			"handed_over": "تم تسليمه",
+			"bedrooms": "غرف نوم",
+			"bathrooms": "الحمامات",
+			"living_room": "غرفة الجلوس",
+			"people": "الناس",
+			"similar_objects": "أشياء مماثلة"
+		}
 	}
 }

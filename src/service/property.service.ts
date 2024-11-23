@@ -10,7 +10,7 @@ import {
 } from '@/models/property.model'
 
 class PropertyService {
-	private BASE_URL = 'property/property/'
+	private BASE_URL = 'property/'
 
 	async getAll(isInvestment: boolean, params?: IFilterStateValue) {
 		const country = params?.country?.id ? `country=${params.country.id}` : ''
@@ -49,7 +49,7 @@ class PropertyService {
 
 	async getDetail(slug: string) {
 		const response = await PUBLIC_API.get<IPropertyDetail>(
-			`${this.BASE_URL + slug}/`
+			this.BASE_URL + `detail/${slug}/`
 		)
 
 		return response.data

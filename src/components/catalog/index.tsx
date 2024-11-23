@@ -1,6 +1,7 @@
 'use client'
 
 import { Box, Button, Container, Flex } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import { PropsWithChildren } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -21,6 +22,7 @@ import FilterCatalogHeader from './filter-catalog-header'
 const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 	const dispatch = useDispatch()
 	const locale = useTypedLocale()
+	const t = useTranslations('Titles')
 
 	const storage = useAppSelector(s => s.storage)
 	const { data, isLoading } = useProperties(storage, isInvestment)
@@ -28,7 +30,7 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 	const { data: stages } = useStages()
 	const { clientWidth } = useFullWindowSize()
 
-	const StagesButtons = !stages ? null : (
+	const StagesButtons = !stages?.length ? null : (
 		<Flex
 			bg='#F2F2F2'
 			rounded='100px'
@@ -69,10 +71,10 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 				textAlign='center'
 				mx='auto'
 			>
-				{isInvestment ? 'Инвестиционные объекты' : 'Каталог объектов'}
+				{isInvestment ? t('investment_objects') : t('catalog')}
 			</TitlePages>
 
-			<FilterCatalogHeader />
+			<FilterCatalogHeader text={t('reset_filters')} />
 			<Box
 				display={{ md: 'none', base: 'block' }}
 				mb='17px'
@@ -97,7 +99,7 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 						onClick={() => dispatch(filterActions.setType({}))}
 						isActive={!storage.type?.id}
 					>
-						{'Все'}
+						{t('all')}
 					</FIlterButton>
 					{types?.map(el => (
 						<FIlterButton

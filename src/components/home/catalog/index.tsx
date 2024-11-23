@@ -1,6 +1,7 @@
 'use client'
 
 import { Container, Flex, Text } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { GoArrowUpRight } from 'react-icons/go'
 
@@ -15,6 +16,7 @@ import { useProperties } from '@/hooks/useProperties'
 
 const CatalogHome = () => {
 	const { data_main_page, isLoading } = useProperties()
+	const t = useTranslations('Titles')
 	const locale = useTypedLocale()
 	return (
 		<Container
@@ -27,7 +29,9 @@ const CatalogHome = () => {
 				alignItems='center'
 				justifyContent={{ sm: 'start', base: 'center' }}
 			>
-				<TitleComponent query='объектов'>Каталог объектов</TitleComponent>
+				<TitleComponent query={t('catalog').split(' ')[1]}>
+					{t('catalog')}
+				</TitleComponent>
 				<Link href={DASHBOARD_PAGES.CATALOG(locale)}>
 					<Flex
 						alignItems='center'
@@ -66,7 +70,7 @@ const CatalogHome = () => {
 							letterSpacing='0.7px'
 							fontWeight='400'
 						>
-							Все объекты
+							{t('all_properties')}
 						</Text>
 						<GoArrowUpRight fontSize='20px' />
 					</Flex>

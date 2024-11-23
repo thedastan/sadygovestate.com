@@ -1,4 +1,5 @@
 import { Flex } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { GoChevronLeft } from 'react-icons/go'
 
@@ -10,7 +11,7 @@ import useTypedLocale from '@/hooks/useLocale'
 
 const HeaderButtons = () => {
 	const locale = useTypedLocale()
-
+	const t = useTranslations('Titles')
 	return (
 		<Flex
 			gap='3'
@@ -35,7 +36,7 @@ const HeaderButtons = () => {
 					fontWeight='400'
 				>
 					<GoChevronLeft />
-					Каталог объектов
+					{t('catalog')}
 				</Flex>
 			</Link>
 
@@ -56,7 +57,7 @@ const HeaderButtons = () => {
 					fontSize='16px'
 					fontWeight='700'
 				>
-					Связаться
+					{t('contact')}
 				</Flex>
 			</Link>
 		</Flex>

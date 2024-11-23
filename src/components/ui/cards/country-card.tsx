@@ -1,4 +1,5 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 import { BsArrowRightShort } from 'react-icons/bs'
@@ -16,8 +17,10 @@ import { ICountry } from '@/models/country.model'
 
 interface CountryCardProps {
 	el: ICountry
+	offer_text: string
+	watch_text: string
 }
-const CountryCard = ({ el }: CountryCardProps) => {
+const CountryCard = ({ el, offer_text, watch_text }: CountryCardProps) => {
 	const locale = useTypedLocale()
 	const dispatch = useDispatch()
 	const cities_name = el.cities?.map(el => el[`name_${locale}`])
@@ -106,7 +109,7 @@ const CountryCard = ({ el }: CountryCardProps) => {
 								gap='1'
 								alignItems='center'
 							>
-								Смотреть
+								{watch_text}
 								<BsArrowRightShort fontSize='28px' />
 							</Flex>
 						</Flex>
@@ -131,7 +134,7 @@ const CountryCard = ({ el }: CountryCardProps) => {
 				color='#333139'
 				opacity='.7'
 			>
-				{total_properties} предложений
+				{total_properties}&nbsp;{offer_text}
 			</Text>
 		</Flex>
 	)

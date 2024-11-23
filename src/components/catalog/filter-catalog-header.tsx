@@ -1,4 +1,5 @@
 import { Divider, Flex, Text } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import { LiaTimesSolid } from 'react-icons/lia'
 import { useDispatch } from 'react-redux'
 
@@ -9,7 +10,7 @@ import useTypedLocale from '@/hooks/useLocale'
 
 import TitleComponent from '../ui/texts/TitleComponent'
 
-const FilterCatalogHeader = () => {
+const FilterCatalogHeader = (props: { text: string }) => {
 	const dispatch = useDispatch()
 	const { country, price, stage, type } = useAppSelector(s => s.storage)
 	const locale = useTypedLocale()
@@ -53,7 +54,7 @@ const FilterCatalogHeader = () => {
 						fontSize='16px'
 						lineHeight='18px'
 					>
-						Сбросить фильтры
+						{props.text}
 					</Text>
 					<LiaTimesSolid fontSize='14px' />
 				</Flex>

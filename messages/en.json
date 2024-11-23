@@ -14,6 +14,7 @@
 		"property_type": "Property type",
 		"select_property_type": "Select a type",
 		"contact_us_short": "Contact us",
+		"investment_objects": "Investment objects",
 		"recommended_countries": "Countries for profitable purchases",
 		"recommendations_roi": "*-recommendations from the company with fast ROI",
 		"recommended_properties": "Recommended properties",
@@ -23,7 +24,8 @@
 			"title": "Find your ideal city",
 			"query": "ideal city"
 		},
-		"no_offers": "offers",
+		"offers": "offers",
+		"see_more": "See more",
 		"all_properties": "ALL PROPERTIES",
 		"prime_real_estate": "12 Prime Real Estate",
 		"team_professionals": "We are a team of professionals striving to make property buying convenient and safe.",
@@ -33,11 +35,25 @@
 		"management": "Management",
 		"investment_help": {
 			"title": "We help you invest in real estate worldwide by selecting properties perfectly tailored to your goals and lifestyle.",
-			"query": ["invest", "worldwide", "your goals"]
+			"query": "invest/worldwide/your goals"
 		},
 		"online_consultation": "Online consultation",
 		"contact_form": "Contact form with a manager",
 		"similar_properties": "Similar properties",
-		"book_consultation": "Book a consultation"
+		"book_consultation": "Book a consultation",
+		"empty": "Empty",
+		"reset_filters": "Reset filters",
+		"all": "All",
+		"detail": {
+			"price": "price",
+			"square": "square",
+			"renting_out": "renting out",
+			"handed_over": "handed over",
+			"bedrooms": "bedrooms",
+			"bathrooms": "bathrooms",
+			"living_room": "living room",
+			"people": "people",
+			"similar_objects": "Similar objects"
+		}
 	}
 }

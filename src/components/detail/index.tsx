@@ -8,6 +8,7 @@ import {
 	Flex,
 	Spinner
 } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useRef } from 'react'
 import { FiMapPin } from 'react-icons/fi'
@@ -39,6 +40,7 @@ import DetailSkeleton from './detail-skeleton'
 const PropertyDetail = ({ slug }: { slug: string }) => {
 	const { clientWidth } = useFullWindowSize()
 	const locale = useTypedLocale()
+	const t = useTranslations('Titles.detail')
 	const { data, isLoading } = usePropertyDetail(slug)
 	const pdfRef = useRef<HTMLDivElement>(null)
 
@@ -85,18 +87,21 @@ const PropertyDetail = ({ slug }: { slug: string }) => {
 						>
 							<PropertyParams
 								title={`$${formatToDE(data.price)}`}
-								subtitle='стоимость'
+								subtitle={t('price')}
 								isFirst={true}
 							/>
 							<PropertyParams
 								title={`${data?.sqmt} m² - ${data?.sqft} f²`}
-								subtitle='площадь'
+								subtitle={t('square')}
 							/>
 							{!!data?.year && (
 								<PropertyParams
 									title={`${data.year?.slice(0, 4)}г`}
-									subtitle='сдан'
+									subtitle={t('handed_over')}
 								/>
+
+								// t('handed_over') сдан
+								// 	t('renting_out') сдача
 							)}
 						</Flex>
 						<Flex
@@ -107,25 +112,25 @@ const PropertyDetail = ({ slug }: { slug: string }) => {
 							{!!data?.bed_room && (
 								<CharacteristicsCard
 									icon={CatalogBedIcon}
-									text={`${data.bed_room} спальни`}
+									text={`${data.bed_room} ${t('bedrooms')}`}
 								/>
 							)}
 							{!!data?.bath && (
 								<CharacteristicsCard
 									icon={CatalogBathroomIcon}
-									text={`${data.bath} ванных`}
+									text={`${data.bath} ${t('bathrooms')}`}
 								/>
 							)}
 							{!!data?.living_room && (
 								<CharacteristicsCard
 									icon={CatalogGarageIcon}
-									text='гостиная'
+									text={t('living_room')}
 								/>
 							)}
 							{!!data?.profitability && (
 								<CharacteristicsCard
 									icon={CatalogPersonIcon}
-									text={`${data.profitability} человек`}
+									text={`${data.profitability} ${t('people')}`}
 								/>
 							)}
 							<SaveAsPdfButton
@@ -213,7 +218,7 @@ const PropertyDetail = ({ slug }: { slug: string }) => {
 				maxW={CONTAINER_WIDTH}
 				mt={{ md: '154px', base: '60px' }}
 			>
-				<TitleComponent query='объекты'>Похожие объекты</TitleComponent>
+				<TitleComponent query='объекты'>{t('similar_objects')}</TitleComponent>
 			</Container>
 
 			<Flex
