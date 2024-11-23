@@ -2,6 +2,8 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import NoPhoto from '@/assets/img/no-photo.png'
+
 import { attribute_From } from '@/config/intl-variables'
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
@@ -31,7 +33,7 @@ const InvestmentCard = ({ el }: SliderPropertyCardProps) => {
 					overflow='hidden'
 				>
 					<Image
-						src={el.main_image}
+						src={el.main_image || NoPhoto}
 						width={378}
 						height={240}
 						alt='Image'

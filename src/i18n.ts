@@ -29,7 +29,11 @@ export default getRequestConfig(async ({ locale }) => {
 	// Validate that the incoming `locale` parameter is valid
 	if (!LOCALES.includes(locale as IntlType)) notFound()
 
-	return {
-		messages: (await import(`../messages/${locale}.json`)).default
+	try {
+		const messages = (await import(`../messages/${locale}.json`)).default
+		return { messages }
+	} catch (error) {
+		console.error('Ошибка при импорте локализации:', error)
+		notFound() // Перенаправляем на 404
 	}
 })

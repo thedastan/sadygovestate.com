@@ -51,7 +51,11 @@ const Header = () => {
 						>
 							<BurgerMenu />
 
-							{inDetailPage && <HeaderButtons />}
+							<Box
+								display={{ lg: inDetailPage ? 'block' : 'none', base: 'none' }}
+							>
+								{inDetailPage && <HeaderButtons />}
+							</Box>
 						</Flex>
 						<Box
 							display={{ lg: inDetailPage ? 'none' : 'block', base: 'none' }}

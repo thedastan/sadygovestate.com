@@ -14,6 +14,7 @@ import { useRef } from 'react'
 import { FiMapPin } from 'react-icons/fi'
 import { IoCheckmarkOutline } from 'react-icons/io5'
 
+import NoPhoto from '@/assets/img/no-photo.png'
 import CatalogBathroomIcon from '@/assets/svg/CatalogBathroomIcon'
 import CatalogBedIcon from '@/assets/svg/CatalogBedIcon'
 import CatalogGarageIcon from '@/assets/svg/CatalogGarageIcon'
@@ -134,7 +135,7 @@ const PropertyDetail = ({ slug }: { slug: string }) => {
 								/>
 							)}
 							<SaveAsPdfButton
-								onClick={() => createPDF(pdfRef, data[`name_${locale}`])}
+								onClick={() => createPDF(pdfRef, slug)}
 								isLoading={isLoadingPDF}
 							/>
 						</Flex>
@@ -176,7 +177,7 @@ const PropertyDetail = ({ slug }: { slug: string }) => {
 							overflow='hidden'
 						>
 							<Image
-								src={data.main_image || ''}
+								src={data.main_image || NoPhoto}
 								alt='Image'
 								className='full-image'
 								width={800}
@@ -287,7 +288,14 @@ function PropertyParams(props: {
 
 function SaveAsPdfButton(props: { onClick: () => void; isLoading: boolean }) {
 	return props.isLoading ? (
-		<Spinner />
+		<Flex
+			h='40px'
+			alignItems='center'
+			justifyContent='center'
+			w='40px'
+		>
+			<Spinner />
+		</Flex>
 	) : (
 		<Button
 			onClick={props.onClick}

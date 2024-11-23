@@ -30,7 +30,7 @@ const ObjectsForInvestment = () => {
 				<Flex
 					w='100%'
 					justifyContent={{
-						lg: !!data && data?.length < 4 ? 'end' : 'start',
+						lg: !!data ? (data?.length < 4 ? 'end' : 'start') : 'end',
 						base: 'start'
 					}}
 					overflowX='auto'

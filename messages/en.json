@@ -54,6 +54,12 @@
 			"living_room": "living room",
 			"people": "people",
 			"similar_objects": "Similar objects"
+		},
+		"form_submit": {
+			"country_toast": "Select country",
+			"hello": "Hello!",
+			"user_text": "I am interested in buying real estate in",
+			"phone": "Phone"
 		}
 	}
 }

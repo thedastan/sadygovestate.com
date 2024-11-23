@@ -3,13 +3,13 @@ export const PHONE_NUMBER = '+971 54 204 4777'
 export const WHATSAPP_NUMBER = PHONE_NUMBER
 
 export const EMAIL_ADDRESS = 'info@vs-realestate.com'
-export const INSTAGRAM = 'vsadigoff'
+export const INSTAGRAM = 'victor_sadygov_estate'
 
 export const LOCATION = 'Бишкек, Улица Ибраимова, 64/2'
 
 /// links
 
-export const WHATSAPP_LINK = `https://wa.me/${PHONE_NUMBER}`
+export const WHATSAPP_LINK = `https://wa.me/${PHONE_NUMBER.split(' ').join('')}`
 
 export const EMAIL_ADDRESS_LINK = `mailto:${EMAIL_ADDRESS}`
 

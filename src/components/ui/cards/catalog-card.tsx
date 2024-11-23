@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
 
-import DefImage from '@/assets/img/slider-image.jpeg'
+import NoPhoto from '@/assets/img/no-photo.png'
 import CatalogArtboardIcon from '@/assets/svg/CatalogArtboardIcon'
 import CatalogBathroomIcon from '@/assets/svg/CatalogBathroomIcon'
 import CatalogBedIcon from '@/assets/svg/CatalogBedIcon'
@@ -46,7 +46,7 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 					position='relative'
 				>
 					<Image
-						src={el.main_image}
+						src={el.main_image || NoPhoto}
 						width={345}
 						height={240}
 						alt='Image'

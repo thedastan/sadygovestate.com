@@ -52,7 +52,7 @@ const IdealCity = () => {
 							<CountryCard
 								key={el.id}
 								el={el}
-								offer_text={t('offer')}
+								offer_text={t('offers')}
 								watch_text={t('see_more')}
 							/>
 						))}

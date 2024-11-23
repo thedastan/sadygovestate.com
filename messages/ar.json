@@ -54,6 +54,12 @@
 			"living_room": "غرفة الجلوس",
 			"people": "الناس",
 			"similar_objects": "أشياء مماثلة"
+		},
+		"form_submit": {
+			"country_toast": "اختر البلد",
+			"hello": "مرحبًا!",
+			"user_text": "أنا مهتم بشراء عقار في",
+			"phone": "هاتف"
 		}
 	}
 }

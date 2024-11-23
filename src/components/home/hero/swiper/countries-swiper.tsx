@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl'
 import { PropsWithChildren, useEffect, useState } from 'react'
 
 import { LoadingImage } from '@/config/helpers'
+import { attribute_From } from '@/config/intl-variables'
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
 import { useCountries } from '@/hooks/useCountries'
@@ -152,7 +153,7 @@ function CityCard({ city }: { city: ICity }) {
 					lineHeight='16.1px'
 					fontWeight='700'
 				>
-					от $200,000*
+					{attribute_From[locale]} $200,000*
 				</Text>
 			</Flex>
 
