@@ -44,6 +44,8 @@
 		"empty": "Empty",
 		"reset_filters": "Reset filters",
 		"all": "All",
+		"comment": "comment",
+
 		"detail": {
 			"price": "price",
 			"square": "square",

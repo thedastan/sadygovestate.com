@@ -15,6 +15,7 @@ import { FiMapPin } from 'react-icons/fi'
 import { IoCheckmarkOutline } from 'react-icons/io5'
 
 import NoPhoto from '@/assets/img/no-photo.png'
+import CatalogArtboardIcon from '@/assets/svg/CatalogArtboardIcon'
 import CatalogBathroomIcon from '@/assets/svg/CatalogBathroomIcon'
 import CatalogBedIcon from '@/assets/svg/CatalogBedIcon'
 import CatalogGarageIcon from '@/assets/svg/CatalogGarageIcon'
@@ -37,13 +38,12 @@ import Title32 from '../ui/texts/Title32'
 import TitleComponent from '../ui/texts/TitleComponent'
 
 import DetailSkeleton from './detail-skeleton'
-import { IDetailPropertyPayload } from '@/models/other.model'
 
-const PropertyDetail = (params: IDetailPropertyPayload) => {
+const PropertyDetail = (params: { slug: string }) => {
 	const { clientWidth } = useFullWindowSize()
 	const locale = useTypedLocale()
 	const t = useTranslations('Titles.detail')
-	const { data, isLoading } = usePropertyDetail(params)
+	const { data, isLoading } = usePropertyDetail(params.slug)
 	const pdfRef = useRef<HTMLDivElement>(null)
 
 	const { createPDF, isLoadingPDF } = useCreatePDF()
@@ -92,10 +92,7 @@ const PropertyDetail = (params: IDetailPropertyPayload) => {
 								subtitle={t('price')}
 								isFirst={true}
 							/>
-							<PropertyParams
-								title={`${data?.sqmt} m² - ${data?.sqft} f²`}
-								subtitle={t('square')}
-							/>
+
 							{!!data?.year && (
 								<PropertyParams
 									title={`${data.year?.slice(0, 4)}`}
@@ -108,8 +105,8 @@ const PropertyDetail = (params: IDetailPropertyPayload) => {
 						</Flex>
 						<Flex
 							my={{ md: '40px', base: '30px' }}
-							gap='6px'
-							flexWrap={{ xl: 'nowrap', base: 'wrap' }}
+							gap='8px 6px'
+							flexWrap='wrap'
 						>
 							{!!data?.bed_room && (
 								<CharacteristicsCard
@@ -135,8 +132,13 @@ const PropertyDetail = (params: IDetailPropertyPayload) => {
 									text={`${data.profitability} ${t('people')}`}
 								/>
 							)}
+							<CharacteristicsCard
+								icon={CatalogArtboardIcon}
+								text={`${data?.sqft} sqft / ${data?.sqmt} sqmt`}
+							/>
+
 							<SaveAsPdfButton
-								onClick={() => createPDF(pdfRef, data[`slug_${locale}`])}
+								onClick={() => createPDF(pdfRef, params.slug)}
 								isLoading={isLoadingPDF}
 							/>
 						</Flex>

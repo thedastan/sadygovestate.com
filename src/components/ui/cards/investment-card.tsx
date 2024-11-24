@@ -13,6 +13,7 @@ import useTypedLocale from '@/hooks/useLocale'
 import Title from '../texts/Title'
 
 import { IProperty } from '@/models/property.model'
+import { EnumIntl } from '@/models/types/intl-types'
 
 interface SliderPropertyCardProps {
 	el: IProperty
@@ -20,12 +21,19 @@ interface SliderPropertyCardProps {
 
 const InvestmentCard = ({ el }: SliderPropertyCardProps) => {
 	const locale = useTypedLocale()
+
+	const obj = {
+		[EnumIntl.ARABIC]: `العائد يصل إلى ${el.profitability} ٪ سنويا`,
+		[EnumIntl.ENGLISH]: `Income up to ${el.profitability}% per year`,
+		[EnumIntl.RUSSIAN]: `Доходность до ${el.profitability}% в год`
+	}
+	const profitability = el.profitability ? obj[locale] : ''
 	return (
 		<Box
 			bg='#FFFFFF'
 			padding={{ md: '0', base: '6px' }}
 		>
-			<Link href={DASHBOARD_PAGES.DETAIL(locale, el[`slug_${locale}`])}>
+			<Link href={DASHBOARD_PAGES.DETAIL(locale, el.slug_en)}>
 				<Box
 					w='100%'
 					h={{ md: '378px', base: '240px' }}
@@ -65,7 +73,7 @@ const InvestmentCard = ({ el }: SliderPropertyCardProps) => {
 							lineHeight='20.7px'
 							color='#000000'
 						>
-							Доходность до 15% в год
+							{profitability}
 						</Text>
 						<Flex
 							color='#333139'

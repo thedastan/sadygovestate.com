@@ -10,8 +10,3 @@ export interface IReview {
 	rating: number
 	created_at: string
 }
-
-export interface IDetailPropertyPayload {
-	slug: string
-	locale: string
-}

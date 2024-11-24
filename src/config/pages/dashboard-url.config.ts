@@ -11,7 +11,7 @@ class DASHBOARD {
 		return `/${locale}/catalog/investment`
 	}
 	DETAIL = (locale: IntlType, slug: string) => {
-		return `/${locale}/property/${slug}?language=${locale}`
+		return `/${locale}/property/${slug}`
 	}
 }
 

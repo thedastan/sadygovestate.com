@@ -1,12 +1,30 @@
 import { Avatar, Box, Flex } from '@chakra-ui/react'
+import moment from 'moment'
+import 'moment/locale/ar'
+import 'moment/locale/ru'
+import { useTranslations } from 'next-intl'
 import { FaStar } from 'react-icons/fa'
 import { FaRegStar } from 'react-icons/fa'
+
+import useTypedLocale from '@/hooks/useLocale'
 
 import Description from '../texts/Description'
 
 import { IReview } from '@/models/other.model'
 
 const ReviewCard = ({ el }: { el: IReview }) => {
+	const locale = useTypedLocale()
+	const t = useTranslations('Titles')
+	moment.locale(locale) // Устанавливаем локализацию
+
+	/**
+	 * Возвращает строку времени в формате "X времени назад".
+	 * @param {Date | string | number} date - Дата в формате `Date`, ISO-строке, или временной метке.
+	 * @returns {string} - Строка вида "X месяцев назад".
+	 */
+	function timeAgo(date: string) {
+		return moment(date).fromNow()
+	}
 	return (
 		<Box
 			bg='#FFFFFF'
@@ -16,6 +34,7 @@ const ReviewCard = ({ el }: { el: IReview }) => {
 			px={{ md: '5', base: '4' }}
 			py={{ md: '18.5px', base: '5' }}
 			maxW='742px'
+			textAlign='start'
 		>
 			<Flex gap='3'>
 				<Avatar
@@ -40,7 +59,7 @@ const ReviewCard = ({ el }: { el: IReview }) => {
 						fontSize='12px'
 						lineHeight='14.52px'
 					>
-						1 отзыв
+						{`1 ${t('comment')}`}
 					</Description>
 				</Flex>
 			</Flex>
@@ -72,7 +91,7 @@ const ReviewCard = ({ el }: { el: IReview }) => {
 					fontSize='14px'
 					lineHeight='16.94px'
 				>
-					11 месяцев назад
+					{timeAgo(el.created_at)}
 				</Description>
 			</Flex>
 			<Description

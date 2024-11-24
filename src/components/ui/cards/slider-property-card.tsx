@@ -27,7 +27,7 @@ const SliderPropertyCard = ({ el }: SliderPropertyCardProps) => {
 			bg='#FFFFFF'
 			transition='.2s'
 		>
-			<Link href={DASHBOARD_PAGES.DETAIL(locale, el[`slug_${locale}`])}>
+			<Link href={DASHBOARD_PAGES.DETAIL(locale, el.slug_en)}>
 				<Box
 					w={{ md: '272px', base: '250px' }}
 					h='140px'
@@ -48,12 +48,22 @@ const SliderPropertyCard = ({ el }: SliderPropertyCardProps) => {
 					mt='10px'
 					pb={{ md: '22px', base: '14px' }}
 				>
+					<Title whiteSpace='nowrap'>{`${attribute_From[locale]} $${formatToDE(el.price)}`}</Title>
 					<Flex
+						mt={{ md: '18px', base: '3' }}
 						justifyContent='space-between'
 						alignItems='center'
 						gap='1'
 					>
-						<Title whiteSpace='nowrap'>{`${attribute_From[locale]} $${formatToDE(el.price)}`}</Title>
+						<Text
+							noOfLines={1}
+							fontWeight='400'
+							fontSize='14px'
+							lineHeight='16.1px'
+							color='#000000'
+						>
+							{`${attribute_From[locale]} ${el.sqmt} m²`}
+						</Text>
 						<Flex
 							color='#333139'
 							alignItems='center'
@@ -68,16 +78,6 @@ const SliderPropertyCard = ({ el }: SliderPropertyCardProps) => {
 							{el[`city_${locale}`]}
 						</Flex>
 					</Flex>
-					<Text
-						noOfLines={1}
-						fontWeight='400'
-						mt={{ md: '18px', base: '3' }}
-						fontSize='14px'
-						lineHeight='16.1px'
-						color='#000000'
-					>
-						{`${attribute_From[locale]} ${el.sqmt} m²`}
-					</Text>
 				</Box>
 			</Link>
 		</Box>

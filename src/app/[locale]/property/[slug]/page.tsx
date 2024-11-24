@@ -5,18 +5,20 @@ import PropertyDetail from '@/components/detail'
 
 import { SEO_KEY_WORDS } from '@/constants/seo/seo.constants'
 
-import { IDetailPropertyPayload } from '@/models/other.model'
 import { propertyService } from '@/service/property.service'
 
 type Props = {
-	params: IDetailPropertyPayload
+	params: {
+		slug: string
+		locale: string
+	}
 }
 
 export async function generateMetadata(
 	{ params }: Props,
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
-	const property = await propertyService.getDetail(params)
+	const property = await propertyService.getDetail(params.slug)
 
 	const previousImages = (await parent).openGraph?.images || []
 
@@ -30,7 +32,7 @@ export async function generateMetadata(
 }
 
 export default async function DetailPropertyPage({ params }: Props) {
-	const property = await propertyService.getDetail(params)
+	const property = await propertyService.getDetail(params.slug)
 	return (
 		<>
 			<Head>
@@ -50,7 +52,7 @@ export default async function DetailPropertyPage({ params }: Props) {
 					key='description'
 				/>
 			</Head>
-			<PropertyDetail {...params} />
+			<PropertyDetail slug={params.slug} />
 		</>
 	)
 }

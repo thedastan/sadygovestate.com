@@ -13,6 +13,7 @@ import { Toaster } from 'sonner'
 
 import Footer from '@/components/navbar/footer'
 import Header from '@/components/navbar/header'
+import WhatsappButton from '@/components/ui/buttons/WhatsappButton'
 
 import { store } from '@/store/store'
 
@@ -42,11 +43,12 @@ export function Providers({ children }: PropsWithChildren) {
 						mx='auto'
 						minH={'100vh'}
 						pb={{ md: '100px', base: '60px' }}
-						dir={locale === EnumIntl.ARABIC ? 'rtl' : 'ltr'}
+						textAlign={locale === EnumIntl.ARABIC ? 'end' : 'start'}
 					>
 						{children}
 					</Box>
 					<Footer />
+					<WhatsappButton />
 					<Toaster
 						theme='light'
 						position='top-center'

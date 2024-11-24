@@ -13,15 +13,59 @@ export function useCreatePDF() {
 		setLoading(true) // Устанавливаем загрузку в true
 		try {
 			if (ref.current) {
+				const element = ref.current
+				const elementWidth = element.offsetWidth
+				const elementHeight = element.offsetHeight
+
+				// const pdf = new jsPDF('p', 'mm', 'a4')
+
+				const pdfWidth = elementWidth * 0.26458 // Перевод пикселей в мм
+				const pdfHeight = pdfWidth * 1.414 // Пропорции A4
+
 				const canvas = await html2canvas(ref.current, {
-					scale: 2 // Высокое качество PDF
+					scale: 2, // Высокое качество PDF
+					scrollY: -window.scrollY
 				})
 
 				const imgData = canvas.toDataURL('image/jpeg')
-				const pdf = new jsPDF('p', 'mm', 'a4')
-				const pdfWidth = pdf.internal.pageSize.getWidth()
-				const pdfHeight = pdf.internal.pageSize.getHeight()
+				const imgWidth = canvas.width
+				const imgHeight = canvas.height
 
+				const pdf = new jsPDF({
+					orientation: 'portrait',
+					unit: 'mm',
+					format: [pdfWidth, pdfHeight]
+				})
+
+				// Разбиение на страницы
+				let yOffset = 0 // Смещение по вертикали
+				while (yOffset < imgHeight) {
+					// Высота фрагмента для текущей страницы
+					const visibleHeight = Math.min(
+						imgHeight - yOffset,
+						pdfHeight * (imgWidth / pdfWidth) // Высота страницы в пикселях
+					)
+
+					// Добавляем текущий фрагмент
+					pdf.addImage(
+						imgData,
+						'JPEG',
+						0,
+						15,
+						pdfWidth,
+						visibleHeight * (pdfWidth / imgWidth), // Масштабирование высоты
+						undefined,
+						'FAST',
+						yOffset // Смещение для текущего фрагмента
+					)
+
+					yOffset += visibleHeight // Увеличиваем смещение
+
+					// Добавляем новую страницу, если ещё остался контент
+					if (yOffset < imgHeight) {
+						pdf.addPage([pdfWidth, pdfHeight], 'portrait')
+					}
+				}
 				pdf.addImage(imgData, 'JPEG', 0, 10, pdfWidth, pdfHeight)
 				pdf.setFontSize(30)
 				pdf.setTextColor(150, 150, 150) // Серый цвет для водяного знака

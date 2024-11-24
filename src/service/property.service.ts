@@ -2,7 +2,6 @@ import { IFilterStateValue } from '@/store/slices/storage-slice'
 
 import { PUBLIC_API } from '@/api/interceptors'
 
-import { IDetailPropertyPayload } from '@/models/other.model'
 import {
 	IProperty,
 	IPropertyDetail,
@@ -62,11 +61,10 @@ class PropertyService {
 		}
 	}
 
-	async getDetail(params: IDetailPropertyPayload) {
+	async getDetail(slug: string) {
 		try {
-			const path = params.slug + `?language=${params.locale}`
 			const response = await PUBLIC_API.get<IPropertyDetail>(
-				this.BASE_URL + `detail/${path}`
+				this.BASE_URL + `detail/${slug}`
 			)
 
 			return response.data

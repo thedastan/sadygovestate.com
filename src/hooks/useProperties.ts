@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 
 import { IFilterStateValue } from '@/store/slices/storage-slice'
 
-import { IDetailPropertyPayload } from '@/models/other.model'
 import { propertyService } from '@/service/property.service'
 
 export function useProperties(
@@ -18,10 +17,10 @@ export function useProperties(
 	return { data, isLoading, data_main_page }
 }
 
-export function usePropertyDetail(params: IDetailPropertyPayload) {
+export function usePropertyDetail(slug: string) {
 	const { data, isLoading } = useQuery({
-		queryKey: ['property-detail', params],
-		queryFn: () => propertyService.getDetail(params)
+		queryKey: ['property-detail', slug],
+		queryFn: () => propertyService.getDetail(slug)
 	})
 
 	return { data, isLoading }
