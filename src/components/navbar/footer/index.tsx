@@ -40,10 +40,10 @@ const Footer = () => {
 						alignItems='start'
 					>
 						<Link href={`tel:${PHONE_NUMBER}`}>
-							<Title32 fontSize={{ md: '26px', base: '32px' }} fontWeight='700'>{PHONE_NUMBER}</Title32>
+							<Title32 fontSize={{ md: '32px', base: '26px' }} fontWeight='700'>{PHONE_NUMBER}</Title32>
 						</Link>
 						<Link href={EMAIL_ADDRESS_LINK}>
-							<Title32 fontSize={{ md: '26px', base: '32px' }} mt='14px'>{EMAIL_ADDRESS}</Title32>
+							<Title32 fontSize={{ md: '32px', base: '26px' }} mt='14px'>{EMAIL_ADDRESS}</Title32>
 						</Link>
 						<Text
 							mt='32px'
