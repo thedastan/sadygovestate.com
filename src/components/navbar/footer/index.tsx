@@ -40,10 +40,10 @@ const Footer = () => {
 						alignItems='start'
 					>
 						<Link href={`tel:${PHONE_NUMBER}`}>
-							<Title32 fontWeight='700'>{PHONE_NUMBER}</Title32>
+							<Title32 fontSize={{ md: '26px', base: '32px' }} fontWeight='700'>{PHONE_NUMBER}</Title32>
 						</Link>
 						<Link href={EMAIL_ADDRESS_LINK}>
-							<Title32 mt='14px'>{EMAIL_ADDRESS}</Title32>
+							<Title32 fontSize={{ md: '26px', base: '32px' }} mt='14px'>{EMAIL_ADDRESS}</Title32>
 						</Link>
 						<Text
 							mt='32px'
@@ -113,7 +113,7 @@ const Footer = () => {
 				fontSize={{ md: '18px', base: '14px' }}
 				lineHeight={{ md: '20.7px', base: '16px' }}
 			>
-				<Text color='#8A8989'>© 2024 Viktor Sadygov</Text>
+				<Text color='#8A8989'>© 2023–2024 Viktor Sadygov Real Estate</Text>
 			</Flex>
 		</Container>
 	)
