@@ -98,7 +98,7 @@ const PropertyDetail = (params: IDetailPropertyPayload) => {
 							/>
 							{!!data?.year && (
 								<PropertyParams
-									title={`${data.year?.slice(0, 4)}г`}
+									title={`${data.year?.slice(0, 4)}`}
 									subtitle={t('handed_over')}
 								/>
 
