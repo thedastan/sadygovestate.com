@@ -8,6 +8,7 @@ import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
 import { useCountries } from '@/hooks/useCountries'
 import useTypedLocale from '@/hooks/useLocale'
+import { useProperties } from '@/hooks/useProperties'
 
 import SlideProvider from './slide-provider'
 import { ICity, ICountry } from '@/models/country.model'
@@ -16,6 +17,8 @@ const CountriesSwiper = () => {
 	const [active, setActive] = useState<ICountry>()
 	const [isLoading, setLoading] = useState(true)
 	const { data } = useCountries()
+	const { data: properties } = useProperties()
+	const main_properties = properties?.filter(el => el.main_page)
 	const locale = useTypedLocale()
 	const [isLargerThanMd] = useMediaQuery('(min-width: 768px)')
 	const t = useTranslations('Titles')

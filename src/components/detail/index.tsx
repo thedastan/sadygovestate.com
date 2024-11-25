@@ -8,13 +8,12 @@ import {
 	Flex,
 	Spinner
 } from '@chakra-ui/react'
+import moment from 'moment'
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import { useRef } from 'react'
 import { FiMapPin } from 'react-icons/fi'
 import { IoCheckmarkOutline } from 'react-icons/io5'
 
-import NoPhoto from '@/assets/img/no-photo.png'
 import CatalogArtboardIcon from '@/assets/svg/CatalogArtboardIcon'
 import CatalogBathroomIcon from '@/assets/svg/CatalogBathroomIcon'
 import CatalogBedIcon from '@/assets/svg/CatalogBedIcon'
@@ -37,6 +36,7 @@ import Description from '../ui/texts/Description'
 import Title32 from '../ui/texts/Title32'
 import TitleComponent from '../ui/texts/TitleComponent'
 
+import DetailGallery from './DetailGallery'
 import DetailSkeleton from './detail-skeleton'
 
 const PropertyDetail = (params: { slug: string }) => {
@@ -45,6 +45,8 @@ const PropertyDetail = (params: { slug: string }) => {
 	const t = useTranslations('Titles.detail')
 	const { data, isLoading } = usePropertyDetail(params.slug)
 	const pdfRef = useRef<HTMLDivElement>(null)
+	const year = moment(data?.year).year()
+	const hasDatePassed = moment().isAfter(moment(data?.year, 'YYYY-MM-DD'))
 
 	const { createPDF, isLoadingPDF } = useCreatePDF()
 	const TitleDetailPage = !!data && (
@@ -93,10 +95,10 @@ const PropertyDetail = (params: { slug: string }) => {
 								isFirst={true}
 							/>
 
-							{!!data?.year && (
+							{!!year && (
 								<PropertyParams
-									title={`${data.year?.slice(0, 4)}`}
-									subtitle={t('handed_over')}
+									title={year.toString()}
+									subtitle={hasDatePassed ? t('handed_over') : t('renting_out')}
 								/>
 
 								// t('handed_over') сдан
@@ -163,57 +165,18 @@ const PropertyDetail = (params: { slug: string }) => {
 						)}
 					</Box>
 
-					<Box
-						maxW='800px'
-						w='100%'
-					>
+					<Box w={{ '2xl': '800px', xl: '650px', lg: '600px', base: '100%' }}>
 						<Box
 							display={{ lg: 'none', base: 'block' }}
 							mb='3'
 						>
 							{TitleDetailPage}
 						</Box>
-						<Box
-							h={{ lg: '500px', base: '464px' }}
-							w='100%'
-							rounded='16px'
-							overflow='hidden'
-						>
-							<Image
-								src={data.main_image || NoPhoto}
-								alt='Image'
-								className='full-image'
-								width={800}
-								height={500}
-							/>
-						</Box>
 
-						<Flex
-							mt='14px'
-							overflow='auto'
-							className='unscroll'
-							w='100%'
-						>
-							<Flex gap='14px'>
-								{data.prop_image?.map(el => (
-									<Box
-										key={el.id}
-										h={{ lg: '260px', sm: '180px', base: '113.75px' }}
-										w={{ xl: '250px', sm: '170px', base: '112.5px' }}
-										rounded='16px'
-										overflow='hidden'
-									>
-										<Image
-											src={el.image}
-											alt='Image'
-											className='full-image'
-											width={257}
-											height={260}
-										/>
-									</Box>
-								))}
-							</Flex>
-						</Flex>
+						<DetailGallery
+							main_image={data.main_image}
+							images={data.prop_image}
+						/>
 					</Box>
 				</Flex>
 			</Container>

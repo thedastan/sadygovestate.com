@@ -16,8 +16,6 @@ import AnimateButton from '@/components/ui/buttons/AnimateButton'
 
 import { WHATSAPP_LINK } from '@/constants/admin'
 
-import { DETAIL_PATH_KEY_WORD } from '@/config/pages/dashboard-url.config'
-
 import useTypedLocale from '@/hooks/useLocale'
 
 import { social_contacts, useNavbar } from '../data'
@@ -35,13 +33,7 @@ const BurgerMenu = () => {
 	const router = useRouter()
 	const t = useTranslations('Titles')
 	const changeIntl = (locale: IntlType) => {
-		if (pathname.includes(DETAIL_PATH_KEY_WORD)) {
-			const path =
-				pathname.replace(localeActive, locale) + `?language=${locale}`
-			router.replace(path)
-		} else {
-			router.replace(pathname.replace(localeActive, locale))
-		}
+		router.replace(pathname.replace(localeActive, locale))
 	}
 
 	const BurgerSticks = (

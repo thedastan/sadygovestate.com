@@ -24,3 +24,20 @@
 		}
 	}
 }
+
+@media (min-width: 768px) {
+	.gallery > .gallery-image {
+		width: 250px;
+	}
+}
+@media (max-width: 768px) {
+	.gallery > .gallery-image {
+		width: 170px;
+	}
+}
+
+@media (max-width: 458px) {
+	.gallery > .gallery-image {
+		width: 112px !important;
+	}
+}
