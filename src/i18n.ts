@@ -7,14 +7,14 @@ import { EnumIntl, ILocale, IntlType } from './models/types/intl-types'
 
 export const locales_data: ILocale[] = [
 	{
-		name: 'english',
-		locale: EnumIntl.ENGLISH,
-		short_name: 'ENG'
-	},
-	{
 		name: 'arabic',
 		locale: EnumIntl.ARABIC,
 		short_name: 'AR'
+	},
+	{
+		name: 'english',
+		locale: EnumIntl.ENGLISH,
+		short_name: 'ENG'
 	},
 	{
 		name: 'русский',
