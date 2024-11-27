@@ -18,6 +18,7 @@ export interface IProperty {
 	tipo: string
 	profitability: string | null
 	investment: boolean
+	country_id: number
 }
 
 export interface IPropertyDetail {

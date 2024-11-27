@@ -105,6 +105,7 @@ const FilterCard = (props: FilterCardProps) => {
 								cursor='pointer'
 								_active={{ opacity: '.4' }}
 								mt='6px'
+								whiteSpace={isLargerThanMiniMobile ? 'nowrap' : 'none'}
 							>
 								<Text
 									display={{ md: 'block', base: 'none' }}
@@ -112,10 +113,7 @@ const FilterCard = (props: FilterCardProps) => {
 								>
 									{isActive ? props.value : props.placeholder}
 								</Text>
-								<Text
-									display={{ md: 'none', base: 'block' }}
-									whiteSpace={isLargerThanMiniMobile ? 'nowrap' : 'none'}
-								>
+								<Text display={{ md: 'none', base: 'block' }}>
 									{isActive ? props.value : props.title}
 								</Text>
 								<FaAngleDown opacity='.5' />

@@ -20,7 +20,7 @@ import { ICountry } from '@/models/country.model'
 import { IPropertyType } from '@/models/property.model'
 
 const local_price = [
-	200000, 400000, 600000, 800000, 1000000, 2000000, 3000000, 4000000, 5000000
+	200000, 400000, 600000, 800000, 1000000, 2000000, 3000000, 4000000, 5000000, 0
 ]
 
 const FilterHead = () => {

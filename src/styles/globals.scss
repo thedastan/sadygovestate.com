@@ -3,6 +3,12 @@
 @import 'swiper';
 @import 'animate';
 
+@media print {
+	body {
+		min-width: 1450px !important;
+	}
+}
+
 .phone-input {
 	background: #ffffff !important;
 	border-radius: 32px !important;

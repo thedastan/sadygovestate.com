@@ -66,7 +66,6 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 		<Box>
 			<TitlePages
 				mb={{ md: '50px', base: '17px' }}
-				maxW='793px'
 				px='4'
 				textAlign='center'
 				mx='auto'

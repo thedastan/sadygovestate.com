@@ -3,6 +3,10 @@ import jsPDF from 'jspdf'
 import { RefObject, useState } from 'react'
 import { toast } from 'sonner'
 
+import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
+
+import { EnumIntl } from '@/models/types/intl-types'
+
 export function useCreatePDF() {
 	const [isLoadingPDF, setLoading] = useState(false)
 
@@ -67,7 +71,7 @@ export function useCreatePDF() {
 					}
 				}
 				pdf.addImage(imgData, 'JPEG', 0, 10, pdfWidth, pdfHeight)
-				pdf.setFontSize(30)
+				pdf.setFontSize(80)
 				pdf.setTextColor(150, 150, 150) // Серый цвет для водяного знака
 				pdf.setFillColor(150, 150, 150, 0.3)
 
@@ -91,5 +95,36 @@ export function useCreatePDF() {
 		}
 	}
 
+	return { createPDF, isLoadingPDF }
+}
+
+export function useCreatePDFTest() {
+	const [isLoadingPDF, setLoading] = useState(false)
+
+	const createPDF = async (slug: string) => {
+		setLoading(true) // Показываем загрузчик
+		try {
+			const url = `${window.location.origin}/api/generate-pdf?url=${window.location.href}`
+
+			const response = await fetch(url, { method: 'GET' })
+
+			if (!response.ok) {
+				throw new Error('Ошибка при генерации PDF')
+			}
+
+			const blob = await response.blob()
+			const link = document.createElement('a')
+			link.href = URL.createObjectURL(blob)
+			link.download = `${slug}.pdf`
+			link.click()
+
+			URL.revokeObjectURL(link.href) // Освобождаем память
+		} catch (error) {
+			console.error('Ошибка:', error)
+			alert('Не удалось скачать PDF.')
+		} finally {
+			setLoading(false) // Скрываем загрузчик
+		}
+	}
 	return { createPDF, isLoadingPDF }
 }

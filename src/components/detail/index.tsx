@@ -6,13 +6,16 @@ import {
 	Container,
 	Divider,
 	Flex,
-	Spinner
+	Spinner,
+	useBreakpointValue
 } from '@chakra-ui/react'
+import { theme } from '@chakra-ui/react'
 import moment from 'moment'
 import { useTranslations } from 'next-intl'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FiMapPin } from 'react-icons/fi'
 import { IoCheckmarkOutline } from 'react-icons/io5'
+import generatePDF from 'react-to-pdf'
 
 import CatalogArtboardIcon from '@/assets/svg/CatalogArtboardIcon'
 import CatalogBathroomIcon from '@/assets/svg/CatalogBathroomIcon'
@@ -23,7 +26,7 @@ import SaveIcon from '@/assets/svg/SaveIcon'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
-import { useCreatePDF } from '@/hooks/useCreatePDF'
+import { useCreatePDF, useCreatePDFTest } from '@/hooks/useCreatePDF'
 import { formatToDE } from '@/hooks/useCreatorPriceObject'
 import { useFullWindowSize } from '@/hooks/useFullHeight'
 import useTypedLocale from '@/hooks/useLocale'
@@ -49,6 +52,8 @@ const PropertyDetail = (params: { slug: string }) => {
 	const hasDatePassed = moment().isAfter(moment(data?.year, 'YYYY-MM-DD'))
 
 	const { createPDF, isLoadingPDF } = useCreatePDF()
+	// const { createPDF, isLoadingPDF } = useCreatePDFTest()
+
 	const TitleDetailPage = !!data && (
 		<>
 			<TitleComponent>{data[`name_${locale}`]}</TitleComponent>
@@ -73,7 +78,14 @@ const PropertyDetail = (params: { slug: string }) => {
 	}
 	if (!data) return <Description px='4'>Что то пошло не так...</Description>
 	return (
-		<Box ref={pdfRef}>
+		<Box
+			ref={pdfRef}
+			css={{
+				'@media print': {
+					minWidth: '1450px'
+				}
+			}}
+		>
 			<Container maxW={CONTAINER_WIDTH}>
 				<Flex
 					gap={{ xl: '52px', md: '24px', base: '34px' }}
@@ -141,6 +153,13 @@ const PropertyDetail = (params: { slug: string }) => {
 
 							<SaveAsPdfButton
 								onClick={() => createPDF(pdfRef, params.slug)}
+								// onClick={() => createPDF(params.slug)}
+								// onClick={() =>
+								// 	generatePDF(pdfRef, {
+								// 		filename: `${params.slug}.pdf`,
+								// 		page: { margin: 15 }
+								// 	})
+								// }
 								isLoading={isLoadingPDF}
 							/>
 						</Flex>

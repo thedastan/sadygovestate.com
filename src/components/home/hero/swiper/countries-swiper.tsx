@@ -1,5 +1,6 @@
 import { Box, Button, Flex, Text, useMediaQuery } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { PropsWithChildren, useEffect, useState } from 'react'
 
 import { LoadingImage } from '@/config/helpers'
@@ -7,11 +8,13 @@ import { attribute_From } from '@/config/intl-variables'
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
 import { useCountries } from '@/hooks/useCountries'
+import { formatToDE } from '@/hooks/useCreatorPriceObject'
 import useTypedLocale from '@/hooks/useLocale'
 import { useProperties } from '@/hooks/useProperties'
 
 import SlideProvider from './slide-provider'
 import { ICity, ICountry } from '@/models/country.model'
+import { IProperty } from '@/models/property.model'
 
 const CountriesSwiper = () => {
 	const [active, setActive] = useState<ICountry>()
@@ -49,17 +52,20 @@ const CountriesSwiper = () => {
 					gap='3'
 					px='3'
 				>
-					{active?.cities?.slice(0, isLargerThanMd ? 4 : 2)?.map((el, idx) => (
-						<Box
-							key={el.id}
-							mt={{
-								md: idx % 2 === 0 ? '92px' : '0',
-								base: idx % 2 === 0 ? '0' : '179px'
-							}}
-						>
-							<CityCard city={el} />
-						</Box>
-					))}
+					{main_properties
+						?.filter(el => el.country_id === active?.id)
+						?.slice(0, isLargerThanMd ? 4 : 2)
+						?.map((el, idx) => (
+							<Box
+								key={el.id}
+								mt={{
+									md: idx % 2 === 0 ? '92px' : '0',
+									base: idx % 2 === 0 ? '0' : '179px'
+								}}
+							>
+								<ItemCard el={el} />
+							</Box>
+						))}
 				</Flex>
 				<Flex
 					overflowX='auto'
@@ -112,75 +118,80 @@ function TabCard(props: TabCardProps) {
 	)
 }
 
-function CityCard({ city }: { city: ICity }) {
+function ItemCard({ el }: { el: IProperty }) {
 	const locale = useTypedLocale()
 	return (
-		<Flex
-			flexDirection='column'
-			alignItems='center'
-			gap='6px'
-			sx={{
-				'&:hover': {
-					'.city-circle': {
-						padding: '6px'
-					},
-					'.city-box': {
-						bg: '#FFFFFF',
-						color: '#333139'
-					}
-				}
-			}}
-		>
+		<Link href={DASHBOARD_PAGES.DETAIL(locale, el.slug_en)}>
 			<Flex
 				flexDirection='column'
-				className='city-box'
 				alignItems='center'
 				gap='6px'
-				bg='#FFFFFF33'
-				backdropFilter='blur(30px)'
-				px='25px'
-				py='10.5px'
-				rounded='12px'
-				color='#FFFFFF'
-				transition='.4s'
+				cursor='pointer'
+				sx={{
+					'&:hover': {
+						'.city-circle': {
+							padding: '6px'
+						},
+						'.city-box': {
+							bg: '#FFFFFF',
+							color: '#333139'
+						}
+					}
+				}}
 			>
-				<Text
-					opacity='.7'
-					fontSize='12px'
-					lineHeight='13.8px'
-					fontWeight='400'
+				<Flex
+					flexDirection='column'
+					className='city-box'
+					alignItems='center'
+					gap='6px'
+					bg='#FFFFFF33'
+					backdropFilter='blur(30px)'
+					px='25px'
+					py='10.5px'
+					rounded='12px'
+					color='#FFFFFF'
+					transition='.4s'
 				>
-					{city[`name_${locale}`]}
-				</Text>
-				<Text
-					fontSize='14px'
-					lineHeight='16.1px'
-					fontWeight='700'
-				>
-					{attribute_From[locale]} $200,000*
-				</Text>
-			</Flex>
+					<Text
+						noOfLines={1}
+						opacity='.7'
+						fontSize='12px'
+						lineHeight='13.8px'
+						fontWeight='400'
+						maxW='90px'
+					>
+						{el[`name_${locale}`]}
+					</Text>
+					<Text
+						fontSize='14px'
+						lineHeight='16.1px'
+						fontWeight='700'
+					>
+						{attribute_From[locale]} ${formatToDE(el.price)}*
+					</Text>
+				</Flex>
 
-			<Flex
-				className='city-circle'
-				w='43px'
-				h='43px'
-				justifyContent='center'
-				transition='.5s'
-				alignItems='center'
-				padding='14px'
-				rounded='50%'
-				bg='#FFFFFF33'
-				backdropFilter='blur(20px)'
-			>
-				<Box
-					w='100%'
-					h='100%'
+				<Flex
+					className='city-circle'
+					w='43px'
+					h='43px'
+					justifyContent='center'
+					transition='.5s'
+					alignItems='center'
+					padding='14px'
 					rounded='50%'
-					bg='#FFFFFF'
-				/>
+					bg='#FFFFFF33'
+					backdropFilter='blur(20px)'
+				>
+					<Box
+						w='100%'
+						h='100%'
+						rounded='50%'
+						bg='#FFFFFF'
+					/>
+				</Flex>
 			</Flex>
-		</Flex>
+		</Link>
 	)
 }
 
