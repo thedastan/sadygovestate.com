@@ -1,4 +1,4 @@
-export const PHONE_NUMBER = '+971 54 204 4777'
+export const PHONE_NUMBER = '+971 50 8698 020'
 
 export const WHATSAPP_NUMBER = PHONE_NUMBER
 
