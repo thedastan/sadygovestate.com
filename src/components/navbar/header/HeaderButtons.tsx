@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { GoChevronLeft } from 'react-icons/go'
@@ -29,13 +29,18 @@ const HeaderButtons = () => {
 					py='14px'
 					alignItems='center'
 					whiteSpace='nowrap'
-					gap='2.5'
+					gap='10px'
 					color='#333139'
 					lineHeight='18.4px'
 					fontSize='16px'
 					fontWeight='400'
 				>
-					<GoChevronLeft />
+					<Box
+						w={{ sm: '18px', base: '10px' }}
+						fontSize={{ sm: '20px', base: '18px' }}
+					>
+						<GoChevronLeft />
+					</Box>
 					{t('catalog')}
 				</Flex>
 			</Link>

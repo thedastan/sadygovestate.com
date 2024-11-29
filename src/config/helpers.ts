@@ -1,7 +1,10 @@
-import moment from 'moment'
-import { toast } from 'sonner'
+import moment from 'moment';
+import { toast } from 'sonner';
 
-import { SITE_NAME } from '@/constants/seo/seo.constants'
+
+
+import { SITE_NAME } from '@/constants/seo/seo.constants';
+
 
 export function ToastError(e: any) {
 	const key = Object.keys(e.response?.data)[0]
@@ -92,7 +95,28 @@ export function LoadingImage(
 	}
 }
 
+export function getYouTubeVideoKey(url: string) {
+	let videoId = ''
 
+	// Regular expression to match YouTube video URLs in various formats
+	const patterns = [
+		/youtu\.be\/([A-Za-z0-9_-]+)/, // Shortened URL
+		/[?&]v=([A-Za-z0-9_-]+)/, // Regular URL with "v="
+		/\/embed\/([A-Za-z0-9_-]+)/, // URL with "/embed/"
+		/\/v\/([A-Za-z0-9_-]+)/, // URL with "/v/"
+		/\/watch\?v=([A-Za-z0-9_-]+)/, // URL with "/watch?v="
+		/\/watch\?.*?v=([A-Za-z0-9_-]+)/, // URL with "/watch?" and "v="
+		/\/(?:embed|v)\/([A-Za-z0-9_-]+)(?:\?|&|$)/ // Embed or v parameter
+	]
 
+	// Iterate through patterns to find a match
+	for (const pattern of patterns) {
+		const match = url.match(pattern)
+		if (match && match[1]) {
+			videoId = match[1]
+			break
+		}
+	}
 
-
+	return videoId
+}

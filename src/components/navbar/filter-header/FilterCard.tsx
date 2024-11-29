@@ -36,6 +36,10 @@ const FilterCard = (props: FilterCardProps) => {
 
 	const isActive = !!props.value
 
+	const baseValue =
+		String(props.value).length > 6
+			? String(props.value).slice(0, 6) + '..'
+			: props.value
 	useEffect(() => {
 		if (isActive) onClose()
 	}, [props.value])
@@ -113,8 +117,11 @@ const FilterCard = (props: FilterCardProps) => {
 								>
 									{isActive ? props.value : props.placeholder}
 								</Text>
-								<Text display={{ md: 'none', base: 'block' }}>
+								<Text display={{ md: 'none', sm: 'block', base: 'none' }}>
 									{isActive ? props.value : props.title}
+								</Text>
+								<Text display={{ sm: 'none', base: 'block' }}>
+									{isActive ? baseValue : props.title}
 								</Text>
 								<FaAngleDown opacity='.5' />
 							</Flex>

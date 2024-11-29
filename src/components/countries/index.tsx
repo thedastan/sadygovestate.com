@@ -55,7 +55,7 @@ const Countries = (props: { mt: ResponsiveValue<string> }) => {
 					flexDirection={{ md: 'row', base: 'column' }}
 				>
 					<Box
-						minW='417px'
+						minW={{ sm: '417px', base: '100%' }}
 						bg='#FFFFFF'
 						padding={{ md: '32px 30px 27px 32px', base: '30px 21px' }}
 					>

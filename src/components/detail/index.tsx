@@ -146,10 +146,10 @@ const PropertyDetail = (params: { slug: string }) => {
 									text={t('living_room')}
 								/>
 							)}
-							{!!data?.profitability && (
+							{!!data?.capacity && (
 								<CharacteristicsCard
 									icon={CatalogPersonIcon}
-									text={`${data.profitability} ${t('people')}`}
+									text={`${data.capacity} ${t('people')}`}
 								/>
 							)}
 							<CharacteristicsCard
@@ -201,6 +201,7 @@ const PropertyDetail = (params: { slug: string }) => {
 						<DetailGallery
 							main_image={data.main_image}
 							images={data.prop_image}
+							videos={data.prop_video}
 						/>
 					</Box>
 				</Flex>

@@ -1,3 +1,5 @@
+import { IVideo } from './other.model'
+
 export interface IProperty {
 	id: number
 	name_ru: string
@@ -53,6 +55,8 @@ export interface IPropertyDetail {
 	advantage_ar: IAdvantage[]
 	country_flag: string
 	studio: boolean
+	prop_video: IVideo[]
+	pdf: string | null
 }
 
 export interface PropImage {

@@ -34,6 +34,7 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 		<Flex
 			bg='#F2F2F2'
 			rounded='100px'
+			justifyContent='space-around'
 			px={{ sm: '10px', base: '1' }}
 			alignItems='center'
 			py={{ md: '2', base: '2.5' }}
@@ -46,7 +47,7 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 					onClick={() => dispatch(filterActions.setStage(el))}
 					variant='none'
 					rounded='200px'
-					w={{ md: 'auto', base: '50%' }}
+					w={{ md: 'auto', base: 'auto' }}
 					maxH={{ md: '30px', base: '39px' }}
 					px='3'
 					lineHeight={{ md: '13.8px', sm: '18px', base: '14px' }}

@@ -103,7 +103,7 @@ const CountryCard = ({ el, offer_text, watch_text }: CountryCardProps) => {
 							</Box>
 							<Flex
 								fontWeight='700'
-								fontSize='18px'
+								fontSize={{ md: '18px', base: '14px' }}
 								color='#FFFFFF'
 								lineHeight='20.7px'
 								gap='1'
@@ -120,11 +120,21 @@ const CountryCard = ({ el, offer_text, watch_text }: CountryCardProps) => {
 				mt={{ md: '5', base: '3' }}
 				fontSize={{ md: '24px', base: '18px' }}
 				lineHeight={{ md: '27.6px', base: '20.7px' }}
+				fontWeight='600'
+				letterSpacing='auto'
+				textAlign='center'
+			>
+				{el[`name_${locale}`]}
+			</Title>
+			<Title
+				mt='1'
+				fontSize={{ md: '18px', base: '14px' }}
+				lineHeight={{ md: '27.6px', base: '20.7px' }}
 				fontWeight='400'
 				letterSpacing='auto'
 				textAlign='center'
 			>
-				{`${el[`name_${locale}`]}, ${cities_name?.join('/')}`}
+				{cities_name?.join(' / ')}
 			</Title>
 			<Text
 				mt={{ md: '3', base: '2.5' }}

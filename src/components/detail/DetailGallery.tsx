@@ -4,13 +4,16 @@ import Image from 'next/image'
 import NoPhoto from '@/assets/img/no-photo.png'
 
 import Fancybox from './fancybox'
+import DetailVideo from './video-card'
+import { IVideo } from '@/models/other.model'
 import { PropImage } from '@/models/property.model'
 
 interface DetailGalleryProps {
 	images: PropImage[]
 	main_image: string | undefined
+	videos: IVideo[]
 }
-function DetailGallery({ images, main_image }: DetailGalleryProps) {
+function DetailGallery({ images, main_image, videos }: DetailGalleryProps) {
 	return (
 		<Fancybox>
 			<Box
@@ -44,6 +47,13 @@ function DetailGallery({ images, main_image }: DetailGalleryProps) {
 					gap='14px'
 					className='gallery'
 				>
+					{videos.map(el => (
+						<DetailVideo
+							key={el.id}
+							youtube_link={el.link}
+						/>
+					))}
+
 					{images.map(el => (
 						<Link
 							key={el.id}
