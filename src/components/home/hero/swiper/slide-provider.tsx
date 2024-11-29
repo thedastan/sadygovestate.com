@@ -7,10 +7,14 @@ import { GoArrowUpRight } from 'react-icons/go'
 
 import TitlePages from '@/components/ui/texts/TitlePages'
 
+import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
+
+import useTypedLocale from '@/hooks/useLocale'
+
 interface SlideProviderProps extends PropsWithChildren {
 	bgImage: StaticImageData | string
 	title: string
-	path: string
+	path: string | undefined
 	isLoading?: boolean
 }
 const SlideProvider = ({
@@ -21,6 +25,10 @@ const SlideProvider = ({
 	isLoading
 }: SlideProviderProps) => {
 	const t = useTranslations('Titles')
+	const locale = useTypedLocale()
+	const isInvestPath = path?.includes(
+		DASHBOARD_PAGES.CATALOG_INVESTMENT(locale)
+	)
 	return (
 		<>
 			<Flex
@@ -29,31 +37,36 @@ const SlideProvider = ({
 			>
 				<TitlePages maxW='901px'>{title}</TitlePages>
 				<Flex justifyContent={{ md: 'initial', base: 'end' }}>
-					<Link href={path}>
-						<Flex
-							flexDirection={{ md: 'column', base: 'row-reverse' }}
-							alignItems='center'
-							justifyContent='center'
-							w={{ md: '172px', base: 'auto' }}
-							h={{ md: '172px', base: 'auto' }}
-							rounded={{ md: '50%', base: '0' }}
-							border={{ md: '1px solid #000000', base: 'none' }}
-							color='#000000'
-							gap={{ md: '1', base: '2px' }}
-							fontSize={{ md: '32px', base: '22px' }}
+					{!!path && (
+						<Link
+							href={path}
+							target={isInvestPath ? '_self' : '_blank'}
 						>
-							<GoArrowUpRight />
-							<Text
-								textTransform='uppercase'
-								fontSize={{ md: '20px', base: '14px' }}
-								lineHeight={{ md: '23px', base: '16.1px' }}
-								letterSpacing='1px'
-								fontWeight='400'
+							<Flex
+								flexDirection={{ md: 'column', base: 'row-reverse' }}
+								alignItems='center'
+								justifyContent='center'
+								w={{ md: '172px', base: 'auto' }}
+								h={{ md: '172px', base: 'auto' }}
+								rounded={{ md: '50%', base: '0' }}
+								border={{ md: '1px solid #000000', base: 'none' }}
+								color='#000000'
+								gap={{ md: '1', base: '2px' }}
+								fontSize={{ md: '32px', base: '22px' }}
 							>
-								{t('read_more')}
-							</Text>
-						</Flex>
-					</Link>
+								<GoArrowUpRight />
+								<Text
+									textTransform='uppercase'
+									fontSize={{ md: '20px', base: '14px' }}
+									lineHeight={{ md: '23px', base: '16.1px' }}
+									letterSpacing='1px'
+									fontWeight='400'
+								>
+									{t('read_more')}
+								</Text>
+							</Flex>
+						</Link>
+					)}
 				</Flex>
 			</Flex>
 

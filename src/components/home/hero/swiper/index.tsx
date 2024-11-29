@@ -8,11 +8,14 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/scss/navigation'
 import 'swiper/scss/pagination'
 
+import { useVideo } from '@/hooks/usePersons'
+
 import CountriesSwiper from './countries-swiper'
 import FeaturedProperties from './featured-properties'
 import ObjectsForInvestment from './objects-for-investment'
 
 const HeroSwiper = () => {
+	const { link, isLoading } = useVideo()
 	const pagination = {
 		clickable: true,
 		renderBullet: function (index: number, className: string) {
@@ -42,10 +45,10 @@ const HeroSwiper = () => {
 				style={{ height: '100%' }}
 			>
 				<SwiperSlide style={{ height: '100%' }}>
-					<CountriesSwiper />
+					<CountriesSwiper video={link} />
 				</SwiperSlide>
 				<SwiperSlide style={{ height: '100%' }}>
-					<FeaturedProperties />
+					<FeaturedProperties video={link} />
 				</SwiperSlide>
 				<SwiperSlide style={{ height: '100%' }}>
 					<ObjectsForInvestment />

@@ -52,6 +52,7 @@ export interface IPropertyDetail {
 	advantage_en: IAdvantage[]
 	advantage_ar: IAdvantage[]
 	country_flag: string
+	studio: boolean
 }
 
 export interface PropImage {

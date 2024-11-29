@@ -13,10 +13,10 @@ import useTypedLocale from '@/hooks/useLocale'
 import { useProperties } from '@/hooks/useProperties'
 
 import SlideProvider from './slide-provider'
-import { ICity, ICountry } from '@/models/country.model'
+import { ICountry } from '@/models/country.model'
 import { IProperty } from '@/models/property.model'
 
-const CountriesSwiper = () => {
+const CountriesSwiper = ({ video }: { video?: string }) => {
 	const [active, setActive] = useState<ICountry>()
 	const [isLoading, setLoading] = useState(true)
 	const { data } = useCountries()
@@ -35,7 +35,7 @@ const CountriesSwiper = () => {
 		<SlideProvider
 			bgImage={active?.image || ''}
 			title={t('recommended_countries')}
-			path={DASHBOARD_PAGES.CATALOG(locale)}
+			path={video}
 			isLoading={isLoading}
 		>
 			<Flex

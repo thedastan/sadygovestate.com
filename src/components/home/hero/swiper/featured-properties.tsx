@@ -9,13 +9,13 @@ import { useRecommendProperties } from '@/hooks/useProperties'
 
 import SlideProvider from './slide-provider'
 
-const FeaturedProperties = () => {
+const FeaturedProperties = ({ video }: { video?: string }) => {
 	const { data, isLoading } = useRecommendProperties()
 	const t = useTranslations('Titles')
 	return (
 		<SlideProvider
 			bgImage={BgImage}
-			path=''
+			path={video}
 			title={t('recommended_properties')}
 		>
 			<Flex

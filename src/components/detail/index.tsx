@@ -67,7 +67,7 @@ const PropertyDetail = (params: { slug: string }) => {
 					fontSize='14px'
 					lineHeight='16.94px'
 				>
-					{`${data[`district_${locale}`]}, ${data[`address_${locale}`]}`}
+					{`${data[`district_${locale}`]}, ${data[`address_${locale}`] || ''}`}
 				</Description>
 			</Flex>
 		</>
@@ -126,6 +126,12 @@ const PropertyDetail = (params: { slug: string }) => {
 								<CharacteristicsCard
 									icon={CatalogBedIcon}
 									text={`${data.bed_room} ${t('bedrooms')}`}
+								/>
+							)}
+							{!!data?.studio && (
+								<CharacteristicsCard
+									icon={CatalogBedIcon}
+									text={t('studio')}
 								/>
 							)}
 							{!!data?.bath && (

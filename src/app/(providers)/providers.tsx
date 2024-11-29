@@ -19,6 +19,7 @@ import { store } from '@/store/store'
 
 import useTypedLocale from '@/hooks/useLocale'
 
+import PlayOnScroll from './playing-music'
 import { EnumIntl } from '@/models/types/intl-types'
 
 export function Providers({ children }: PropsWithChildren) {
@@ -48,6 +49,7 @@ export function Providers({ children }: PropsWithChildren) {
 						{children}
 					</Box>
 					<Footer />
+					<PlayOnScroll />
 					<WhatsappButton />
 					<Toaster
 						theme='light'
