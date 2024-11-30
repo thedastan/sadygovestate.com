@@ -53,6 +53,7 @@ const ObjectsForInvestment = () => {
 							: data?.map(el => (
 									<SliderPropertyCard
 										el={el}
+										isInvest={true}
 										key={el.id}
 									/>
 								))}

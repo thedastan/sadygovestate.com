@@ -1,41 +1,19 @@
 'use client'
 
-import { Box, Container, Flex, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import { SocialMediaIcons } from '@/components/navbar/data'
-import ManagementCard, {
-	IManagementCard
-} from '@/components/ui/cards/management-card'
 import Description from '@/components/ui/texts/Description'
-import TitleComponent from '@/components/ui/texts/TitleComponent'
 
 import { INSTAGRAM_LINK, WHATSAPP_LINK, YOUTUBE_LINK } from '@/constants/admin'
 
 import ViktorSadygov from '@/assets/img/Виктор Садыгов.png'
-import IrinaIlina from '@/assets/img/Ирина Ильина.png'
-
-import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
 const Management = () => {
 	const t = useTranslations('Titles')
-
-	const management: IManagementCard[] = [
-		{
-			image: ViktorSadygov,
-			full_name: t('Viktor.full_name'),
-			post: t('Viktor.post'),
-			duty: t('Viktor.duty')
-		},
-		{
-			image: IrinaIlina,
-			full_name: t('Irina.full_name'),
-			post: t('Irina.post'),
-			duty: t('Irina.duty')
-		}
-	]
 
 	const contacts = [
 		{
@@ -53,11 +31,14 @@ const Management = () => {
 		}
 	]
 	return (
-		<Flex mt={{ md: '140px', base: '60px' }}>
+		<Flex
+			mt={{ md: '140px', base: '60px' }}
+			flexDirection={{ md: 'row', base: 'column' }}
+		>
 			<Box
-				maxW='44%'
+				maxW={{ md: '44%', base: '100%' }}
 				w='100%'
-				h='767px'
+				h={{ md: '767px', base: '560px' }}
 			>
 				<Image
 					src={ViktorSadygov}
@@ -67,20 +48,21 @@ const Management = () => {
 			</Box>
 
 			<Flex
-				h='767px'
+				minH={{ md: '767px', sm: '500px', base: '440px' }}
 				bg='rgba(74, 74, 74, 1)'
-				maxW='56%'
+				maxW={{ md: '56%', base: '100%' }}
 				w='100%'
 				px='4'
 				justifyContent='center'
 				alignItems='center'
-				py='4'
+				py='8'
 			>
 				<Flex
 					flexDirection='column'
 					alignItems='center'
 					color='#FFFFFF'
 					maxW='562px'
+					gap={{ md: '43px', sm: '32px', base: '28px' }}
 				>
 					<Flex
 						rounded='100px'
@@ -88,8 +70,8 @@ const Management = () => {
 						py='10px'
 						border='1px solid #FFFFFF'
 						fontWeight='400'
-						fontSize='24px'
-						lineHeight='27.6px'
+						fontSize={{ sm: '24px', base: '20px' }}
+						lineHeight={{ sm: '27.6px', base: '24px' }}
 						textTransform='uppercase'
 						letterSpacing='3px'
 					>
@@ -97,19 +79,15 @@ const Management = () => {
 					</Flex>
 
 					<Text
-						mt='43px'
-						fontSize='50px'
-						lineHeight='60px'
+						fontSize={{ md: '50px', sm: '34px', base: '28px' }}
+						lineHeight={{ md: '60px', base: '40px' }}
 						fontWeight='400'
 						textAlign='center'
 					>
 						{t('Viktor.post')}
 					</Text>
 
-					<Flex
-						mt='43px'
-						gap='4'
-					>
+					<Flex gap='4'>
 						{contacts.map((el, idx) => (
 							<Link
 								href={el.link}
@@ -132,8 +110,7 @@ const Management = () => {
 						))}
 					</Flex>
 					<Description
-						mt='43px'
-						fontSize='18px'
+						fontSize={{ md: '18px', base: '16px' }}
 						lineHeight='21.8px'
 						color='#FFFFFF'
 						textAlign='center'
