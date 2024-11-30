@@ -15,3 +15,8 @@ export interface IVideo {
 	id: number
 	link: string
 }
+
+export interface IFormSelect {
+	id: number
+	name: string
+}

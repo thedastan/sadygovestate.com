@@ -21,7 +21,7 @@ export function useNavbar() {
 			path: '/'
 		},
 		{
-			name: t('about_us'),
+			name: t('about_company'),
 			path: '#about'
 		},
 		{

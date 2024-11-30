@@ -41,7 +41,7 @@ const PrimeRealEstate = () => {
 					zIndex='1'
 				>
 					<TitleComponent query='Real Estate'>
-						{t('prime_real_estate')}
+						{t('about_us')}
 					</TitleComponent>
 
 					<List

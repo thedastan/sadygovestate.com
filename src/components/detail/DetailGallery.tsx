@@ -47,13 +47,6 @@ function DetailGallery({ images, main_image, videos }: DetailGalleryProps) {
 					gap='14px'
 					className='gallery'
 				>
-					{videos.map(el => (
-						<DetailVideo
-							key={el.id}
-							youtube_link={el.link}
-						/>
-					))}
-
 					{images.map(el => (
 						<Link
 							key={el.id}
@@ -73,6 +66,13 @@ function DetailGallery({ images, main_image, videos }: DetailGalleryProps) {
 								height={260}
 							/>
 						</Link>
+					))}
+
+					{videos.map(el => (
+						<DetailVideo
+							key={el.id}
+							youtube_link={el.link}
+						/>
 					))}
 				</Flex>
 			</Flex>

@@ -1,42 +1,35 @@
 'use client'
 
-import {
-	Box,
-	Flex,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
-	Radio,
-	Stack,
-	Text
-} from '@chakra-ui/react'
+import { Box, Flex, MenuItem, Radio, Stack, Text } from '@chakra-ui/react'
+import axios from 'axios'
 import { useTranslations } from 'next-intl'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { BsHouseDoor } from 'react-icons/bs'
 import { GrLocation } from 'react-icons/gr'
-import { IoIosArrowDown } from 'react-icons/io'
 import { toast } from 'sonner'
 
-import { WHATSAPP_LINK } from '@/constants/admin'
+import { WHATSAPP_LINK, WHATSAPP_NUMBER } from '@/constants/admin'
 
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { useCountries } from '@/hooks/useCountries'
 import useTypedLocale from '@/hooks/useLocale'
 
 import AnimateButton from '../ui/buttons/AnimateButton'
+import FormSelect from '../ui/inputs/FormSelect'
 import InputComponent from '../ui/inputs/InputComponent'
 import PhoneInputComponent from '../ui/inputs/PhoneInputComponent'
 import Description from '../ui/texts/Description'
 import Title32 from '../ui/texts/Title32'
 
-import { ICountry } from '@/models/country.model'
+import { IFormSelect } from '@/models/other.model'
 
 const FeedbackForm = () => {
 	const [value, setValue] = useState({
 		full_name: '',
 		phone: '',
 		description: '',
-		country: {} as Partial<ICountry>
+		country: {} as Partial<IFormSelect>,
+		type: {} as Partial<IFormSelect>
 	})
 	const { country } = useAppSelector(s => s.storage)
 	const locale = useTypedLocale()
@@ -47,27 +40,63 @@ const FeedbackForm = () => {
 	) => {
 		setValue({ ...value, [e.target.name]: e.target.value })
 	}
+	const TOKEN = process.env.NEXT_PUBLIC_TG_TOKEN
+	const CHAT_ID = process.env.NEXT_PUBLIC_TG_CHAT_ID
 
-	const onsubmit = (e: FormEvent<HTMLFormElement>) => {
+	function tgMessage() {
+		let message = `${t('placeholder.name')}: <b>${value.full_name}</b>\n`
+		message += `Number: <b>${value.phone}</b>\n`
+		message += `${t('form_type.placeholder')}: <b>${value.type.name}</b>\n`
+		message += `${t('country')}: <b>${value.country.name}</b>\n`
+		message += value.description
+			? `${t('placeholder.message')}: ${value.description}\n`
+			: ''
+		return message
+	}
+	const onsubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		if (!value.country?.id) {
 			toast.error(t('form_submit.country_toast'))
 			return
+		} else if (!value.type?.id) {
+			toast.error(t('form_submit.type_toast'))
 		} else {
-			const link = document.createElement('a')
-			link.setAttribute('target', '_blank')
-			const wh_href =
-				WHATSAPP_LINK +
-				`?text=${encodeURIComponent(`${t('form_submit.hello')}\n`)}\n
-	${encodeURIComponent(`${t('form_submit.user_text')} ${value.country[`name_${locale}`]}\n`)}\n
-		${encodeURIComponent(`${t('form_submit.phone')}: ${value.phone}\n`)}\n
-		${encodeURIComponent(value.description)}`
+			try {
+				await axios.post(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+					chat_id: CHAT_ID,
+					parse_mode: 'html',
+					text: tgMessage()
+				})
 
-			link.href = wh_href
+				const link = document.createElement('a')
+				link.setAttribute('target', '_blank')
 
-			link.click()
+				const message = `${t('form_submit.hello')}\n\n${t('form_submit.user_text')} ${value.country.name}\n${t('form_type.placeholder')}: ${value.type.name}\n${t('form_submit.phone')}: ${value.phone}\n${value.description}`
+
+				const wa_link = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`
+				link.href = wa_link
+
+				link.click()
+
+				setValue({ ...value, full_name: '', phone: '' })
+			} catch (e) {
+				toast.error(`Error: ${e}`)
+			}
 		}
 	}
+
+	const type_list: IFormSelect[] = [
+		{ id: 1, name: t('form_type.sell') },
+		{ id: 2, name: t('form_type.rent_out') },
+		{ id: 3, name: t('form_type.rent_an') }
+	]
+
+	const countries_list: IFormSelect[] | undefined = data?.map(el => {
+		return {
+			id: el.id,
+			name: el[`name_${locale}`]
+		}
+	})
 
 	useEffect(() => {
 		if (country?.id) {
@@ -103,70 +132,21 @@ const FeedbackForm = () => {
 						spacing='3'
 						mt='30px'
 					>
-						<Menu closeOnSelect={true}>
-							<MenuButton as={Box}>
-								<Flex
-									h='50px'
-									rounded='32px'
-									cursor='pointer'
-									px='4'
-									py='3'
-									alignItems='center'
-									justifyContent='space-between'
-									color='#333139'
-									border='1px solid #3331394D'
-									bg='#FFFFFF'
-								>
-									<Flex
-										gap='1'
-										alignItems='center'
-									>
-										<GrLocation fontSize='18px' />
-										<Description
-											fontSize='14px'
-											lineHeight='17px'
-										>
-											{value.country?.id
-												? `${value.country[`name_${locale}`]}`
-												: t('country')}
-										</Description>
-									</Flex>
-									<Box pr='3'>
-										<IoIosArrowDown fontSize='18px' />
-									</Box>
-								</Flex>
-							</MenuButton>
-							<MenuList>
-								{data?.map(el => (
-									<MenuItem
-										key={el.id}
-										onClick={() => setValue({ ...value, country: el })}
-										rounded='10px'
-										pl='4'
-										bg={el.id === value.country?.id ? '#0000000A' : '#FFFFFF'}
-									>
-										<Flex
-											justifyContent='space-between'
-											alignItems='center'
-											w='100%'
-										>
-											<Text
-												color='#000000'
-												fontSize='14px'
-												fontWeight='400'
-												lineHeight='24px'
-											>
-												{el[`name_${locale}`]}
-											</Text>
-											<Radio
-												colorScheme='green'
-												isChecked={el.id === value.country?.id}
-											/>
-										</Flex>
-									</MenuItem>
-								))}
-							</MenuList>
-						</Menu>
+						<FormSelect
+							icon={BsHouseDoor}
+							onChange={type => setValue({ ...value, type })}
+							placeholder={t('form_type.placeholder')}
+							value={value.type}
+							data={type_list}
+						/>
+						<FormSelect
+							icon={GrLocation}
+							onChange={country => setValue({ ...value, country })}
+							placeholder={t('country')}
+							value={value.country}
+							data={countries_list}
+						/>
+
 						<InputComponent
 							handleChange={handleChange}
 							name='full_name'
@@ -196,6 +176,41 @@ const FeedbackForm = () => {
 				</form>
 			</Box>
 		</Box>
+	)
+}
+
+interface MenuCardProps {
+	onClick: () => void
+	isActive: boolean
+	text: string
+}
+function MenuCard({ isActive, onClick, text }: MenuCardProps) {
+	return (
+		<MenuItem
+			onClick={onClick}
+			rounded='10px'
+			pl='4'
+			bg={isActive ? '#0000000A' : '#FFFFFF'}
+		>
+			<Flex
+				justifyContent='space-between'
+				alignItems='center'
+				w='100%'
+			>
+				<Text
+					color='#000000'
+					fontSize='14px'
+					fontWeight='400'
+					lineHeight='24px'
+				>
+					{text}
+				</Text>
+				<Radio
+					colorScheme='green'
+					isChecked={isActive}
+				/>
+			</Flex>
+		</MenuItem>
 	)
 }
 

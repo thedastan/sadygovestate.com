@@ -3,7 +3,7 @@
 		"catalog": "Property catalog",
 		"contact_us": "Contact us for more information and support",
 		"home": "Home",
-		"about_us": "About Us",
+		"about_company": "About Us",
 		"properties": "Properties",
 		"contacts": "Contacts",
 		"awards_and_reviews": "Awards and Reviews",
@@ -27,7 +27,7 @@
 		"offers": "offers",
 		"see_more": "See more",
 		"all_properties": "ALL PROPERTIES",
-		"prime_real_estate": "12 Prime Real Estate",
+		"about_us": "About Us",
 		"team_professionals": "We are a team of professionals striving to make property buying convenient and safe.",
 		"priority_client_goals": "Our priority is your interests and achieving your goals in real estate.",
 		"quality_services": "We provide quality real estate services, helping clients find perfect properties worldwide.",
@@ -60,6 +60,7 @@
 		},
 		"form_submit": {
 			"country_toast": "Select country",
+			"type_toast": "Select type",
 			"hello": "Hello!",
 			"user_text": "I am interested in buying real estate in",
 			"phone": "Phone"
@@ -70,13 +71,14 @@
 		},
 		"Viktor": {
 			"full_name": "Victor Sadygov",
-			"post": "Founder and CEO of Victor Sadygov Real Estate",
+			"post": "Founder and CEO of NÍKA ESTATE International",
 			"duty": "Sells real estate in 13 countries with offices in 11 cities. Member of the Russian Association AREA."
 		},
-		"Irina": {
-			"full_name": "Anastasia Tian",
-			"post": "Director of the Victor Sadygov Real Estate Middle East branch",
-			"duty": "Victor Sadygov Real Estate’s collection includes premium real estate in the UAE and Oman from $300,000 and Saudi Arabia from $1,000,000"
+		"form_type": {
+			"placeholder": "Type",
+			"sell": "sell",
+			"rent_out": "rent out",
+			"rent_an": "rent an"
 		}
 	}
 }
