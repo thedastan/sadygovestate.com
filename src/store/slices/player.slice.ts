@@ -2,9 +2,11 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 export interface PlayerStateValue {
 	isPlaying: boolean
+	isPlayButton: boolean
 }
 const initialState: PlayerStateValue = {
-	isPlaying: false
+	isPlaying: false,
+	isPlayButton: false
 }
 
 export const playerSlice = createSlice({
@@ -13,6 +15,10 @@ export const playerSlice = createSlice({
 	reducers: {
 		setIsPlaying(state, action: PayloadAction<boolean>) {
 			state.isPlaying = action.payload
+		},
+
+		setIsPlayButton(state, action: PayloadAction<boolean>) {
+			state.isPlayButton = action.payload
 		}
 	}
 })

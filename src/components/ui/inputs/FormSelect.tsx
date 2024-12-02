@@ -58,6 +58,7 @@ const FormSelect = (props: FormSelectProps) => {
 			<MenuList>
 				{props.data?.map(el => (
 					<MenuCard
+						key={el.id}
 						onClick={() => props.onChange(el)}
 						isActive={el.id === props.value?.id}
 						text={el.name}

@@ -7,7 +7,7 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 
 const PlayOnScroll = () => {
 	const audioRef = useRef<HTMLAudioElement>(null)
-	const { isPlaying } = useAppSelector(s => s.player)
+	const { isPlaying, isPlayButton } = useAppSelector(s => s.player)
 	const dispatch = useDispatch()
 	const setIsPlaying = (value: boolean) => {
 		dispatch(playerActions.setIsPlaying(value))
@@ -15,18 +15,23 @@ const PlayOnScroll = () => {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			if (!isPlaying && audioRef.current) {
+			if (audioRef.current) {
 				audioRef.current
 					.play()
 					.then(() => setIsPlaying(true))
-					.catch(err => console.error('Audio playback failed:', err))
+					.catch(err => console.error('Audio playback failed (scroll):', err))
+					.finally(() => window.removeEventListener('scroll', handleScroll))
 			}
+		}
 
-			const btn = document.createElement('button')
-			btn.addEventListener('click', () => audioRef.current?.play())
-			btn.click()
-
-			window.removeEventListener('scroll', handleScroll)
+		const handleClick = () => {
+			if (audioRef.current) {
+				audioRef.current
+					.play()
+					.then(() => setIsPlaying(true))
+					.catch(err => console.error('Audio playback failed (click):', err))
+					.finally(() => window.removeEventListener('click', handleClick))
+			}
 		}
 
 		// Обработчик изменения видимости страницы
@@ -42,18 +47,22 @@ const PlayOnScroll = () => {
 			}
 		}
 
-		if (isPlaying) {
-			audioRef.current?.play().catch(() => {})
-		} else {
-			audioRef.current?.pause()
+		if (isPlayButton) {
+			if (isPlaying) {
+				audioRef.current?.play()
+			} else {
+				audioRef.current?.pause()
+			}
 		}
 
 		// Загружаем API и устанавливаем обработчики
 		window.addEventListener('scroll', handleScroll)
+		window.addEventListener('click', handleClick)
 		document.addEventListener('visibilitychange', handleVisibilityChange)
 
 		return () => {
 			window.removeEventListener('scroll', handleScroll)
+			window.removeEventListener('click', handleClick)
 			document.removeEventListener('visibilitychange', handleVisibilityChange)
 		}
 	}, [isPlaying])

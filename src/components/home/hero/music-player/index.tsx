@@ -1,4 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react'
+import { useRef } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { FaPause } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
@@ -9,10 +10,16 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 
 const MusicPlayer = () => {
 	const dispatch = useDispatch()
+	const audioRef = useRef<HTMLDivElement>(null)
 	const { isPlaying } = useAppSelector(s => s.player)
-
-	const onPlay = () => dispatch(playerActions.setIsPlaying(true))
-	const onPause = () => dispatch(playerActions.setIsPlaying(false))
+	const onPlay = () => {
+		dispatch(playerActions.setIsPlayButton(true))
+		dispatch(playerActions.setIsPlaying(true))
+	}
+	const onPause = () => {
+		dispatch(playerActions.setIsPlaying(false))
+		dispatch(playerActions.setIsPlayButton(true))
+	}
 
 	return (
 		<Flex
@@ -45,7 +52,12 @@ const MusicPlayer = () => {
 				fontSize='20px'
 			>
 				{isPlaying ? (
-					<FaPause onClick={onPause} />
+					<Box
+						onClick={onPause}
+						ref={audioRef}
+					>
+						<FaPause />
+					</Box>
 				) : (
 					<FaPlay onClick={onPlay} />
 				)}
