@@ -53,6 +53,14 @@ const FeedbackForm = () => {
 	}
 	const onsubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+
+		const link = document.createElement('a')
+		link.setAttribute('target', '_blank')
+
+		const message = `${t('form_submit.hello')}\n\n${t('form_submit.user_text')} ${value.country.name}\n${t('form_type.placeholder')}: ${value.type.name}\n${t('form_submit.phone')}: ${value.phone}\n${value.description}`
+
+		const wa_link = `${WHATSAPP_LINK}?text=${encodeURIComponent(message)}`
+		link.href = wa_link
 		if (!value.country?.id) {
 			toast.error(t('form_submit.country_toast'))
 			return
@@ -65,21 +73,12 @@ const FeedbackForm = () => {
 					parse_mode: 'html',
 					text: tgMessage()
 				})
+				link.click()
 
 				setValue({ ...value, full_name: '', phone: '' })
 			} catch (e) {
 				toast.error(`Error: ${e}`)
 			}
-
-			const link = document.createElement('a')
-			link.setAttribute('target', '_blank')
-
-			const message = `${t('form_submit.hello')}\n\n${t('form_submit.user_text')} ${value.country.name}\n${t('form_type.placeholder')}: ${value.type.name}\n${t('form_submit.phone')}: ${value.phone}\n${value.description}`
-
-			const wa_link = `${WHATSAPP_LINK}?text=${encodeURIComponent(message)}`
-			link.href = wa_link
-
-			link.click()
 		}
 	}
 
