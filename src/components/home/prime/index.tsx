@@ -15,7 +15,6 @@ import { CONTAINER_WIDTH } from '@/config/_variables.config'
 const PrimeRealEstate = () => {
 	const t = useTranslations('Titles')
 	const list = [
-		t('team_professionals'),
 		t('priority_client_goals'),
 		t('quality_services')
 	]

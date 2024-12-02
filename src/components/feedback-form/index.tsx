@@ -86,10 +86,10 @@ const FeedbackForm = () => {
 	}
 
 	const type_list: IFormSelect[] = [
-		{ id: 1, name: t('form_type.sell') },
+		{ id: 1, name: t('form_type.buy_an') },
 		{ id: 2, name: t('form_type.rent_out') },
 		{ id: 3, name: t('form_type.rent_an') },
-		{ id: 4, name: t('form_type.buy_an') }
+		{ id: 4, name: t('form_type.sell') }
 	]
 
 	const countries_list: IFormSelect[] | undefined = data?.map(el => {
