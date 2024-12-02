@@ -15,15 +15,16 @@ const PlayOnScroll = () => {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			if (!isPlaying) {
-				setIsPlaying(true)
+			if (!isPlaying && audioRef.current) {
+				audioRef.current
+					.play()
+					.then(() => setIsPlaying(true))
+					.catch(err => console.error('Audio playback failed:', err))
 			}
-			// if (!isPlaying && audioRef.current) {
-			// 	audioRef.current
-			// 		.play()
-			// 		.then(() => setIsPlaying(true))
-			// 		.catch(err => console.error('Audio playback failed:', err))
-			// }
+
+			const btn = document.createElement('button')
+			btn.addEventListener('click', () => audioRef.current?.play())
+			btn.click()
 
 			window.removeEventListener('scroll', handleScroll)
 		}
