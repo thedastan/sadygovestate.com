@@ -1,4 +1,4 @@
-export const PHONE_NUMBER = '+971 50 8698 020'
+export const PHONE_NUMBER = '+971 50 109 5666'
 
 export const WHATSAPP_NUMBER = PHONE_NUMBER
 
@@ -15,7 +15,7 @@ export const EMAIL_ADDRESS_LINK = `mailto:${EMAIL_ADDRESS}`
 
 export const INSTAGRAM_LINK = `https://instagram.com/${INSTAGRAM}`
 export const FACEBOOK_LINK = ``
-export const YOUTUBE_LINK = ``
+export const YOUTUBE_LINK = `https://www.youtube.com/@moskvadorogaya`
 
 export const TELEGRAM_LINK = `https://t.me/`
 
