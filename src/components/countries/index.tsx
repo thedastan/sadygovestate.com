@@ -85,13 +85,13 @@ const Countries = (props: { mt: ResponsiveValue<string> }) => {
 							/>
 							<SocialMediaCard
 								icon={SocialMediaIcons.WHATSAPP}
-								path='https://wa.me/971542044777'
-								text='+971 54 204 4777'
+								path='https://wa.me/971501095666'
+								text='+971 50 109 5666'
 							/>
 							<SocialMediaCard
 								icon={SocialMediaIcons.PHONE}
-								path='tel:+971542044777'
-								text='+971 54 204 4777'
+								path='tel:+971501095666'
+								text='+971 50 109 5666'
 								notBlank={true}
 							/>
 						</Stack>
