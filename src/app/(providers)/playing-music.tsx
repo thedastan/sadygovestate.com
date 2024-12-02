@@ -22,6 +22,8 @@ const PlayOnScroll = () => {
 			// 		.then(() => setIsPlaying(true))
 			// 		.catch(err => console.error('Audio playback failed:', err))
 			// }
+
+			window.removeEventListener('scroll', handleScroll)
 		}
 
 		// Обработчик изменения видимости страницы
