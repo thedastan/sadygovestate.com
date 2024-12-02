@@ -20,7 +20,6 @@ const PrimeRealEstate = () => {
 	const t = useTranslations('Titles')
 	const locale = useTypedLocale()
 	const list = [
-		t('team_professionals'),
 		t('priority_client_goals'),
 		t('quality_services')
 	]
