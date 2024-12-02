@@ -46,7 +46,7 @@ const PrimeRealEstate = () => {
 					textAlign='start'
 					dir={locale === EnumIntl.ARABIC ? 'rtl' : 'ltr'}
 				>
-					<TitleComponent query='Real Estate'>{t('about_us')}</TitleComponent>
+					<TitleComponent query='Real Estate'>{t('about_company')}</TitleComponent>
 
 					<List
 						styleType='disc'
