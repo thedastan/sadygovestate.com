@@ -15,7 +15,9 @@ const PlayOnScroll = () => {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			setIsPlaying(true)
+			if (!isPlaying) {
+				setIsPlaying(true)
+			}
 			// if (!isPlaying && audioRef.current) {
 			// 	audioRef.current
 			// 		.play()
