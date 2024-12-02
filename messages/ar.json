@@ -71,6 +71,13 @@
 			"post": "المؤسس والرئيس التنفيذي لشركة Victor Sadygov Real Estate",
 			"duty": "تبيع العقارات 13 دولة ولديها مكاتب في 11 مدينة!عضو في الرابطة الروسية AREA."
 		},
+		"form_type": {
+			"placeholder": "يكتب",
+			"sell": "يبيع",
+			"rent_out": "تأجير",
+			"rent_an": "استئجار",
+			"buy_an": "يشتري"
+		},
 		"Irina": {
 			"full_name": "أناستاسيا تيان",
 			"post": "مدير فرع Victor Sadygov Real Estate في الشرق الأوسط",

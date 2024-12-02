@@ -44,13 +44,11 @@ const FeedbackForm = () => {
 	const CHAT_ID = process.env.NEXT_PUBLIC_TG_CHAT_ID
 
 	function tgMessage() {
-		let message = `${t('placeholder.name')}: <b>${value.full_name}</b>\n`
-		message += `Number: <b>${value.phone}</b>\n`
-		message += `${t('form_type.placeholder')}: <b>${value.type.name}</b>\n`
-		message += `${t('country')}: <b>${value.country.name}</b>\n`
-		message += value.description
-			? `${t('placeholder.message')}: ${value.description}\n`
-			: ''
+		let message = `Имя: <b>${value.full_name}</b>\n`
+		message += `номер: <b>${value.phone}</b>\n`
+		message += `Тип: <b>${value.type.name}</b>\n`
+		message += `Страна: <b>${value.country.name}</b>\n`
+		message += value.description ? `Сообщение: ${value.description}\n` : ''
 		return message
 	}
 	const onsubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -68,20 +66,20 @@ const FeedbackForm = () => {
 					text: tgMessage()
 				})
 
-				const link = document.createElement('a')
-				link.setAttribute('target', '_blank')
-
-				const message = `${t('form_submit.hello')}\n\n${t('form_submit.user_text')} ${value.country.name}\n${t('form_type.placeholder')}: ${value.type.name}\n${t('form_submit.phone')}: ${value.phone}\n${value.description}`
-
-				const wa_link = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`
-				link.href = wa_link
-
-				link.click()
-
 				setValue({ ...value, full_name: '', phone: '' })
 			} catch (e) {
 				toast.error(`Error: ${e}`)
 			}
+
+			const link = document.createElement('a')
+			link.setAttribute('target', '_blank')
+
+			const message = `${t('form_submit.hello')}\n\n${t('form_submit.user_text')} ${value.country.name}\n${t('form_type.placeholder')}: ${value.type.name}\n${t('form_submit.phone')}: ${value.phone}\n${value.description}`
+
+			const wa_link = `${WHATSAPP_LINK}?text=${encodeURIComponent(message)}`
+			link.href = wa_link
+
+			link.click()
 		}
 	}
 

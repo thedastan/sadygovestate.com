@@ -39,6 +39,7 @@ export function Providers({ children }: PropsWithChildren) {
 		<QueryClientProvider client={client}>
 			<HydrationBoundary state={dehydratedState}>
 				<Provider store={store}>
+					<PlayOnScroll />
 					<Header />
 					<Box
 						mx='auto'
@@ -49,7 +50,7 @@ export function Providers({ children }: PropsWithChildren) {
 						{children}
 					</Box>
 					<Footer />
-					<PlayOnScroll />
+
 					<WhatsappButton />
 					<Toaster
 						theme='light'

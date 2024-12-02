@@ -2,7 +2,7 @@ import { Box, Flex, Skeleton, Text } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
-import { PropsWithChildren, useEffect } from 'react'
+import { PropsWithChildren } from 'react'
 import { GoArrowUpRight } from 'react-icons/go'
 
 import TitlePages from '@/components/ui/texts/TitlePages'
@@ -10,6 +10,8 @@ import TitlePages from '@/components/ui/texts/TitlePages'
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
 import useTypedLocale from '@/hooks/useLocale'
+
+import MusicPlayer from '../music-player'
 
 interface SlideProviderProps extends PropsWithChildren {
 	bgImage: StaticImageData | string
@@ -93,24 +95,7 @@ const SlideProvider = ({
 						className='detail-image'
 					/>
 				)}
-				<Flex
-					position='absolute'
-					right='5'
-					top='3'
-					zIndex='2'
-					className='music-player'
-					alignItems='center'
-					gap='1'
-				>
-					{[1, 2, 3, 4, 5, 6, 7, 8, 10].map(item => (
-						<Box
-							key={item}
-							w='2px'
-							bg='#FFFFFF'
-							className={`music-player-item${item}`}
-						/>
-					))}
-				</Flex>
+				<MusicPlayer />
 
 				{!isLoading && (
 					<Box

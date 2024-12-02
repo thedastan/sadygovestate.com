@@ -12,8 +12,13 @@ import DefImage from '@/assets/img/slider-image.jpeg'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
+import useTypedLocale from '@/hooks/useLocale'
+
+import { EnumIntl } from '@/models/types/intl-types'
+
 const PrimeRealEstate = () => {
 	const t = useTranslations('Titles')
+	const locale = useTypedLocale()
 	const list = [
 		t('team_professionals'),
 		t('priority_client_goals'),
@@ -39,10 +44,10 @@ const PrimeRealEstate = () => {
 					rounded={{ lg: '20px', base: '30px' }}
 					position='relative'
 					zIndex='1'
+					textAlign='start'
+					dir={locale === EnumIntl.ARABIC ? 'rtl' : 'ltr'}
 				>
-					<TitleComponent query='Real Estate'>
-						{t('about_us')}
-					</TitleComponent>
+					<TitleComponent query='Real Estate'>{t('about_us')}</TitleComponent>
 
 					<List
 						styleType='disc'

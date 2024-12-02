@@ -1,48 +1,26 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { playerActions } from '@/store/slices/player.slice'
+
+import { useAppSelector } from '@/hooks/useAppSelector'
 
 const PlayOnScroll = () => {
 	const audioRef = useRef<HTMLAudioElement>(null)
-	const [isPlaying, setIsPlaying] = useState(false)
+	const { isPlaying } = useAppSelector(s => s.player)
+	const dispatch = useDispatch()
+	const setIsPlaying = (value: boolean) => {
+		dispatch(playerActions.setIsPlaying(value))
+	}
 
 	useEffect(() => {
-		// Функция для загрузки YouTube IFrame Player API
-		const loadYouTubeAPI = () => {
-			if (
-				!document.querySelector(
-					'script[src="https://www.youtube.com/iframe_api"]'
-				)
-			) {
-				const tag = document.createElement('script')
-				tag.src = 'https://www.youtube.com/iframe_api'
-				document.body.appendChild(tag)
-			}
-		}
-
-		// Обработчик сообщений от YouTube
-		const handleYouTubeMessage = (event: MessageEvent) => {
-			if (
-				typeof event.data === 'string' &&
-				event.data.includes('PLAYER_STATE_CHANGE')
-			) {
-				const state = parseInt(event.data.split(':')[1], 10)
-				if (state === 1) {
-					// PLAYING
-					audioRef.current?.pause()
-					setIsPlaying(false)
-				} else if (state === 0 || state === 2) {
-					// ENDED or PAUSED
-					audioRef.current?.play().catch(() => {})
-					setIsPlaying(true)
-				}
-			}
-		}
-
-		// Обработчик прокрутки
 		const handleScroll = () => {
-			audioRef.current
-				?.play()
-				.then(() => setIsPlaying(true))
-				.catch(err => console.error('Audio playback failed:', err))
+			if (!isPlaying && audioRef.current) {
+				audioRef.current
+					.play()
+					.then(() => setIsPlaying(true))
+					.catch(err => console.error('Audio playback failed:', err))
+			}
 
 			window.removeEventListener('scroll', handleScroll)
 		}
@@ -60,27 +38,31 @@ const PlayOnScroll = () => {
 			}
 		}
 
+		if (isPlaying) {
+			audioRef.current?.play().catch(() => {})
+		} else {
+			audioRef.current?.pause()
+		}
+
 		// Загружаем API и устанавливаем обработчики
-		loadYouTubeAPI()
 		window.addEventListener('scroll', handleScroll)
-		window.addEventListener('message', handleYouTubeMessage)
 		document.addEventListener('visibilitychange', handleVisibilityChange)
 
 		return () => {
 			window.removeEventListener('scroll', handleScroll)
-			window.removeEventListener('message', handleYouTubeMessage)
 			document.removeEventListener('visibilitychange', handleVisibilityChange)
 		}
-	}, [])
+	}, [isPlaying])
 
 	return (
-		<audio
-			ref={audioRef}
-			src='/music/main-music.mp3'
-			preload='auto'
-			loop
-			autoPlay
-		/>
+		<div>
+			<audio
+				ref={audioRef}
+				src='/music/main-music.mp3'
+				preload='auto'
+				loop
+			/>
+		</div>
 	)
 }
 

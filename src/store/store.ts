@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
+import { PlayerReducer } from './slices/player.slice'
 import { FilterReducer } from './slices/storage-slice'
 
 const rootReducer = combineReducers({
-	storage: FilterReducer
+	storage: FilterReducer,
+	player: PlayerReducer
 })
 
 export const makeStore = () =>
