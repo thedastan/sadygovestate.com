@@ -15,14 +15,13 @@ const PlayOnScroll = () => {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			if (!isPlaying && audioRef.current) {
-				audioRef.current
-					.play()
-					.then(() => setIsPlaying(true))
-					.catch(err => console.error('Audio playback failed:', err))
-			}
-
-			window.removeEventListener('scroll', handleScroll)
+			setIsPlaying(true)
+			// if (!isPlaying && audioRef.current) {
+			// 	audioRef.current
+			// 		.play()
+			// 		.then(() => setIsPlaying(true))
+			// 		.catch(err => console.error('Audio playback failed:', err))
+			// }
 		}
 
 		// Обработчик изменения видимости страницы
