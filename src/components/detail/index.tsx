@@ -6,16 +6,13 @@ import {
 	Container,
 	Divider,
 	Flex,
-	Spinner,
-	useBreakpointValue
+	Spinner
 } from '@chakra-ui/react'
-import { theme } from '@chakra-ui/react'
 import moment from 'moment'
 import { useTranslations } from 'next-intl'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { FiMapPin } from 'react-icons/fi'
 import { IoCheckmarkOutline } from 'react-icons/io5'
-import generatePDF from 'react-to-pdf'
 
 import CatalogArtboardIcon from '@/assets/svg/CatalogArtboardIcon'
 import CatalogBathroomIcon from '@/assets/svg/CatalogBathroomIcon'
@@ -26,9 +23,8 @@ import SaveIcon from '@/assets/svg/SaveIcon'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
-import { useCreatePDF, useCreatePDFTest } from '@/hooks/useCreatePDF'
+import { useCreatePDF } from '@/hooks/useCreatePDF'
 import { formatToDE } from '@/hooks/useCreatorPriceObject'
-import { useFullWindowSize } from '@/hooks/useFullHeight'
 import useTypedLocale from '@/hooks/useLocale'
 import { usePropertyDetail } from '@/hooks/useProperties'
 
@@ -43,7 +39,6 @@ import DetailGallery from './DetailGallery'
 import DetailSkeleton from './detail-skeleton'
 
 const PropertyDetail = (params: { slug: string }) => {
-	const { clientWidth } = useFullWindowSize()
 	const locale = useTypedLocale()
 	const t = useTranslations('Titles.detail')
 	const { data, isLoading } = usePropertyDetail(params.slug)
@@ -52,7 +47,6 @@ const PropertyDetail = (params: { slug: string }) => {
 	const hasDatePassed = moment().isAfter(moment(data?.year, 'YYYY-MM-DD'))
 
 	const { createPDF, isLoadingPDF } = useCreatePDF()
-	// const { createPDF, isLoadingPDF } = useCreatePDFTest()
 
 	const TitleDetailPage = !!data && (
 		<>
@@ -159,13 +153,6 @@ const PropertyDetail = (params: { slug: string }) => {
 
 							<SaveAsPdfButton
 								onClick={() => createPDF(pdfRef, params.slug)}
-								// onClick={() => createPDF(params.slug)}
-								// onClick={() =>
-								// 	generatePDF(pdfRef, {
-								// 		filename: `${params.slug}.pdf`,
-								// 		page: { margin: 15 }
-								// 	})
-								// }
 								isLoading={isLoadingPDF}
 							/>
 						</Flex>
@@ -207,7 +194,7 @@ const PropertyDetail = (params: { slug: string }) => {
 				</Flex>
 			</Container>
 
-			<Container
+			{/* <Container
 				maxW={CONTAINER_WIDTH}
 				mt={{ md: '154px', base: '60px' }}
 			>
@@ -231,11 +218,12 @@ const PropertyDetail = (params: { slug: string }) => {
 							key={el}
 							minW='357px'
 						>
-							{/* <CatalogCard /> */}
+							<CatalogCard />
 						</Box>
 					))}
 				</Flex>
-			</Flex>
+			</Flex> */}
+
 			<Countries mt={{ md: '158px', base: '60px' }} />
 		</Box>
 	)

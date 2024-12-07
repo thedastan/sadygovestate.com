@@ -1,6 +1,7 @@
 import {
 	Box,
 	Button,
+	Divider,
 	Flex,
 	ResponsiveValue,
 	Stack,
@@ -11,21 +12,26 @@ import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+import { GoArrowUpRight } from 'react-icons/go'
+import { useDispatch } from 'react-redux'
 
 import AnimateButton from '@/components/ui/buttons/AnimateButton'
 
 import { WHATSAPP_LINK } from '@/constants/admin'
 
+import { filterActions } from '@/store/slices/storage-slice'
+
 import useTypedLocale from '@/hooks/useLocale'
 
-import { social_contacts, useNavbar } from '../data'
+import { social_contacts, useNavbar, useTypeList } from '../data'
 
 import { locales_data } from '@/i18n'
 import { IntlType } from '@/models/types/intl-types'
 
 const BurgerMenu = () => {
 	const navbar = useNavbar()
-
+	const type_list = useTypeList()
+	const dispatch = useDispatch()
 	const { isOpen, onClose, onOpen } = useDisclosure()
 	const localeActive = useTypedLocale()
 	const pathname = usePathname()
@@ -220,9 +226,39 @@ const BurgerMenu = () => {
 										</Link>
 									))}
 								</Stack>
+								<Divider
+									h='1px'
+									opacity='.1'
+									bg='#000000'
+									my='15px'
+								/>
+								<Stack spacing='4'>
+									{type_list.map(el => (
+										<Link href={'#feedback-form'}>
+											<Flex
+												key={el.id}
+												onClick={() => {
+													dispatch(filterActions.setServiceType(el))
+													onClose()
+												}}
+												alignItems='center'
+												gap='1'
+												color='#000000'
+											>
+												<Text
+													fontSize='20px'
+													lineHeight='20px'
+												>
+													{el.name}
+												</Text>
+												<GoArrowUpRight fontSize='20px' />
+											</Flex>
+										</Link>
+									))}
+								</Stack>
 								<Box
 									display={{ md: 'none', base: 'block' }}
-									mt='40px'
+									mt='10'
 								>
 									{ContactButton}
 								</Box>

@@ -14,8 +14,17 @@ const PlayOnScroll = () => {
 	}
 
 	useEffect(() => {
+		if (isPlayButton) {
+			if (isPlaying) {
+				audioRef.current?.play()
+			} else {
+				audioRef.current?.pause()
+			}
+		}
+	}, [isPlaying])
+	useEffect(() => {
 		const handleScroll = () => {
-			if (audioRef.current) {
+			if (!isPlayButton && audioRef.current) {
 				audioRef.current
 					.play()
 					.then(() => setIsPlaying(true))
@@ -47,14 +56,6 @@ const PlayOnScroll = () => {
 			}
 		}
 
-		if (isPlayButton) {
-			if (isPlaying) {
-				audioRef.current?.play()
-			} else {
-				audioRef.current?.pause()
-			}
-		}
-
 		// Загружаем API и устанавливаем обработчики
 		window.addEventListener('scroll', handleScroll)
 		window.addEventListener('click', handleClick)
@@ -65,7 +66,7 @@ const PlayOnScroll = () => {
 			window.removeEventListener('click', handleClick)
 			document.removeEventListener('visibilitychange', handleVisibilityChange)
 		}
-	}, [isPlaying])
+	}, [])
 
 	return (
 		<div>

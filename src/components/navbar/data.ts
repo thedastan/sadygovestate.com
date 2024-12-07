@@ -12,6 +12,8 @@ import {
 	YOUTUBE_LINK
 } from '@/constants/admin'
 
+import { IFormSelect } from '@/models/other.model'
+
 export function useNavbar() {
 	const t = useTranslations('Titles')
 
@@ -28,6 +30,16 @@ export function useNavbar() {
 			name: t('properties'),
 			path: '#catalog'
 		}
+	]
+}
+
+export function useTypeList(): IFormSelect[] {
+	const t = useTranslations('Titles.form_type')
+	return [
+		{ id: 1, name: t('buy_an') },
+		{ id: 2, name: t('rent_out') },
+		{ id: 3, name: t('rent_an') },
+		{ id: 4, name: t('sell') }
 	]
 }
 

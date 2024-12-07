@@ -17,6 +17,7 @@ import { IconType } from 'react-icons/lib'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
+import { useAppSelector } from '@/hooks/useAppSelector'
 import { useOffices } from '@/hooks/useCountries'
 import useTypedLocale from '@/hooks/useLocale'
 
@@ -29,14 +30,22 @@ import { IOffice } from '@/models/office.model'
 
 const Countries = (props: { mt: ResponsiveValue<string> }) => {
 	const locale = useTypedLocale()
+	const { country } = useAppSelector(s => s.storage)
 	const [activeCity, setActiveCity] = useState<IOffice>()
 	const { data, isLoading } = useOffices()
 
 	useEffect(() => {
-		if (!!data?.length) {
-			setActiveCity(data[0])
+		if (country.id) {
+			const active = data?.find(el => el.country_id === country.id)
+			if (active) {
+				setActiveCity(active)
+			}
+		} else {
+			if (!!data?.length) {
+				setActiveCity(data[0])
+			}
 		}
-	}, [data])
+	}, [data, country])
 	return (
 		<Container
 			maxW={CONTAINER_WIDTH}

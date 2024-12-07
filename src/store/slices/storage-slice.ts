@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { ICountry } from '@/models/country.model'
-import { IFilterValue } from '@/models/other.model'
+import { IFilterValue, IFormSelect } from '@/models/other.model'
 import { IPropertyStage, IPropertyType } from '@/models/property.model'
 
 export interface IFilterStateValue {
@@ -9,13 +9,15 @@ export interface IFilterStateValue {
 	price: Partial<IFilterValue>
 	type: Partial<IPropertyType>
 	stage: Partial<IPropertyStage>
+	type_service: Partial<IFormSelect>
 }
 
 const initialState: IFilterStateValue = {
 	country: {},
 	price: {},
 	type: {},
-	stage: {}
+	stage: {},
+	type_service: {}
 }
 export const filterSlice = createSlice({
 	name: 'filter-value',
@@ -32,6 +34,9 @@ export const filterSlice = createSlice({
 		},
 		setStage(state, action: PayloadAction<IPropertyStage>) {
 			state.stage = action.payload
+		},
+		setServiceType(state, action: PayloadAction<IFormSelect>) {
+			state.type_service = action.payload
 		},
 
 		resetFrom(state) {

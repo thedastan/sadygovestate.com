@@ -30,6 +30,8 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 	const { data: stages } = useStages()
 	const { clientWidth } = useFullWindowSize()
 
+	const necessary_types =
+		storage.stage?.id === 2 ? types?.filter(el => el.id !== 4) : types
 	const StagesButtons = !stages?.length ? null : (
 		<Flex
 			bg='#F2F2F2'
@@ -101,7 +103,7 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 					>
 						{t('all')}
 					</FIlterButton>
-					{types?.map(el => (
+					{necessary_types?.map(el => (
 						<FIlterButton
 							key={el.id}
 							onClick={() => dispatch(filterActions.setType(el))}
