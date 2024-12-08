@@ -17,7 +17,7 @@ export const INSTAGRAM_LINK = `https://instagram.com/${INSTAGRAM}`
 export const FACEBOOK_LINK = ``
 export const YOUTUBE_LINK = `https://www.youtube.com/@moskvadorogaya`
 
-export const TELEGRAM_LINK = `https://t.me/`
+export const TELEGRAM_LINK = `https://t.me/alikherbek`
 
 export const LOCATION_LINK = 'https://maps.app.goo.gl/WbQbcDwFsFDJpSsi6'
 

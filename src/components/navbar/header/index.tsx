@@ -16,7 +16,8 @@ import {
 
 import useTypedLocale from '@/hooks/useLocale'
 
-import FilterHead from '../filter-header'
+import FilterHead from '../filter-header/index'
+
 
 import HeaderButtons from './HeaderButtons'
 import BurgerMenu from './burger-menu'
