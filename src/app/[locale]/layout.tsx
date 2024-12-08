@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 
 import { arial, inter } from '@/constants/fonts/fonts'
 import YandexMetrika from '@/constants/seo/YandexMetrika'
-import { SITE_NAME } from '@/constants/seo/seo.constants'
+import { SITE_NAME, SEO_DESCRIPTION,SEO_KEY_WORDS } from '@/constants/seo/seo.constants'
 
 import ClientProvider from '../(providers)/ClientProvider'
 import { Providers } from '../(providers)/providers'
@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 		default: SITE_NAME,
 		template: `%s | ${SITE_NAME}`
 	},
-	description: '...'
+	description: `${SEO_DESCRIPTION}`,
+	keywords: `${SEO_KEY_WORDS}`
 }
 
 interface RootLayoutProps {
