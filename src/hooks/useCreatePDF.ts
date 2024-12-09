@@ -19,7 +19,6 @@ export function useCreatePDF() {
 				const elementWidth = element.offsetWidth
 				const elementHeight = element.offsetHeight
 
-
 				const pdfWidth = elementWidth * 0.26458 // Перевод пикселей в мм
 				const pdfHeight = pdfWidth * 1.414 // Пропорции A4
 
@@ -85,12 +84,12 @@ export function useCreatePDF() {
 						// @ts-ignore
 						pdf.setGState(new pdf.GState({ opacity: 0.4 }))
 						// Добавляем водяной знак на текущую страницу
-						pdf.setFontSize(110)
+						pdf.setFontSize(100)
 						pdf.setTextColor(150, 150, 150)
 						pdf.text(
 							'Victor Sadygov Real Estate',
 							pdfWidth / 2 + 35,
-							pdfHeight / 2,
+							pdfHeight / 2 + 20,
 							{
 								angle: 45,
 								align: 'center'
@@ -120,4 +119,3 @@ export function useCreatePDF() {
 
 	return { createPDF, isLoadingPDF }
 }
-

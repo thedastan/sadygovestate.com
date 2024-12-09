@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import moment from 'moment'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { useRef } from 'react'
 import { FiMapPin } from 'react-icons/fi'
 import { IoCheckmarkOutline } from 'react-icons/io5'
@@ -151,10 +152,22 @@ const PropertyDetail = (params: { slug: string }) => {
 								text={`${data?.sqft} sqft / ${data?.sqmt} sqmt`}
 							/>
 
-							<SaveAsPdfButton
-								onClick={() => createPDF(pdfRef, params.slug)}
-								isLoading={isLoadingPDF}
-							/>
+							{data.pdf ? (
+								<Link
+									href={data.pdf}
+									target='_blank'
+								>
+									<SaveAsPdfButton
+										onClick={() => {}}
+										isLoading={false}
+									/>
+								</Link>
+							) : (
+								<SaveAsPdfButton
+									onClick={() => createPDF(pdfRef, params.slug)}
+									isLoading={isLoadingPDF}
+								/>
+							)}
 						</Flex>
 						<Description
 							lineHeight='26px'
