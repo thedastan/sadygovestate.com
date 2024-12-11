@@ -66,26 +66,28 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 						{!!el?.installment && <TypeCard>{t('installments')}</TypeCard>}
 						{!!el?.mortgage && <TypeCard>{t('mortgage')}</TypeCard>}
 					</Flex>
-					<Box
-						position='absolute'
-						className='card-flag'
-						top='16.57px'
-						opacity='0'
-						transition='.4s'
-						right='14px'
-						w='46px'
-						h='32.86px'
-						rounded='6px'
-						overflow='hidden'
-					>
-						<Image
-							src={el.country_flag}
-							width={46}
-							height={33}
-							alt='Flag'
-							className='full-image'
-						/>
-					</Box>
+					{!!el.country_flag && (
+						<Box
+							position='absolute'
+							className='card-flag'
+							top='16.57px'
+							opacity='0'
+							transition='.4s'
+							right='14px'
+							w='46px'
+							h='32.86px'
+							rounded='6px'
+							overflow='hidden'
+						>
+							<Image
+								src={el.country_flag || ''}
+								width={46}
+								height={33}
+								alt='Flag'
+								className='full-image'
+							/>
+						</Box>
+					)}
 				</Box>
 
 				<Box

@@ -5,7 +5,7 @@ interface CharacteristicsCardProps {
 	text: string | number
 	isMini?: boolean
 }
-export default function CharacteristicsCard(props: CharacteristicsCardProps) {
+const CharacteristicsCard = (props: CharacteristicsCardProps) => {
 	return (
 		<Flex
 			alignItems='center'
@@ -30,3 +30,5 @@ export default function CharacteristicsCard(props: CharacteristicsCardProps) {
 		</Flex>
 	)
 }
+
+export default CharacteristicsCard

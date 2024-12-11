@@ -21,8 +21,9 @@ export interface IProperty {
 	profitability: string | null
 	investment: boolean
 	country_id: number
-	mortgage?: boolean
-	installment?: boolean
+	mortgage: boolean
+	installment: boolean
+	pdf: string | null
 }
 
 export interface IPropertyDetail {
