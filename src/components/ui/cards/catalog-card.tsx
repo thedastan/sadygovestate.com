@@ -1,6 +1,8 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
+import { PropsWithChildren } from 'react'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
 
 import NoPhoto from '@/assets/img/no-photo.png'
@@ -25,6 +27,7 @@ interface CatalogCardProps {
 }
 const CatalogCard = ({ el }: CatalogCardProps) => {
 	const locale = useTypedLocale()
+	const t = useTranslations('Titles')
 	return (
 		<Box
 			padding='6px'
@@ -54,6 +57,15 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 						className='full-image'
 					/>
 
+					<Flex
+						position='absolute'
+						left='3'
+						top='3'
+						gap='10px'
+					>
+						{!!el?.installment && <TypeCard>{t('installments')}</TypeCard>}
+						{!!el?.mortgage && <TypeCard>{t('mortgage')}</TypeCard>}
+					</Flex>
 					<Box
 						position='absolute'
 						className='card-flag'
@@ -137,6 +149,25 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 					</Flex>
 				</Box>
 			</Link>
+		</Box>
+	)
+}
+
+function TypeCard(props: PropsWithChildren) {
+	return (
+		<Box
+			px='3'
+			py='1'
+			color='#333139'
+			fontSize='14px'
+			lineHeight='16.1px'
+			letterSpacing='1px'
+			fontWeight='400'
+			bg='#FFFFFF'
+			rounded='100px'
+			h='24px'
+		>
+			{props.children}
 		</Box>
 	)
 }

@@ -79,6 +79,8 @@
 			"rent_out": "rent out",
 			"rent_an": "rent an",
 			"buy_an": "buy an"
-		}
+		},
+		"installments": "Installments",
+		"mortgage": "Mortgage"
 	}
 }
