@@ -15,6 +15,7 @@ export interface IProperty {
 	sqft: number
 	sqmt: number
 	main_image: string
+	main_image_s3: string | null
 	main_page: boolean
 	country_flag: string
 	tipo: string
@@ -35,7 +36,8 @@ export interface IPropertyDetail {
 	description_ru: string
 	description_en: string
 	description_ar: string
-	price: number
+	price_usd: number | null
+	price_aed: number | null
 	bed_room: number | null
 	bath: number | null
 	living_room: boolean
@@ -43,6 +45,7 @@ export interface IPropertyDetail {
 	sqmt: number
 	prop_image: PropImage[]
 	main_image?: string
+	main_image_s3: string | null
 	capacity: any
 	district_ru: string | null
 	district_en: string | null
