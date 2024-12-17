@@ -43,7 +43,7 @@ const SliderPropertyCard = ({ el, isInvest }: SliderPropertyCardProps) => {
 					overflow='hidden'
 				>
 					<Image
-						src={el.main_image || NoPhoto}
+						src={el.main_image || el.main_image_s3 || NoPhoto}
 						width={272}
 						height={140}
 						alt='Image'
