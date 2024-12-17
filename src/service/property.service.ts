@@ -41,11 +41,11 @@ class PropertyService {
 
 	async getInvestment() {
 		try {
-			const response = await PUBLIC_API.get<IProperty[]>(
+			const response = await PUBLIC_API.get<RootProperty>(
 				this.BASE_URL + 'investment/'
 			)
 
-			return response.data
+			return response.data.results
 		} catch (e) {
 			console.error(e)
 		}
