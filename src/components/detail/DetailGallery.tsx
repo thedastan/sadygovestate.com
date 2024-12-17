@@ -5,15 +5,14 @@ import NoPhoto from '@/assets/img/no-photo.png'
 
 import Fancybox from './fancybox'
 import DetailVideo from './video-card'
-import { IVideo } from '@/models/other.model'
-import { PropImage } from '@/models/property.model'
+import { IPropertyDetail } from '@/models/property.model'
 
 interface DetailGalleryProps {
-	images: PropImage[]
-	main_image: string | undefined
-	videos: IVideo[]
+	data: IPropertyDetail
 }
-function DetailGallery({ images, main_image, videos }: DetailGalleryProps) {
+function DetailGallery({ data }: DetailGalleryProps) {
+	const { main_image, main_image_s3, prop_video, prop_image, s3prop_image } =
+		data
 	return (
 		<Fancybox>
 			<Box
@@ -23,13 +22,13 @@ function DetailGallery({ images, main_image, videos }: DetailGalleryProps) {
 				overflow='hidden'
 			>
 				<Link
-					href={main_image || ''}
+					href={main_image || main_image_s3 || ''}
 					data-fancybox='gallery'
 					h='100%'
 					w='100%'
 				>
 					<Image
-						src={main_image || NoPhoto}
+						src={main_image || main_image_s3 || NoPhoto}
 						alt='Image'
 						className='full-image'
 						width={800}
@@ -47,7 +46,7 @@ function DetailGallery({ images, main_image, videos }: DetailGalleryProps) {
 					gap='14px'
 					className='gallery'
 				>
-					{images.map(el => (
+					{prop_image?.map(el => (
 						<Link
 							key={el.id}
 							className='gallery-image'
@@ -68,7 +67,28 @@ function DetailGallery({ images, main_image, videos }: DetailGalleryProps) {
 						</Link>
 					))}
 
-					{videos.map(el => (
+					{s3prop_image?.map(el => (
+						<Link
+							key={el.id}
+							className='gallery-image'
+							href={el.link}
+							data-fancybox='gallery'
+							h={{ lg: '260px', sm: '180px', base: '113.75px' }}
+							minW={{ xl: '250px', sm: '170px', base: '112.5px' }}
+							rounded='16px'
+							overflow='hidden'
+						>
+							<Image
+								src={el.link || ''}
+								alt='Image'
+								className='full-image'
+								width={257}
+								height={260}
+							/>
+						</Link>
+					))}
+
+					{prop_video.map(el => (
 						<DetailVideo
 							key={el.id}
 							youtube_link={el.link}

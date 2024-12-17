@@ -56,7 +56,14 @@ const SliderPropertyCard = ({ el, isInvest }: SliderPropertyCardProps) => {
 					mt='10px'
 					pb={{ md: '22px', base: '14px' }}
 				>
-					<Title whiteSpace='nowrap'>{`${attribute_From[locale]} $${formatToDE(el.price)}`}</Title>
+					<Box>
+						{!!el.price_usd && (
+							<Title whiteSpace='nowrap'>{`${attribute_From[locale]} $${formatToDE(el.price_usd)}`}</Title>
+						)}
+						{!!el.price_aed && (
+							<Title whiteSpace='nowrap'>{`${attribute_From[locale]} ${formatToDE(el.price_aed)} AED`}</Title>
+						)}
+					</Box>
 					<Flex
 						mt={{ md: '18px', base: '3' }}
 						justifyContent='space-between'

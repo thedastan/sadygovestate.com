@@ -14,6 +14,7 @@ import { useFullWindowSize } from '@/hooks/useFullHeight'
 import useTypedLocale from '@/hooks/useLocale'
 import { useProperties, useStages, useTypes } from '@/hooks/useProperties'
 
+import PaginationButton from '../ui/buttons/PaginationButton'
 import TitlePages from '../ui/texts/TitlePages'
 
 import CatalogGridComponent from './catalog-grid'
@@ -25,13 +26,27 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 	const t = useTranslations('Titles')
 
 	const storage = useAppSelector(s => s.storage)
-	const { data, isLoading } = useProperties(storage, isInvestment)
+	const { data, isLoading, count_pages } = useProperties(storage, isInvestment)
 	const { data: types, isLoading: isLoading2 } = useTypes()
 	const { data: stages } = useStages()
 	const { clientWidth } = useFullWindowSize()
 
+	const setPage = (page: number) => {
+		dispatch(filterActions.setPage(page))
+	}
+	const fist_part_pages =
+		storage.page > count_pages.length - 5
+			? count_pages.slice(0, 2)
+			: count_pages.slice(storage.page - 1, storage.page + 2)
+
+	const second_part_pages =
+		storage.page > count_pages.length - 5
+			? count_pages.slice(storage.page - 1)
+			: count_pages.slice(-2)
+
 	const necessary_types =
 		storage.stage?.id === 2 ? types?.filter(el => el.id !== 4) : types
+
 	const StagesButtons = !stages?.length ? null : (
 		<Flex
 			bg='#F2F2F2'
@@ -120,6 +135,57 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 					isLoading={isLoading}
 					isInvestment={isInvestment}
 				/>
+
+				{count_pages.length > 1 && (
+					<Flex
+						mt='42px'
+						justifyContent='center'
+						gap='5'
+					>
+						<PaginationButton
+							isNext={false}
+							onClick={() => setPage(storage.page - 1)}
+							disabled={storage.page === 1}
+						/>
+						{count_pages.length < 10 ? (
+							<Flex gap='2'>
+								{count_pages.map(page => (
+									<PaginationItem
+										isActive={storage.page === page}
+										onClick={() => setPage(page)}
+										value={page}
+									/>
+								))}
+							</Flex>
+						) : (
+							<Flex
+								gap='2'
+								alignItems='center'
+							>
+								{fist_part_pages.map(page => (
+									<PaginationItem
+										isActive={storage.page === page}
+										onClick={() => setPage(page)}
+										value={page}
+									/>
+								))}
+								<p>...</p>
+								{second_part_pages.map(page => (
+									<PaginationItem
+										isActive={storage.page === page}
+										onClick={() => setPage(page)}
+										value={page}
+									/>
+								))}
+							</Flex>
+						)}
+						<PaginationButton
+							isNext={true}
+							onClick={() => setPage(storage.page + 1)}
+							disabled={storage.page === count_pages.length}
+						/>
+					</Flex>
+				)}
 			</Container>
 		</Box>
 	)
@@ -151,4 +217,26 @@ function FIlterButton(props: FIlterButtonProps) {
 	)
 }
 
+interface PaginationItemProps {
+	onClick: () => void
+	isActive: boolean
+	value: number
+}
+function PaginationItem(props: PaginationItemProps) {
+	return (
+		<Box
+			onClick={props.onClick}
+			bg={props.isActive ? '#2C2C2C' : 'transparent'}
+			color={props.isActive ? '#F5F5F5' : '#1E1E1E'}
+			px='3'
+			py='2'
+			rounded='6px'
+			lineHeight='16px'
+			fontSize='18px'
+			cursor='pointer'
+		>
+			{props.value}
+		</Box>
+	)
+}
 export default Catalog

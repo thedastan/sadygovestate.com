@@ -15,7 +15,7 @@ import useTypedLocale from '@/hooks/useLocale'
 import { useProperties } from '@/hooks/useProperties'
 
 const CatalogHome = () => {
-	const { data_main_page, isLoading } = useProperties()
+	const { data, isLoading } = useProperties()
 	const t = useTranslations('Titles')
 	const locale = useTypedLocale()
 	return (
@@ -48,7 +48,7 @@ const CatalogHome = () => {
 			</Flex>
 
 			<CatalogGridComponent
-				data={data_main_page}
+				data={data?.slice(0, 8)}
 				isLoading={isLoading}
 			/>
 

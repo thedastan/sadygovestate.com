@@ -51,7 +51,9 @@ const PropertyDetail = (params: { slug: string }) => {
 
 	const TitleDetailPage = !!data && (
 		<>
-			<TitleComponent>{data[`name_${locale}`]}</TitleComponent>
+			{!!data[`name_${locale}`] && (
+				<TitleComponent>{data[`name_${locale}`]}</TitleComponent>
+			)}
 			<Flex
 				mt={{ md: '4', base: '3' }}
 				gap='3'
@@ -204,11 +206,7 @@ const PropertyDetail = (params: { slug: string }) => {
 							{TitleDetailPage}
 						</Box>
 
-						<DetailGallery
-							main_image={data.main_image}
-							images={data.prop_image}
-							videos={data.prop_video}
-						/>
+						<DetailGallery data={data} />
 					</Box>
 				</Flex>
 			</Container>

@@ -162,13 +162,20 @@ function ItemCard({ el }: { el: IProperty }) {
 					>
 						{el[`name_${locale}`]}
 					</Text>
-					<Text
+
+					<Box
 						fontSize='14px'
 						lineHeight='16.1px'
 						fontWeight='700'
+						whiteSpace='nowrap'
 					>
-						{attribute_From[locale]} ${formatToDE(el.price)}*
-					</Text>
+						{!!el.price_usd && (
+							<Text>{`${attribute_From[locale]} $${formatToDE(el.price_usd)}`}</Text>
+						)}
+						{!!el.price_aed && (
+							<Text>{`${attribute_From[locale]} ${formatToDE(el.price_aed)} AED`}</Text>
+						)}
+					</Box>
 				</Flex>
 
 				<Flex

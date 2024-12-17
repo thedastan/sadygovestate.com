@@ -10,6 +10,7 @@ export interface IFilterStateValue {
 	type: Partial<IPropertyType>
 	stage: Partial<IPropertyStage>
 	type_service: Partial<IFormSelect>
+	page: number
 }
 
 const initialState: IFilterStateValue = {
@@ -17,7 +18,8 @@ const initialState: IFilterStateValue = {
 	price: {},
 	type: {},
 	stage: {},
-	type_service: {}
+	type_service: {},
+	page: 1
 }
 export const filterSlice = createSlice({
 	name: 'filter-value',
@@ -37,6 +39,10 @@ export const filterSlice = createSlice({
 		},
 		setServiceType(state, action: PayloadAction<IFormSelect>) {
 			state.type_service = action.payload
+		},
+
+		setPage(state, action: PayloadAction<number>) {
+			state.page = action.payload
 		},
 
 		resetFrom(state) {

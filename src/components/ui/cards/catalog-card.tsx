@@ -50,7 +50,7 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 					position='relative'
 				>
 					<Image
-						src={el.main_image || NoPhoto}
+						src={el.main_image || el.main_image_s3 || NoPhoto}
 						width={345}
 						height={240}
 						alt='Image'
@@ -97,9 +97,16 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 				>
 					<Flex
 						justifyContent='space-between'
-						alignItems='center'
+						alignItems='start'
 					>
-						<Title>{`${attribute_From[locale]} $${formatToDE(el.price)}`}</Title>
+						<Box>
+							{!!el.price_usd && (
+								<Title>{`${attribute_From[locale]} $${formatToDE(el.price_usd)}`}</Title>
+							)}
+							{!!el.price_aed && (
+								<Title>{`${attribute_From[locale]} ${formatToDE(el.price_aed)} AED`}</Title>
+							)}
+						</Box>
 						<Flex
 							gap='6px'
 							color='#333139'

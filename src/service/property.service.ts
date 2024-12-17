@@ -6,7 +6,8 @@ import {
 	IProperty,
 	IPropertyDetail,
 	IPropertyStage,
-	IPropertyType
+	IPropertyType,
+	RootProperty
 } from '@/models/property.model'
 
 class PropertyService {
@@ -17,17 +18,18 @@ class PropertyService {
 			const country = params?.country?.id ? `country=${params.country.id}` : ''
 			const type = params?.type?.id ? `tipo=${params.type.id}` : ''
 			const stage = params?.stage?.id ? `stage=${params.stage.id}` : ''
+			const page = params?.page ? `page=${params.page}` : ''
 			const max_price = params?.price?.value
 				? `max_price=${params.price.value}`
 				: ''
 
-			const arr = [country, type, stage, max_price].filter(el => !!el)
+			const arr = [country, type, stage, max_price, page].filter(el => !!el)
 			const filter_path = arr.length ? '?' + arr.join('&') : ''
 
 			const result_path = isInvestment
 				? 'investment/' + filter_path
 				: filter_path
-			const response = await PUBLIC_API.get<IProperty[]>(
+			const response = await PUBLIC_API.get<RootProperty>(
 				this.BASE_URL + result_path
 			)
 

@@ -55,10 +55,14 @@ const InvestmentCard = ({ el }: SliderPropertyCardProps) => {
 					pb={{ md: '0', base: '4' }}
 				>
 					<Title>{el[`name_${locale}`]}</Title>
-					<Title
-						fontWeight='700'
-						mt={{ md: '19px', base: '3' }}
-					>{`${attribute_From[locale]} $${formatToDE(el.price)}`}</Title>
+					<Box mt={{ md: '19px', base: '3' }}>
+						{!!el.price_usd && (
+							<Title fontWeight='700'>{`${attribute_From[locale]} $${formatToDE(el.price_usd)}`}</Title>
+						)}
+						{!!el.price_aed && (
+							<Title fontWeight='700'>{`${attribute_From[locale]} ${formatToDE(el.price_aed)} AED`}</Title>
+						)}
+					</Box>
 					<Flex
 						justifyContent='space-between'
 						alignItems='center'

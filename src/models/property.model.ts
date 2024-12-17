@@ -1,5 +1,12 @@
 import { IVideo } from './other.model'
 
+export interface RootProperty {
+	count: number
+	next: string | null
+	previous: string | null
+	results: IProperty[]
+}
+
 export interface IProperty {
 	id: number
 	name_ru: string
@@ -8,7 +15,8 @@ export interface IProperty {
 	city_ru: string
 	city_en: string
 	city_ar: string
-	price: number
+	price_usd: number | null
+	price_aed: number | null
 	slug_en: string
 	bed_room: any
 	bath: number
@@ -44,6 +52,7 @@ export interface IPropertyDetail {
 	sqft: number
 	sqmt: number
 	prop_image: PropImage[]
+	s3prop_image: ImageGroupS3[]
 	main_image?: string
 	main_image_s3: string | null
 	capacity: any
@@ -68,6 +77,11 @@ export interface IPropertyDetail {
 export interface PropImage {
 	id: number
 	image: string
+}
+
+export interface ImageGroupS3 {
+	id: number
+	link: string
 }
 
 export interface IAdvantage {

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { IFilterStateValue } from '@/store/slices/storage-slice'
 
+import { RootProperty } from '@/models/property.model'
 import { propertyService } from '@/service/property.service'
 
 export function useProperties(
@@ -12,9 +13,9 @@ export function useProperties(
 		queryKey: ['properties-get', params],
 		queryFn: () => propertyService.getAll(!!isInvestment, params)
 	})
-
-	const data_main_page = data?.filter(item => item.main_image)
-	return { data, isLoading, data_main_page }
+	const count_pages = getCountPages(data)
+	const data_main_page = data?.results?.filter(item => item.main_page)
+	return { data: data?.results, isLoading, data_main_page, count_pages }
 }
 
 export function usePropertyDetail(slug: string) {
@@ -60,4 +61,13 @@ export function useTypes() {
 	})
 
 	return { data, isLoading }
+}
+
+function getCountPages(data: RootProperty | undefined): number[] {
+	const result: number[] = []
+	const count = data?.count ? Math.ceil(data.count / 8) : 1
+	for (let i = 1; i <= count; i++) {
+		result.push(i)
+	}
+	return result
 }
