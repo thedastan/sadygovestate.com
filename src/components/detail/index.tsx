@@ -37,6 +37,7 @@ import Title32 from '../ui/texts/Title32'
 import TitleComponent from '../ui/texts/TitleComponent'
 
 import DetailGallery from './DetailGallery'
+import SimilarProducts from './SimilarProducts'
 import DetailSkeleton from './detail-skeleton'
 
 const PropertyDetail = (params: { slug: string }) => {
@@ -49,24 +50,29 @@ const PropertyDetail = (params: { slug: string }) => {
 
 	const { createPDF, isLoadingPDF } = useCreatePDF()
 
+	const address = !!data
+		? `${data[`district_${locale}`] || ''} ${data[`address_${locale}`] ? `, ` + data[`address_${locale}`] : ''}`
+		: ''
 	const TitleDetailPage = !!data && (
 		<>
 			{!!data[`name_${locale}`] && (
 				<TitleComponent>{data[`name_${locale}`]}</TitleComponent>
 			)}
-			<Flex
-				mt={{ md: '4', base: '3' }}
-				gap='3'
-				alignItems='center'
-			>
-				<FiMapPin fontSize='16px' />
-				<Description
-					fontSize='14px'
-					lineHeight='16.94px'
+			{!!address.trim() && (
+				<Flex
+					mt={{ md: '4', base: '3' }}
+					gap='3'
+					alignItems='center'
 				>
-					{`${data[`district_${locale}`]}, ${data[`address_${locale}`] || ''}`}
-				</Description>
-			</Flex>
+					<FiMapPin fontSize='16px' />
+					<Description
+						fontSize='14px'
+						lineHeight='16.94px'
+					>
+						{address}
+					</Description>
+				</Flex>
+			)}
 		</>
 	)
 
@@ -211,35 +217,7 @@ const PropertyDetail = (params: { slug: string }) => {
 				</Flex>
 			</Container>
 
-			{/* <Container
-				maxW={CONTAINER_WIDTH}
-				mt={{ md: '154px', base: '60px' }}
-			>
-				<TitleComponent query='объекты'>{t('similar_objects')}</TitleComponent>
-			</Container>
-
-			<Flex
-				mt={{ md: '10', base: '5' }}
-				overflowX='auto'
-				className='unscroll'
-			>
-				<Flex
-					gap={{ md: '6', base: '3' }}
-					px={{
-						xl: `${(clientWidth - parseInt(CONTAINER_WIDTH)) / 2 + 16}px`,
-						base: '4'
-					}}
-				>
-					{[1, 2, 3, 4].map(el => (
-						<Box
-							key={el}
-							minW='357px'
-						>
-							<CatalogCard />
-						</Box>
-					))}
-				</Flex>
-			</Flex> */}
+			{!!data.tipo && <SimilarProducts type={Number(data.tipo)} />}
 
 			<Countries mt={{ md: '158px', base: '60px' }} />
 		</Box>

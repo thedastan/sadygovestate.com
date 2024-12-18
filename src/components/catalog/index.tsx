@@ -151,6 +151,7 @@ const Catalog = ({ isInvestment }: { isInvestment?: boolean }) => {
 							<Flex gap='2'>
 								{count_pages.map(page => (
 									<PaginationItem
+										key={page}
 										isActive={storage.page === page}
 										onClick={() => setPage(page)}
 										value={page}

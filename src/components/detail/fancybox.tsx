@@ -7,7 +7,7 @@ function Fancybox(props: any) {
 	const delegate = props.delegate || '[data-fancybox]'
 
 	useEffect(() => {
-		const opts = props.options || {}
+		const opts = props.options || { click: false }
 
 		NativeFancybox.bind(delegate, opts)
 

@@ -234,9 +234,11 @@ const BurgerMenu = () => {
 								/>
 								<Stack spacing='4'>
 									{type_list.map(el => (
-										<Link href={'#feedback-form'}>
+										<Link
+											href={'#feedback-form'}
+											key={el.id}
+										>
 											<Flex
-												key={el.id}
 												onClick={() => {
 													dispatch(filterActions.setServiceType(el))
 													onClose()
