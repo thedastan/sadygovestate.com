@@ -104,17 +104,23 @@ const PropertyDetail = (params: { slug: string }) => {
 							gap={{ md: '30px', sm: '5', base: '3' }}
 							alignItems='center'
 						>
-							{data.price_usd && (
+							{data.price_usd ? (
 								<PropertyParams
 									title={`$${formatToDE(data.price_usd)}`}
 									subtitle={
-										t('price') + '  ' + data.price_aed
-											? `AED ${data.price_aed}`
-											: ''
+										t('price') +
+										'  ' +
+										`${data.price_aed ? `AED ${data.price_aed}` : ''}`
 									}
 									isFirst={true}
 								/>
-							)}
+							) : data.price_aed ? (
+								<PropertyParams
+									title={`$${formatToDE(data.price_aed)}`}
+									subtitle={t('price')}
+									isFirst={true}
+								/>
+							) : null}
 
 							{!!year && (
 								<PropertyParams
