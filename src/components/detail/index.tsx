@@ -116,7 +116,7 @@ const PropertyDetail = (params: { slug: string }) => {
 								/>
 							) : data.price_aed ? (
 								<PropertyParams
-									title={`$${formatToDE(data.price_aed)}`}
+									title={`AED ${formatToDE(data.price_aed)}`}
 									subtitle={t('price')}
 									isFirst={true}
 								/>
