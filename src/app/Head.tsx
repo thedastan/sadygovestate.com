@@ -41,6 +41,8 @@ const Head = () => {
       {/* Open Graph meta tags */}
       <meta property="og:title" content={SITE_NAME} />
       <meta property="og:description" content={SEO_DESCRIPTION} />
+      <meta property="og:type" content="website"/>
+      <meta property="og:url" content="https://sadygovestate.com"/>
       <meta property="og:image" content="https://nikaestate.ae/upload/iblock/355/gc78kdwwpfg5p422nc9vmvqyt053gstx.png" />
       {/* Добавляем только после рендеринга на клиенте */}
       {currentUrl && <meta property="og:url" content={currentUrl} />}
@@ -58,7 +60,7 @@ const Head = () => {
         content="black-translucent"
       />
       {/* SEO robots meta tag */}
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content="noindex, nofollow" />
 
       {/* Viewport settings */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
