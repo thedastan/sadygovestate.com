@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sadygovestate.com
+
+# Sitemaps
+Sitemap: https://sadygovestate.com/sitemap.xml
