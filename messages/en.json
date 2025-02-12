@@ -37,7 +37,7 @@
 			"query": "invest/worldwide/your goals"
 		},
 		"online_consultation": "Online consultation",
-		"contact_form": "Contact form with a manager",
+		"contact_form": "Contact our manager",
 		"similar_properties": "Similar properties",
 		"book_consultation": "Book a consultation",
 		"empty": "Empty",
@@ -77,8 +77,8 @@
 			"placeholder": "Type",
 			"sell": "sell",
 			"rent_out": "rent out",
-			"rent_an": "rent an",
-			"buy_an": "buy an"
+			"rent_an": "rent",
+			"buy_an": "buy"
 		},
 		"installments": "Installments",
 		"mortgage": "Mortgage"

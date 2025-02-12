@@ -1,9 +1,10 @@
 'use client'
 
-import { Box, Container, Flex, List, ListItem, Text } from '@chakra-ui/react'
+import { Box, Container, Flex, List, ListItem, Text, Link } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { GoArrowUpRight } from 'react-icons/go'
+import { WHATSAPP_LINK } from '@/constants/admin'
 
 import Description from '@/components/ui/texts/Description'
 import TitleComponent from '@/components/ui/texts/TitleComponent'
@@ -82,6 +83,10 @@ const PrimeRealEstate = () => {
 						gap='1'
 					>
 						<GoArrowUpRight fontSize='32px' />
+						<Link
+				        	href={WHATSAPP_LINK}
+							target={'_blank'}
+						>
 						<Text
 							textTransform='uppercase'
 							fontSize='20px'
@@ -91,6 +96,7 @@ const PrimeRealEstate = () => {
 						>
 							{t('contact')}
 						</Text>
+						</Link>
 					</Flex>
 				</Box>
 				<Flex

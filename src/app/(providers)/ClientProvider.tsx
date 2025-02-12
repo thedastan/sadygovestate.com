@@ -17,6 +17,7 @@ export default function ClientProvider({
 		<NextIntlClientProvider
 			locale={locale}
 			messages={messages}
+			timeZone="Asia/Dubai" // ✅ Добавлено для установки временной зоны
 		>
 			{children}
 		</NextIntlClientProvider>
