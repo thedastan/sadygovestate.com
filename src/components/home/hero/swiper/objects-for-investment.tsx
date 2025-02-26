@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 
 import SliderPropertyCard from '@/components/ui/cards/slider-property-card'
 
-import BgImage from '@/assets/img/slider-investment.jpeg'
+import BgImage from '@/assets/img/slider-investment.webp'
 
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 

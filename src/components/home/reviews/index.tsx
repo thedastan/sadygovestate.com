@@ -6,7 +6,7 @@ import Image from 'next/image'
 import FeedbackForm from '@/components/feedback-form'
 import ReviewCard from '@/components/ui/cards/review-card'
 
-import ReviewsBg from '@/assets/img/reviews-bg.jpeg'
+import ReviewsBg from '@/assets/img/reviews-bg.webp'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
@@ -17,7 +17,7 @@ const Reviews = () => {
 	return (
 		<Container
 			maxW={CONTAINER_WIDTH}
-			mt={{ md: '140px', base: '60px' }}
+			mt={{ md: '100px', base: '60px' }}
 			px={{ sm: '4', base: '0' }}
 			id='reviews'
 		>

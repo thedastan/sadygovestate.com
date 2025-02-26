@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 
 import SliderPropertyCard from '@/components/ui/cards/slider-property-card'
 
-import BgImage from '@/assets/img/slider-recomended.jpeg'
+import BgImage from '@/assets/img/slider-recomended.webp'
 
 import { useRecommendProperties } from '@/hooks/useProperties'
 

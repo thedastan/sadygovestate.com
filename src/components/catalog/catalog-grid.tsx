@@ -30,7 +30,7 @@ const CatalogGridComponent = ({
 				columns={
 					!!isInvestment
 						? { md: 2, base: 1 }
-						: { '2xl': 4, lg: 3, sm: 2, base: 1 }
+						: { '2xl': 3, lg: 3, sm: 2, base: 1 }
 				}
 			>
 				{isLoading &&
