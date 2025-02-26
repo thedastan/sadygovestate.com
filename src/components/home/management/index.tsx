@@ -10,7 +10,7 @@ import Description from '@/components/ui/texts/Description'
 
 import { INSTAGRAM_LINK, WHATSAPP_LINK, YOUTUBE_LINK } from '@/constants/admin'
 
-import ViktorSadygov from '@/assets/img/Виктор Садыгов.png'
+import ViktorSadygov from '@/assets/img/Виктор Садыгов.webp'
 
 const Management = () => {
 	const t = useTranslations('Titles')
@@ -32,7 +32,7 @@ const Management = () => {
 	]
 	return (
 		<Flex
-			mt={{ md: '140px', base: '60px' }}
+			mt={{ md: '100px', base: '60px' }}
 			flexDirection={{ md: 'row', base: 'column' }}
 		>
 			<Box
@@ -79,7 +79,7 @@ const Management = () => {
 					</Flex>
 
 					<Text
-						fontSize={{ md: '50px', sm: '34px', base: '28px' }}
+						fontSize={{ md: '40px', sm: '34px', base: '28px' }}
 						lineHeight={{ md: '60px', base: '40px' }}
 						fontWeight='400'
 						textAlign='center'

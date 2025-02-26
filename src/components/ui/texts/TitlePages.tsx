@@ -7,8 +7,8 @@ interface Props extends ChakraProps {
 const TitlePages = ({
 	children,
 	fontWeight = '400',
-	fontSize = { xl: '90px', md: '60px', base: '32px' },
-	lineHeight = { xl: '103.49px', md: '70px', base: '36.8px' },
+	fontSize = { xl: '70px', md: '60px', base: '32px' },
+	lineHeight = { xl: '80.49px', md: '70px', base: '36.8px' },
 	color = '#333139',
 	...props
 }: Props) => {

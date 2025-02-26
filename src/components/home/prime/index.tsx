@@ -9,7 +9,7 @@ import { WHATSAPP_LINK } from '@/constants/admin'
 import Description from '@/components/ui/texts/Description'
 import TitleComponent from '@/components/ui/texts/TitleComponent'
 
-import DefImage from '@/assets/img/slider-image.jpeg'
+import DefImage from '@/assets/img/slider-image.webp'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
@@ -27,7 +27,7 @@ const PrimeRealEstate = () => {
 	return (
 		<Container
 			maxW={CONTAINER_WIDTH}
-			mt={{ lg: '182px', base: '122px' }}
+			mt={{ lg: '102px', base: '122px' }}
 			px={{ lg: '4', base: '0' }}
 			id='about'
 		>

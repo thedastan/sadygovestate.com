@@ -21,7 +21,7 @@ const CatalogHome = () => {
 	return (
 		<Container
 			maxW={CONTAINER_WIDTH}
-			mt={{ md: '170px', base: '60px' }}
+			mt={{ md: '120px', base: '60px' }}
 			id='catalog'
 		>
 			<Flex
