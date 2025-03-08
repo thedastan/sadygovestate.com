@@ -14,23 +14,23 @@ export function useForm(onSuccess: () => void) {
 	function tgMessage(value: IFormState) {
 		let message = `Имя: <b>${value.full_name}</b>\n`
 		message += `номер: <b>${value.phone}</b>\n`
-		message += `Тип: <b>${value.type.name}</b>\n`
+		message += `Тип: <b>${value.tipo.name}</b>\n`
 		message += `Страна: <b>${value.country.name}</b>\n`
-		message += value.description ? `Сообщение: ${value.description}\n` : ''
+		message += value.message ? `Сообщение: ${value.message}\n` : ''
 		return message
 	}
 	async function onSend(value: IFormState) {
 		const link = document.createElement('a')
 		link.setAttribute('target', '_blank')
 
-		const message = `${t('form_submit.hello')}\n\n${t('form_submit.user_text')} ${value.country.name}\n${t('form_type.placeholder')}: ${value.type.name}\n${t('form_submit.phone')}: ${value.phone}\n${value.description}`
+		const message = `${t('form_submit.hello')}\n\n${t('form_submit.user_text')} ${value.country.name}\n${t('form_type.placeholder')}: ${value.tipo.name}\n${t('form_submit.phone')}: ${value.phone}\n${value.message}`
 
 		const wa_link = `${WHATSAPP_LINK}?text=${encodeURIComponent(message)}`
 		link.href = wa_link
 		if (!value.country?.id) {
 			toast.error(t('form_submit.country_toast'))
 			return
-		} else if (!value.type?.id) {
+		} else if (!value.tipo?.id) {
 			toast.error(t('form_submit.type_toast'))
 		} else {
 			try {

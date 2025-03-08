@@ -2,6 +2,7 @@ import { PUBLIC_API } from '@/api/interceptors'
 
 import { ICityList, ICountry } from '@/models/country.model'
 import { IOffice } from '@/models/office.model'
+import { IFormState } from '@/models/other.model'
 
 class CountryService {
 	private BASE_URL = 'property/'
@@ -27,6 +28,15 @@ class CountryService {
 
 		return response.data
 	}
+
+
+	async postFeedback() {
+		const response = await PUBLIC_API.get<IFormState[]>(`${this.BASE_URL}consult/`)
+
+		return response.data
+	}
+	
+ 
 }
 
 export const countryService = new CountryService()

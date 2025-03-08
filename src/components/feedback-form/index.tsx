@@ -1,12 +1,9 @@
-'use client'
-
-import { Box, Flex, MenuItem, Radio, Stack, Text } from '@chakra-ui/react'
+import { Box, Stack, Text } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { BsHouseDoor } from 'react-icons/bs'
 import { GrLocation } from 'react-icons/gr'
 
-import { useAppSelector } from '@/hooks/useAppSelector'
 import { useCountries } from '@/hooks/useCountries'
 import useTypedLocale from '@/hooks/useLocale'
 
@@ -18,34 +15,76 @@ import PhoneInputComponent from '../ui/inputs/PhoneInputComponent'
 import Description from '../ui/texts/Description'
 import Title32 from '../ui/texts/Title32'
 
-import { useForm } from './actions'
 import { IFormSelect, IFormState } from '@/models/other.model'
 
 const FeedbackForm = () => {
+	const locale = useTypedLocale()
+	const t = useTranslations('Titles')
+	const type_list = useTypeList()
+
+	const { data } = useCountries()
 	const [value, setValue] = useState<IFormState>({
 		full_name: '',
 		phone: '',
-		description: '',
+		message: '',
 		country: {} as Partial<IFormSelect>,
-		type: {} as Partial<IFormSelect>
+		tipo: {} as Partial<IFormSelect>
 	})
-	const { country, type_service } = useAppSelector(s => s.storage)
-	const locale = useTypedLocale()
-	const t = useTranslations('Titles')
-	const { data } = useCountries()
-	const type_list = useTypeList()
-	const handleChange = (
-		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
-		setValue({ ...value, [e.target.name]: e.target.value })
-	}
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState<string | null>(null)
 
-	const { onSend } = useForm(() =>
-		setValue({ ...value, full_name: '', phone: '' })
-	)
-	const onsubmit = async (e: FormEvent<HTMLFormElement>) => {
+	const onsubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
-		onSend(value)
+		setLoading(true)
+		setError(null)
+
+		const formData = {
+			full_name: value.full_name,
+			phone: value.phone,
+			message: value.message,
+			country: value.country.id,
+			tipo: value.tipo.id
+		}
+
+		try {
+			const response = await fetch(
+				'https://api.admin-sadygovestate.com/property/consult/',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(formData)
+				}
+			)
+
+			if (!response.ok) {
+				const errorResponse = await response.json()
+				console.error('Error response from server:', errorResponse)
+				throw new Error(errorResponse.message || 'Failed to send the message')
+			}
+
+			const responseData = await response.json()
+			console.log('Form submitted successfully', responseData)
+
+			const message = `${value.full_name}\n | ${value.phone}\n | ${value.message}`
+			const waLink = `https://wa.me/?text=${encodeURIComponent(message)}`
+
+			window.open(waLink, '_blank')
+
+			setValue({
+				full_name: '',
+				phone: '',
+				message: '',
+				country: {} as Partial<IFormSelect>,
+				tipo: {} as Partial<IFormSelect>
+			})
+		} catch (error: any) {
+			console.error('Error during form submission:', error)
+			setError(error.message || 'An error occurred while submitting the form')
+		} finally {
+			setLoading(false)
+		}
 	}
 
 	const countries_list: IFormSelect[] | undefined = data?.map(el => {
@@ -55,15 +94,6 @@ const FeedbackForm = () => {
 		}
 	})
 
-	useEffect(() => {
-		if (country?.id) {
-			setValue({ ...value, country })
-		}
-
-		if (type_service.id) {
-			setValue({ ...value, type: type_service })
-		}
-	}, [country, type_service])
 	return (
 		<Box
 			bg='#F2F2F2'
@@ -96,10 +126,10 @@ const FeedbackForm = () => {
 					>
 						<FormSelect
 							icon={BsHouseDoor}
-							onChange={type => setValue({ ...value, type })}
+							onChange={tipo => setValue({ ...value, tipo })}
 							placeholder={t('form_type.placeholder')}
-							value={value.type}
-							data={type_list}
+							value={value.tipo}
+							data={type_list} // Ensure `type_list` is defined
 						/>
 						<FormSelect
 							icon={GrLocation}
@@ -108,9 +138,10 @@ const FeedbackForm = () => {
 							value={value.country}
 							data={countries_list}
 						/>
-
 						<InputComponent
-							handleChange={handleChange}
+							handleChange={e =>
+								setValue({ ...value, full_name: e.target.value })
+							}
 							name='full_name'
 							value={value.full_name}
 							placeholder={t('placeholder.name')}
@@ -120,14 +151,24 @@ const FeedbackForm = () => {
 							value={value.phone}
 						/>
 						<InputComponent
-							handleChange={handleChange}
-							name='description'
-							value={value.description}
+							handleChange={e =>
+								setValue({ ...value, message: e.target.value })
+							}
+							name='message'
+							value={value.message}
 							placeholder={t('placeholder.message')}
 							as='textArea'
-							required={false}
 						/>
 					</Stack>
+
+					{error && (
+						<Text
+							color='red.500'
+							mt='4'
+						>
+							{error}
+						</Text>
+					)}
 
 					<AnimateButton
 						type='submit'
@@ -138,41 +179,6 @@ const FeedbackForm = () => {
 				</form>
 			</Box>
 		</Box>
-	)
-}
-
-interface MenuCardProps {
-	onClick: () => void
-	isActive: boolean
-	text: string
-}
-function MenuCard({ isActive, onClick, text }: MenuCardProps) {
-	return (
-		<MenuItem
-			onClick={onClick}
-			rounded='10px'
-			pl='4'
-			bg={isActive ? '#0000000A' : '#FFFFFF'}
-		>
-			<Flex
-				justifyContent='space-between'
-				alignItems='center'
-				w='100%'
-			>
-				<Text
-					color='#000000'
-					fontSize='14px'
-					fontWeight='400'
-					lineHeight='24px'
-				>
-					{text}
-				</Text>
-				<Radio
-					colorScheme='green'
-					isChecked={isActive}
-				/>
-			</Flex>
-		</MenuItem>
 	)
 }
 

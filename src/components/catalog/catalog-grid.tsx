@@ -18,6 +18,10 @@ const CatalogGridComponent = ({
 	isLoading,
 	isInvestment
 }: CatalogGridComponentProps) => {
+
+
+
+	
 	return (
 		<>
 			<SimpleGrid
