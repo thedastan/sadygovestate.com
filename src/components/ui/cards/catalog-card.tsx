@@ -101,10 +101,14 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 					>
 						<Box>
 							{!!el.price_usd && (
-								<Title fontSize={{ md: '24px', base: '20px' }}>{`${attribute_From[locale]} $${formatToDE(el.price_usd)}`}</Title>
+								<Title
+									fontSize={{ md: '24px', base: '20px' }}
+								>{`${attribute_From[locale]} $${formatToDE(el.price_usd)}`}</Title>
 							)}
 							{!!el.price_aed && (
-								<Title fontSize={{ md: '24px', base: '20px' }}>{`${attribute_From[locale]} ${formatToDE(el.price_aed)} AED`}</Title>
+								<Title
+									fontSize={{ md: '24px', base: '20px' }}
+								>{`${attribute_From[locale]} ${formatToDE(el.price_aed)} AED`}</Title>
 							)}
 						</Box>
 						<Flex
@@ -150,11 +154,20 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 								isMini={true}
 							/>
 						)}
-						<CharacteristicsCard
-							icon={CatalogArtboardIcon}
-							text={`${el.sqft} sqft / ${el.sqmt} sqmt`}
-							isMini={true}
-						/>
+						 
+
+						{!!(el?.sqft || el?.sqmt) && (
+							<CharacteristicsCard
+								icon={CatalogArtboardIcon}
+								text={[
+									el?.sqft ? `${el.sqft} sqft` : '',
+									el?.sqmt ? `${el.sqmt} sqmt` : ''
+								]
+									.filter(Boolean)
+									.join(' / ')}
+									isMini={true}
+							/>
+						)}
 					</Flex>
 				</Box>
 			</Link>

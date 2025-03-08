@@ -38,7 +38,7 @@ const CatalogGridComponent = ({
 				}
 			>
 				{isLoading &&
-					[1, 2, 3, 4].map(index => <PropertySkeleton key={index} />)}
+					[1, 2, 3, 4, 5, 6].map(index => <PropertySkeleton key={index} />)}
 				{!isLoading &&
 					!!data &&
 					data?.map(el =>
