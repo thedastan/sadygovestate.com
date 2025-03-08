@@ -101,10 +101,10 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 					>
 						<Box>
 							{!!el.price_usd && (
-								<Title>{`${attribute_From[locale]} $${formatToDE(el.price_usd)}`}</Title>
+								<Title fontSize={{ md: '24px', base: '20px' }}>{`${attribute_From[locale]} $${formatToDE(el.price_usd)}`}</Title>
 							)}
 							{!!el.price_aed && (
-								<Title>{`${attribute_From[locale]} ${formatToDE(el.price_aed)} AED`}</Title>
+								<Title fontSize={{ md: '24px', base: '20px' }}>{`${attribute_From[locale]} ${formatToDE(el.price_aed)} AED`}</Title>
 							)}
 						</Box>
 						<Flex
