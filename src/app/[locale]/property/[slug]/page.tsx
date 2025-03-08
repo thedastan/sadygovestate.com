@@ -22,9 +22,23 @@ export async function generateMetadata(
 
 	const previousImages = (await parent).openGraph?.images || []
 
+	const title = [property?.name_en, property?.name_ar, property?.name_ru]
+		.filter(Boolean)
+		.join(' | ')
+
+	const description = [
+		property?.description_en,
+		property?.description_ar,
+		property?.description_ru
+	]
+		.filter(Boolean)
+		.join(' | ')
+
 	return {
-		title: `${property?.name_en} | ${property?.name_ar} | ${property?.name_ru}`,
-		description: `${property?.description_en} | ${property?.description_ar} | ${property?.description_ru}`,
+		title,
+		description,
+		// title: `${property?.name_en} | ${property?.name_ar} | ${property?.name_ru}`,
+		// description: `${property?.description_en} | ${property?.description_ar} | ${property?.description_ru}`,
 		openGraph: {
 			images: [`${property?.main_image}`, ...previousImages]
 		}
@@ -33,12 +47,16 @@ export async function generateMetadata(
 
 export default async function DetailPropertyPage({ params }: Props) {
 	const property = await propertyService.getDetail(params.slug)
+
+	console.log(property, 'property property')
+
 	return (
 		<>
 			<Head>
 				<title>
 					{`${property?.name_en} | ${property?.name_ar} | ${property?.name_ru}`}
 				</title>
+
 				<meta
 					property='og:title'
 					name='title'

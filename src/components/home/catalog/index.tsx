@@ -48,7 +48,7 @@ const CatalogHome = () => {
 			</Flex>
 
 			<CatalogGridComponent
-				data={data?.slice(0, 8)}
+				data={data?.slice(0, 12)}
 				isLoading={isLoading}
 			/>
 

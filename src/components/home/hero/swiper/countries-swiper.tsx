@@ -31,6 +31,9 @@ const CountriesSwiper = ({ video }: { video?: string }) => {
 			LoadingImage(data[0]?.image, setLoading)
 		}
 	}, [data])
+
+	console.log(properties);
+	
 	return (
 		<SlideProvider
 			bgImage={active?.image || ''}

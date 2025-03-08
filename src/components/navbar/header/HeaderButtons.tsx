@@ -1,4 +1,15 @@
-import { Box, Flex } from '@chakra-ui/react'
+import {
+	Box,
+	Flex,
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay,
+	useDisclosure
+} from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { GoChevronLeft } from 'react-icons/go'
@@ -8,10 +19,13 @@ import { WHATSAPP_LINK } from '@/constants/admin'
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
 import useTypedLocale from '@/hooks/useLocale'
+import FeedbackForm from '@/components/feedback-form'
 
 const HeaderButtons = () => {
 	const locale = useTypedLocale()
 	const t = useTranslations('Titles')
+
+	const { isOpen, onOpen, onClose } = useDisclosure()
 	return (
 		<Flex
 			gap='3'
@@ -45,7 +59,7 @@ const HeaderButtons = () => {
 				</Flex>
 			</Link>
 
-			<Link href={WHATSAPP_LINK}>
+			{/* <Link href={WHATSAPP_LINK}> */}
 				<Flex
 					maxW={{ sm: '128px', base: '182px' }}
 					w='100%'
@@ -61,10 +75,25 @@ const HeaderButtons = () => {
 					lineHeight='18.4px'
 					fontSize='16px'
 					fontWeight='700'
+					onClick={onOpen}
+					cursor="pointer"
 				>
 					{t('contact')}
 				</Flex>
-			</Link>
+			{/* </Link> */}
+
+			<Modal
+				isOpen={isOpen}
+				onClose={onClose}
+			>
+				<ModalOverlay />
+				<ModalContent borderRadius={10}	bg='#F2F2F2' h="600px" display="flex" justifyContent="center" alignItems="center"  overflow="hidden" >
+					<ModalCloseButton />
+					<ModalBody  >
+						<FeedbackForm/>
+					</ModalBody>
+				</ModalContent>
+			</Modal>
 		</Flex>
 	)
 }

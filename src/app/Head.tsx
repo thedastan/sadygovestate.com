@@ -7,63 +7,87 @@ const Head = () => {
   const [currentUrl, setCurrentUrl] = useState<string>('')
 
   useEffect(() => {
-    // Обновляем URL только на клиенте
     setCurrentUrl(window.location.href)
-  }, [])  // Пустой массив зависимостей означает, что этот код выполнится только один раз после рендеринга на клиенте
+  }, [])   
 
   return (
     <head>
-      {/* Google Site Verification */}
       <meta
         name="google-site-verification"
         content="fQ0IqJz2eTDIDxVnU7cEV8OYPUrHscc9wXzSRQaozgY"
       />
-      {/* Web App Manifest */}
       <link rel="manifest" href="/manifest.json" />
-      {/* Favicon */}
       <link
         rel="icon"
         href="/favicon.ico"
         type="image/x-icon"
       />
-      {/* Apple Touch Icon */}
       <link
         rel="apple-touch-icon"
         sizes="180x180"
         href="/icons/icon-192x192.png"
       />
 
-      {/* SEO meta tags */}
       <meta name="description" content={SEO_DESCRIPTION} />
       <meta name="keywords" content={SEO_KEY_WORDS} />
-      <meta name="author" content="Viktor Sadygov" />
+      <meta name="author" content="Victor Sadygov" />
 
-      {/* Open Graph meta tags */}
       <meta property="og:title" content={SITE_NAME} />
       <meta property="og:description" content={SEO_DESCRIPTION} />
       <meta property="og:type" content="website"/>
       <meta property="og:url" content="https://sadygovestate.com"/>
       <meta property="og:image" content="https://nikaestate.ae/upload/iblock/355/gc78kdwwpfg5p422nc9vmvqyt053gstx.png" />
-      {/* Добавляем только после рендеринга на клиенте */}
       {currentUrl && <meta property="og:url" content={currentUrl} />}
       <meta property="og:type" content="website" />
 
-      {/* Twitter Card meta tags */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={SITE_NAME} />
       <meta name="twitter:description" content={SEO_DESCRIPTION} />
       <meta name="twitter:image" content="https://nikaestate.ae/upload/iblock/355/gc78kdwwpfg5p422nc9vmvqyt053gstx.png" />
       
-      {/* Mobile web app settings */}
       <meta
         name="apple-mobile-web-app-status-bar-style"
         content="black-translucent"
       />
-      {/* SEO robots meta tag */}
       <meta name="robots" content="noindex, nofollow" />
 
-      {/* Viewport settings */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+      {/* /// */}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-LX0WD4LHKC"></script>
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-LX0WD4LHKC');
+        `,
+      }} />
+
+      {/* ////// */}
+
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          !function(f,b,e,v,n,t,s) {
+            if(f.fbq)return;
+            n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;
+            n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];
+            t=b.createElement(e);t.async=!0;
+            t.src=v;
+            s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)
+          }(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1239094310501637');
+          fbq('track', 'PageView');
+        `,
+      }} />
+       <noscript>
+        <img height="1" width="1" style={{ display: 'none' }} src="https://www.facebook.com/tr?id=1239094310501637&ev=PageView&noscript=1" />
+      </noscript>
+      
     </head>
   )
 }

@@ -22,9 +22,9 @@ export interface IFormSelect {
 }
 
 export interface IFormState {
-	full_name: string
 	phone: string
-	description: string
+	full_name: string
+	message: string
+	tipo: Partial<IFormSelect>
 	country: Partial<IFormSelect>
-	type: Partial<IFormSelect>
 }

@@ -3,10 +3,12 @@ import jsPDF from 'jspdf'
 import { RefObject, useState } from 'react'
 import { toast } from 'sonner'
 
-import dancingScript from '@/constants/fonts/dancing-script/dancing-font-base64'
+// import dancingScript from '@/constants/fonts/dancing-script/dancing-font-base64'
+import timesNewNormal from '@/constants/fonts/times_new_normal/times-font-base64'
 
 export function useCreatePDF() {
 	const [isLoadingPDF, setLoading] = useState(false)
+	
 
 	const createPDF = async (
 		ref: RefObject<HTMLDivElement>,
@@ -36,11 +38,13 @@ export function useCreatePDF() {
 					format: [pdfWidth, pdfHeight]
 				})
 
-				pdf.addFileToVFS('DancingScript.ttf', dancingScript)
+				pdf.addFileToVFS('TimesNewNormal.ttf', timesNewNormal)
+				pdf.addFont('TimesNewNormal.ttf', 'Times New Normal', 'normal')
+				pdf.setFont('Times New Normal')
 
-				// Регистрируем шрифт
-				pdf.addFont('DancingScript.ttf', 'Dancing Script', 'normal')
-				pdf.setFont('Dancing Script')
+				// pdf.addFileToVFS('DancingScript.ttf', dancingScript)
+				// pdf.addFont('DancingScript.ttf', 'Dancing Script', 'normal')
+				// pdf.setFont('Dancing Script')
 				let yOffset = 0 // Смещение по вертикали в пикселях
 				const topOffset = 8 // Верхний отступ в мм
 				const pageContentHeightInMM = pdfHeight - topOffset * 2 // Доступная высота для контента
