@@ -167,10 +167,20 @@ const PropertyDetail = (params: { slug: string }) => {
 									text={`${data.capacity} ${t('people')}`}
 								/>
 							)}
-							<CharacteristicsCard
-								icon={CatalogArtboardIcon}
-								text={`${data?.sqft} sqft / ${data?.sqmt} sqmt`}
-							/>
+
+							{!!(data?.sqft || data?.sqmt) && (
+								<CharacteristicsCard
+									icon={CatalogArtboardIcon}
+									text={[
+										data?.sqft ? `${data.sqft} sqft` : '',
+										data?.sqmt ? `${data.sqmt} sqmt` : ''
+									]
+										.filter(Boolean)
+										.join(' / ')}
+								/>
+							)}
+
+							 
 
 							{data.pdf ? (
 								<Link
