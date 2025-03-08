@@ -40,8 +40,9 @@ const SimilarProducts = ({ type }: { type: number }) => {
 					{data?.map(el => (
 						<Box
 							key={el.id}
-							minW='357px'
-							maxW='397px'
+							w="100%"
+							minW={{ md: '470px', base: '350px' }}
+							// maxW='550px'
 						>
 							<CatalogCard el={el} />
 						</Box>

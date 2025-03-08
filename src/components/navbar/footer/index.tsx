@@ -138,7 +138,7 @@ const Footer = () => {
 				fontSize={{ md: '18px', base: '14px' }}
 				lineHeight={{ md: '20.7px', base: '16px' }}
 			>
-				<Text color='#8A8989'>© 2023–2024 Victor Sadygov Real Estate</Text>
+				<Text color='#8A8989'>© 2023–2025 Victor Sadygov Real Estate</Text>
 			</Flex>
 		</Container>
 	)
