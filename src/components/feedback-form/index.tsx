@@ -3,6 +3,9 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { BsHouseDoor } from 'react-icons/bs'
 import { GrLocation } from 'react-icons/gr'
+import { toast } from 'sonner'
+
+import { WHATSAPP_LINK } from '@/constants/admin'
 
 import { useCountries } from '@/hooks/useCountries'
 import useTypedLocale from '@/hooks/useLocale'
@@ -46,6 +49,11 @@ const FeedbackForm = () => {
 			tipo: value.tipo.id
 		}
 
+		const link = document.createElement('a')
+		link.setAttribute('target', '_blank')
+		const message = `${t('form_submit.hello')}\n\n${t('form_submit.user_text')} ${value.country.name}\n${t('form_type.placeholder')}: ${value.tipo.name}\n${t('form_submit.phone')}: ${value.phone}\n${value.message}`
+		const wa_link = `${WHATSAPP_LINK}?text=${encodeURIComponent(message)}`
+
 		try {
 			const response = await fetch(
 				'https://api.admin-sadygovestate.com/property/consult/',
@@ -57,6 +65,8 @@ const FeedbackForm = () => {
 					body: JSON.stringify(formData)
 				}
 			)
+			link.href = wa_link
+			link.click()
 
 			if (!response.ok) {
 				const errorResponse = await response.json()
@@ -66,11 +76,6 @@ const FeedbackForm = () => {
 
 			const responseData = await response.json()
 			console.log('Form submitted successfully', responseData)
-
-			const message = `${value.full_name}\n | ${value.phone}\n | ${value.message}`
-			const waLink = `https://wa.me/?text=${encodeURIComponent(message)}`
-
-			window.open(waLink, '_blank')
 
 			setValue({
 				full_name: '',
