@@ -27,4 +27,5 @@ export interface IFormState {
 	message: string
 	tipo: Partial<IFormSelect>
 	country: Partial<IFormSelect>
+	link: string
 }

@@ -1,6 +1,10 @@
-import { Box, Stack, Text } from '@chakra-ui/react'
+'use client'
+
+import { Box, Button, Stack, Text } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { BsHouseDoor } from 'react-icons/bs'
 import { GrLocation } from 'react-icons/gr'
 import { toast } from 'sonner'
@@ -20,19 +24,24 @@ import Title32 from '../ui/texts/Title32'
 
 import { IFormSelect, IFormState } from '@/models/other.model'
 
-const FeedbackForm = () => {
+const FeedbackDetails = () => {
 	const locale = useTypedLocale()
 	const t = useTranslations('Titles')
 	const type_list = useTypeList()
 
 	const { data } = useCountries()
+	const pathname = usePathname()
+	const baseURL = 'https://sadygovestate.com'
+	const slug = pathname.split('/').pop()
+	const propertyURL = `${baseURL}/${locale}/property/${slug}`
+
 	const [value, setValue] = useState<IFormState>({
 		full_name: '',
 		phone: '',
 		message: '',
 		country: {} as Partial<IFormSelect>,
 		tipo: {} as Partial<IFormSelect>,
-		link: ''
+		link: propertyURL
 	})
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
@@ -85,7 +94,7 @@ const FeedbackForm = () => {
 				message: '',
 				country: {} as Partial<IFormSelect>,
 				tipo: {} as Partial<IFormSelect>,
-				link: ''
+				link: propertyURL
 			})
 		} catch (error: any) {
 			console.error('Error during form submission:', error)
@@ -102,8 +111,6 @@ const FeedbackForm = () => {
 		}
 	})
 
-
-	
 
 	return (
 		<Box
@@ -140,7 +147,7 @@ const FeedbackForm = () => {
 							onChange={tipo => setValue({ ...value, tipo })}
 							placeholder={t('form_type.placeholder')}
 							value={value.tipo}
-							data={type_list} // Ensure `type_list` is defined
+							data={type_list}
 						/>
 						<FormSelect
 							icon={GrLocation}
@@ -193,4 +200,4 @@ const FeedbackForm = () => {
 	)
 }
 
-export default FeedbackForm
+export default FeedbackDetails

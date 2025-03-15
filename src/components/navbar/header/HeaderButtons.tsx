@@ -20,6 +20,7 @@ import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
 import useTypedLocale from '@/hooks/useLocale'
 import FeedbackForm from '@/components/feedback-form'
+import FeedbackDetails from '@/components/feedback-form/FeedbackDetails'
 
 const HeaderButtons = () => {
 	const locale = useTypedLocale()
@@ -90,7 +91,7 @@ const HeaderButtons = () => {
 				<ModalContent borderRadius={10}	bg='#F2F2F2' h="600px" display="flex" justifyContent="center" alignItems="center"  overflow="hidden" >
 					<ModalCloseButton />
 					<ModalBody  >
-						<FeedbackForm/>
+						<FeedbackDetails/>
 					</ModalBody>
 				</ModalContent>
 			</Modal>
