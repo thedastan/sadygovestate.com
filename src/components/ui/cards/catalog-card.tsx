@@ -154,7 +154,6 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 								isMini={true}
 							/>
 						)}
-						 
 
 						{!!(el?.sqft || el?.sqmt) && (
 							<CharacteristicsCard
@@ -165,7 +164,7 @@ const CatalogCard = ({ el }: CatalogCardProps) => {
 								]
 									.filter(Boolean)
 									.join(' / ')}
-									isMini={true}
+								isMini={true}
 							/>
 						)}
 					</Flex>

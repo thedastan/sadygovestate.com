@@ -63,6 +63,35 @@ export function useTypes() {
 	return { data, isLoading }
 }
 
+export function useBlog() {
+	const { data, isLoading } = useQuery({
+		queryKey: ['blog'],
+		queryFn: () => propertyService.getBlog()
+	})
+
+	return { data, isLoading }
+}
+
+// export function useBlogSlug(slug_en: string) {
+// 	const { data, isLoading } = useQuery({
+// 		queryKey: ['blog-detail', slug_en],
+// 		queryFn: () => propertyService.getDetailSlug(slug_en)
+// 	})
+
+// 	return { data, isLoading }
+// }
+
+// export function useBlogSlug(slug_en: string) {
+// 	const { data, isLoading } = useQuery({
+// 		queryKey: ['blog-detail', slug_en],
+// 		queryFn: () => propertyService.getDetailSlug(slug_en)
+// 	})
+
+// 	console.log(data, 'nnnnnnnnnnn')
+
+// 	return { data, isLoading }
+// }
+
 function getCountPages(data: RootProperty | undefined): number[] {
 	const result: number[] = []
 	const count = data?.count ? Math.ceil(data.count / 8) : 1

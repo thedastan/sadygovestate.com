@@ -1,4 +1,5 @@
 import Countries from '@/components/countries'
+import Block from '@/components/home/block/Block'
 import CatalogHome from '@/components/home/catalog'
 import Employees from '@/components/home/employees'
 import HomeHero from '@/components/home/hero'
@@ -16,6 +17,7 @@ export default function HomePage() {
 			<PrimeRealEstate />
 			<Management />
 			<Employees />
+			<Block />
 			<Reviews />
 			<Countries mt={{ md: '100px', base: '0' }} />
 		</>

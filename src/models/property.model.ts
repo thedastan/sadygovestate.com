@@ -102,3 +102,25 @@ export interface IPropertyType {
 	name_ar: string
 	name_en: string
 }
+
+export interface IBlogType {
+	id: number
+	title_ru: string
+	title_en: string
+	title_ar: string
+	image: string
+	created_at: string
+	slug_en: string
+}
+
+export interface IBlogSlugType {
+	id: number | string
+	title_ru: string
+	title_en: string
+	title_ar: string
+	image: string
+	description_ru: string
+	description_en: string
+	description_ar: string
+	created_at: string
+}

@@ -3,6 +3,8 @@ import { IFilterStateValue } from '@/store/slices/storage-slice'
 import { PUBLIC_API } from '@/api/interceptors'
 
 import {
+	IBlogSlugType,
+	IBlogType,
 	IProperty,
 	IPropertyDetail,
 	IPropertyStage,
@@ -98,6 +100,41 @@ class PropertyService {
 			console.error(e)
 		}
 	}
+
+	async getBlog() {
+		try {
+			const response = await PUBLIC_API.get<IBlogType[]>(
+				`${this.BASE_URL}blog/`
+			)
+
+			return response.data
+		} catch (e) {
+			console.error(e)
+		}
+	}
+
+	// async getDetailSlug(slug_en: string) {
+	// 	try {
+	// 		const response = await PUBLIC_API.get<IBlogSlugType>(
+	// 			this.BASE_URL + `blog/${slug_en}`
+	// 		)
+
+	// 		console.log(response.data, 'response.data')
+
+	// 		return response.data
+	// 	} catch (e) {
+	// 		console.error(e)
+	// 	}
+	// }
+
+	// async getDetailSlug(slug_en: string) {
+	// 	try {
+	// 		const response = await PUBLIC_API.get<IBlogSlugType>(
+	// 			`${this.BASE_URL}blog/${slug_en}/`
+	// 		)
+	// 		return response.data
+	// 	} catch (e) {}
+	// }
 }
 
 export const propertyService = new PropertyService()
