@@ -4,10 +4,11 @@ import { Box, Container, Flex, Skeleton, Text } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import React from 'react'
 
 import TitleComponent from '@/components/ui/texts/TitleComponent'
+
+import notImage from '@/assets/img/no-photo.png'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
@@ -17,8 +18,9 @@ import { useBlog } from '@/hooks/useProperties'
 
 const Block = () => {
 	const { data, isLoading } = useBlog()
+	console.log(data, 'data')
+
 	const locale = useTypedLocale()
-	const router = useRouter()
 
 	const t = useTranslations('Titles')
 
@@ -41,8 +43,7 @@ const Block = () => {
 						}}
 					>
 						{isLoading
-							? // Скелетон для загрузки
-								Array.from({ length: 4 }).map((_, index) => (
+							? Array.from({ length: 4 }).map((_, index) => (
 									<Box
 										key={index}
 										bg='white'
@@ -92,12 +93,27 @@ const Block = () => {
 												borderRadius={10}
 												overflow='hidden'
 											>
-												<Image
-													objectFit='cover'
-													fill
-													src={el.image}
-													alt={el.slug_en}
-												/>
+												{el.image ? (
+													<Image
+														objectFit='cover'
+														fill
+														src={el.image}
+														alt={el.slug_en || 'Нет данных'}
+													/>
+												) : (
+													<Box
+														bg='#EFEFEF'
+														w='100%'
+														h={{ md: '230px', base: '250px' }}
+													>
+														<Image
+															objectFit='cover'
+															fill
+															src={notImage}
+															alt='Нет данных'
+														/>
+													</Box>
+												)}
 											</Box>
 											<Box
 												py={2}
