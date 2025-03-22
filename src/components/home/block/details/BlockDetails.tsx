@@ -3,6 +3,7 @@
 import { Box, Container, Skeleton, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import Image from 'next/image'
+import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
@@ -13,14 +14,14 @@ const BlockDetails = () => {
 	const locale = useTypedLocale()
 	const [des, setDes] = useState<any | null>(null)
 	const [isLoading, setIsLoading] = useState(true)
+	const { id } = useParams()
 
 	const fetchData = async () => {
 		try {
 			const { data } = await axios.get(
-				`https://api.admin-sadygovestate.com/property/blog/the-real-estate-in-dubai`
+				`https://api.admin-sadygovestate.com/property/blog/${id}`
 			)
-
-			console.log(data)
+			console.log(data, 'slug data')
 			setDes(data)
 		} catch (e) {
 			console.error('Ошибка', e)
@@ -32,6 +33,12 @@ const BlockDetails = () => {
 	useEffect(() => {
 		fetchData()
 	}, [])
+
+	console.log(des, 'nnnnnnnnn')
+	console.log(id, 'asdf')
+
+	// blog/abu-dhabi-real-estate-the-perfect-combination-of-comfort-and-inve-1
+	// block/abu-dhabi-real-estate-the-perfect-combination-of-comfort-and-inve-1
 
 	return (
 		<Container maxW={CONTAINER_WIDTH}>
@@ -70,21 +77,23 @@ const BlockDetails = () => {
 							{des.title_ru}
 						</Text>
 
-						<Box
-							mt={6}
-							position='relative'
-							w='100%'
-							overflow='hidden'
-							borderRadius={20}
-							h={{ md: 500, base: 300 }}
-						>
-							<Image
-								src={des.image}
-								fill
-								objectFit='cover'
-								alt='img'
-							/>
-						</Box>
+						{des.image && (
+							<Box
+								mt={6}
+								position='relative'
+								w='100%'
+								overflow='hidden'
+								borderRadius={20}
+								h={{ md: 500, base: 300 }}
+							>
+								<Image
+									src={des.image}
+									fill
+									objectFit='cover'
+									alt='img'
+								/>
+							</Box>
+						)}
 
 						<Box
 							mt={10}
