@@ -37,10 +37,10 @@ const Block = () => {
 				>
 					<Flex
 						gap={{ md: '14px', base: '8.74px' }}
-						px={{
-							xl: `${(clientWidth - parseInt(CONTAINER_WIDTH)) / 2 + 16}px`,
-							base: '0'
-						}}
+						// px={{
+						// 	xl: `${(clientWidth - parseInt(CONTAINER_WIDTH)) / 2 + 16}px`,
+						// 	base: '0'
+						// }}
 					>
 						{isLoading
 							? Array.from({ length: 4 }).map((_, index) => (
