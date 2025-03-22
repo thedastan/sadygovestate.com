@@ -74,7 +74,7 @@ const BlockDetails = () => {
 							fontSize='2xl'
 							fontWeight='bold'
 						>
-							{des.title_ru}
+							{des[`title_${locale}`]}
 						</Text>
 
 						{des.image && (
@@ -98,8 +98,33 @@ const BlockDetails = () => {
 						<Box
 							mt={10}
 							fontSize={18}
+							overflow='hidden'
+							wordBreak='break-word'
+							sx={{
+								h2: {
+									fontSize: '22px',
+									fontWeight: 'bold',
+									marginTop: '20px'
+								},
+								img: {
+									display: 'block',
+									maxWidth: '100%',
+									margin: '10px 0',
+									borderRadius: '20px',
+									objectFit: 'cover' // Исправленный синтаксис
+								}
+							}}
 							dangerouslySetInnerHTML={{
-								__html: des[`description_${locale}`]
+								__html:
+									des?.[`description_${locale}`]
+										?.replace(
+											/src="\/media/g,
+											'src="https://api.admin-sadygovestate.com/media'
+										)
+										?.replace(
+											/style="[^"]*height:\d+px[^"]*"/g,
+											'style="height:400px; width:100% ;"'
+										) || ''
 							}}
 						/>
 
@@ -124,3 +149,7 @@ const BlockDetails = () => {
 }
 
 export default BlockDetails
+
+{
+	/* <img alt=\"\" src=\"/media/uploads/2025/03/22/6626124071426c9609d38656_full-1.jpg\" style=\"height:1125px; width:2000px\" /> */
+}
