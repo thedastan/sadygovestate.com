@@ -3,19 +3,18 @@
 import { Box } from '@chakra-ui/react'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
-import { Autoplay, EffectFade, Pagination } from 'swiper/modules'
+import { Autoplay, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/scss/navigation'
 import 'swiper/scss/pagination'
 
-import { useVideo } from '@/hooks/usePersons'
-
 import CountriesSwiper from './countries-swiper'
 import FeaturedProperties from './featured-properties'
 import ObjectsForInvestment from './objects-for-investment'
+import { MainPageProps } from './types'
 
-const HeroSwiper = () => {
-	const { link, isLoading } = useVideo()
+const HeroSwiper = (props: MainPageProps) => {
+	const link = props.video ? props.video[0].link : undefined
 	const pagination = {
 		clickable: true,
 		renderBullet: function (index: number, className: string) {
@@ -45,13 +44,20 @@ const HeroSwiper = () => {
 				style={{ height: '100%' }}
 			>
 				<SwiperSlide style={{ height: '100%' }}>
-					<CountriesSwiper video={link} />
+					<CountriesSwiper
+						video={link}
+						countries={props.countries}
+						properties={props.all_properties}
+					/>
 				</SwiperSlide>
 				<SwiperSlide style={{ height: '100%' }}>
-					<FeaturedProperties video={link} />
+					<FeaturedProperties
+						video={link}
+						recommended={props.recommended}
+					/>
 				</SwiperSlide>
 				<SwiperSlide style={{ height: '100%' }}>
-					<ObjectsForInvestment />
+					<ObjectsForInvestment investment={props.investment} />
 				</SwiperSlide>
 			</Swiper>
 		</Box>

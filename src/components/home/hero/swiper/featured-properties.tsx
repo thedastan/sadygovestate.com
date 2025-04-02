@@ -8,9 +8,13 @@ import BgImage from '@/assets/img/slider-recomended.webp'
 import { useRecommendProperties } from '@/hooks/useProperties'
 
 import SlideProvider from './slide-provider'
+import { IProperty } from '@/models/property.model'
 
-const FeaturedProperties = ({ video }: { video?: string }) => {
-	const { data, isLoading } = useRecommendProperties()
+interface Props {
+	video?: string
+	recommended: IProperty[] | undefined
+}
+const FeaturedProperties = ({ video, recommended }: Props) => {
 	const t = useTranslations('Titles')
 	return (
 		<SlideProvider
@@ -26,7 +30,11 @@ const FeaturedProperties = ({ video }: { video?: string }) => {
 				<Flex
 					w='100%'
 					justifyContent={{
-						lg: !!data ? (data?.length < 4 ? 'end' : 'start') : 'end',
+						lg: !!recommended
+							? recommended?.length < 4
+								? 'end'
+								: 'start'
+							: 'end',
 						base: 'start'
 					}}
 					overflowX='auto'
@@ -37,21 +45,12 @@ const FeaturedProperties = ({ video }: { video?: string }) => {
 						px={{ sm: '5', base: '4' }}
 						alignItems='start'
 					>
-						{isLoading
-							? [1, 2, 3].map(el => (
-									<Skeleton
-										key={el}
-										w={{ md: '284px', base: '260px' }}
-										h={{ md: '250px', base: '234px' }}
-										rounded='20px'
-									/>
-								))
-							: data?.map(el => (
-									<SliderPropertyCard
-										el={el}
-										key={el.id}
-									/>
-								))}
+						{recommended?.map(el => (
+							<SliderPropertyCard
+								el={el}
+								key={el.id}
+							/>
+						))}
 					</Flex>
 				</Flex>
 			</Flex>

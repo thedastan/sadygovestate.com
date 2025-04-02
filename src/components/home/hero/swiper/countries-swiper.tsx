@@ -7,33 +7,33 @@ import { LoadingImage } from '@/config/helpers'
 import { attribute_From } from '@/config/intl-variables'
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
-import { useCountries } from '@/hooks/useCountries'
 import { formatToDE } from '@/hooks/useCreatorPriceObject'
 import useTypedLocale from '@/hooks/useLocale'
-import { useProperties } from '@/hooks/useProperties'
 
 import SlideProvider from './slide-provider'
 import { ICountry } from '@/models/country.model'
 import { IProperty } from '@/models/property.model'
 
-const CountriesSwiper = ({ video }: { video?: string }) => {
+interface Props {
+	properties: IProperty[] | undefined
+	video?: string
+	countries: ICountry[] | undefined
+}
+const CountriesSwiper = ({ video, countries, properties }: Props) => {
 	const [active, setActive] = useState<ICountry>()
 	const [isLoading, setLoading] = useState(true)
-	const { data } = useCountries()
-	const { data: properties } = useProperties()
-	const main_properties = properties?.filter(el => el.main_page)
 	const locale = useTypedLocale()
 	const [isLargerThanMd] = useMediaQuery('(min-width: 768px)')
 	const t = useTranslations('Titles')
 	useEffect(() => {
-		if (data?.length) {
-			setActive(data[0])
-			LoadingImage(data[0]?.image, setLoading)
+		if (countries?.length) {
+			setActive(countries[0])
+			LoadingImage(countries[0]?.image, setLoading)
 		}
-	}, [data])
+	}, [countries])
 
-	console.log(properties);
-	
+	console.log(properties)
+
 	return (
 		<SlideProvider
 			bgImage={active?.image || ''}
@@ -55,7 +55,7 @@ const CountriesSwiper = ({ video }: { video?: string }) => {
 					gap='3'
 					px='3'
 				>
-					{main_properties
+					{properties
 						?.filter(el => el.country_id === active?.id)
 						?.slice(0, isLargerThanMd ? 4 : 2)
 						?.map((el, idx) => (
@@ -80,7 +80,7 @@ const CountriesSwiper = ({ video }: { video?: string }) => {
 						gap={{ md: '17px', sm: '10px', base: '1' }}
 						px='4'
 					>
-						{data?.map(el => (
+						{countries?.map(el => (
 							<TabCard
 								key={el.id}
 								onClick={() => setActive(el)}

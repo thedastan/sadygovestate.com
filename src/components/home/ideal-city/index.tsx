@@ -17,8 +17,13 @@ import { CONTAINER_WIDTH } from '@/config/_variables.config'
 import { useCountries } from '@/hooks/useCountries'
 import { useFullWindowSize } from '@/hooks/useFullHeight'
 
-const IdealCity = () => {
-	const { data, isLoading } = useCountries()
+import { ICountry } from '@/models/country.model'
+
+interface Props {
+	data?: ICountry[]
+}
+const IdealCity = ({ data }: Props) => {
+	// const { data, isLoading } = useCountries()
 	const t = useTranslations('Titles')
 	const { clientWidth } = useFullWindowSize()
 	return (
@@ -45,17 +50,16 @@ const IdealCity = () => {
 						base: '4'
 					}}
 				>
-					{isLoading &&
-						[1, 2, 3, 4, 5].map(idx => <SkeletonCountries key={idx} />)}
-					{!isLoading &&
-						data?.map(el => (
-							<CountryCard
-								key={el.id}
-								el={el}
-								offer_text={t('offers')}
-								watch_text={t('see_more')}
-							/>
-						))}
+					{/* {isLoading &&
+						[1, 2, 3, 4, 5].map(idx => <SkeletonCountries key={idx} />)} */}
+					{data?.map(el => (
+						<CountryCard
+							key={el.id}
+							el={el}
+							offer_text={t('offers')}
+							watch_text={t('see_more')}
+						/>
+					))}
 				</Flex>
 			</Flex>
 		</Box>

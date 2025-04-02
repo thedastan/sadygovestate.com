@@ -2,6 +2,7 @@ import { IFilterStateValue } from '@/store/slices/storage-slice'
 
 import { PUBLIC_API } from '@/api/interceptors'
 
+import { ICountry } from '@/models/country.model'
 import {
 	IBlogSlugType,
 	IBlogType,
@@ -36,6 +37,18 @@ class PropertyService {
 			)
 
 			return response.data
+		} catch (e) {
+			console.error(e)
+		}
+	}
+
+	async getAllPro() {
+		try {
+			const response = await PUBLIC_API.get<RootProperty>(
+				`${this.BASE_URL}?page_size=300`
+			)
+
+			return response.data.results
 		} catch (e) {
 			console.error(e)
 		}
@@ -112,7 +125,6 @@ class PropertyService {
 			console.error(e)
 		}
 	}
- 
 }
 
 export const propertyService = new PropertyService()

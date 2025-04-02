@@ -6,12 +6,13 @@ import { useTranslations } from 'next-intl'
 import { CONTAINER_WIDTH } from '@/config/_variables.config'
 
 import HeroSwiper from './swiper'
+import { MainPageProps } from './swiper/types'
 
-const HomeHero = () => {
+const HomeHero = (props: MainPageProps) => {
 	const t = useTranslations('Titles')
 	return (
 		<Container maxW={CONTAINER_WIDTH}>
-			<HeroSwiper />
+			<HeroSwiper {...props} />
 
 			<Text
 				mt={{ md: '0', base: '30px' }}
