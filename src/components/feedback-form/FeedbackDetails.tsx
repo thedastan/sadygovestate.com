@@ -1,33 +1,27 @@
 'use client'
 
-import { Box, Button, Stack, Text } from '@chakra-ui/react'
+import { Box,  Stack, Text } from '@chakra-ui/react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { BsHouseDoor } from 'react-icons/bs'
-import { GrLocation } from 'react-icons/gr'
-import { toast } from 'sonner'
+import {  useState } from 'react'
 
 import { WHATSAPP_LINK } from '@/constants/admin'
 
 import { useCountries } from '@/hooks/useCountries'
 import useTypedLocale from '@/hooks/useLocale'
 
-import { useTypeList } from '../navbar/data'
 import AnimateButton from '../ui/buttons/AnimateButton'
-import FormSelect from '../ui/inputs/FormSelect'
 import InputComponent from '../ui/inputs/InputComponent'
 import PhoneInputComponent from '../ui/inputs/PhoneInputComponent'
 import Description from '../ui/texts/Description'
 import Title32 from '../ui/texts/Title32'
 
 import { IFormSelect, IFormState } from '@/models/other.model'
+import InputTextArea from '../ui/inputs/InputTextArea'
 
 const FeedbackDetails = () => {
 	const locale = useTypedLocale()
 	const t = useTranslations('Titles')
-	const type_list = useTypeList()
 
 	const { data } = useCountries()
 	const pathname = usePathname()
@@ -38,7 +32,7 @@ const FeedbackDetails = () => {
 	const [value, setValue] = useState<IFormState>({
 		full_name: '',
 		phone: '',
-		message: '',
+		message: t('description_message'),
 		country: {} as Partial<IFormSelect>,
 		tipo: {} as Partial<IFormSelect>,
 		link: propertyURL
@@ -62,7 +56,7 @@ const FeedbackDetails = () => {
 
 		const link = document.createElement('a')
 		link.setAttribute('target', '_blank')
-		const message = `${t('form_submit.hello')}\n\n${t('form_submit.user_text')} ${value.country.name}\n${t('form_type.placeholder')}: ${value.tipo.name}\n${t('form_submit.phone')}: ${value.phone}\n${value.message}`
+		const message = `${value.message}\n${t('form_submit.phone')}: ${value.phone}`
 		const wa_link = `${WHATSAPP_LINK}?text=${encodeURIComponent(message)}`
 
 		try {
@@ -91,7 +85,7 @@ const FeedbackDetails = () => {
 			setValue({
 				full_name: '',
 				phone: '',
-				message: '',
+				message:  t('description_message'),
 				country: {} as Partial<IFormSelect>,
 				tipo: {} as Partial<IFormSelect>,
 				link: propertyURL
@@ -110,7 +104,6 @@ const FeedbackDetails = () => {
 			name: el[`name_${locale}`]
 		}
 	})
-
 
 	return (
 		<Box
@@ -142,7 +135,7 @@ const FeedbackDetails = () => {
 						spacing='3'
 						mt='30px'
 					>
-						<FormSelect
+						{/* <FormSelect
 							icon={BsHouseDoor}
 							onChange={tipo => setValue({ ...value, tipo })}
 							placeholder={t('form_type.placeholder')}
@@ -155,7 +148,7 @@ const FeedbackDetails = () => {
 							placeholder={t('country')}
 							value={value.country}
 							data={countries_list}
-						/>
+						/> */}
 						<InputComponent
 							handleChange={e =>
 								setValue({ ...value, full_name: e.target.value })
@@ -168,7 +161,7 @@ const FeedbackDetails = () => {
 							handleChange={phone => setValue({ ...value, phone })}
 							value={value.phone}
 						/>
-						<InputComponent
+						<InputTextArea
 							handleChange={e =>
 								setValue({ ...value, message: e.target.value })
 							}

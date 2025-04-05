@@ -20,6 +20,7 @@
 		"recommended_properties": "Recommended properties",
 		"investment_properties": "Properties for investment",
 		"read_more": "Know more",
+		"description_message":"Hello! I would like to know more about the project featured on this page.",
 		"find_ideal_city": {
 			"title": "Find your ideal city",
 			"query": "ideal city"

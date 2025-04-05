@@ -5,8 +5,6 @@ import {
 	ModalBody,
 	ModalCloseButton,
 	ModalContent,
-	ModalFooter,
-	ModalHeader,
 	ModalOverlay,
 	useDisclosure
 } from '@chakra-ui/react'
@@ -14,12 +12,10 @@ import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { GoChevronLeft } from 'react-icons/go'
 
-import { WHATSAPP_LINK } from '@/constants/admin'
 
 import { DASHBOARD_PAGES } from '@/config/pages/dashboard-url.config'
 
 import useTypedLocale from '@/hooks/useLocale'
-import FeedbackForm from '@/components/feedback-form'
 import FeedbackDetails from '@/components/feedback-form/FeedbackDetails'
 
 const HeaderButtons = () => {
