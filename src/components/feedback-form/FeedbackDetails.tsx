@@ -35,7 +35,7 @@ const FeedbackDetails = () => {
 		message: t('description_message'),
 		country: {} as Partial<IFormSelect>,
 		tipo: {} as Partial<IFormSelect>,
-		link: propertyURL
+		link: ""
 	})
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
@@ -56,7 +56,7 @@ const FeedbackDetails = () => {
 
 		const link = document.createElement('a')
 		link.setAttribute('target', '_blank')
-		const message = `${value.message}\n${t('form_submit.phone')}: ${value.phone}`
+		const message = `${value.message}\n${t('form_submit.phone')}: ${value.phone}\n ${value.link}`
 		const wa_link = `${WHATSAPP_LINK}?text=${encodeURIComponent(message)}`
 
 		try {
@@ -104,6 +104,10 @@ const FeedbackDetails = () => {
 			name: el[`name_${locale}`]
 		}
 	})
+
+
+// console.log(value,"asim aism aism");
+
 
 	return (
 		<Box
@@ -194,3 +198,5 @@ const FeedbackDetails = () => {
 }
 
 export default FeedbackDetails
+
+ 

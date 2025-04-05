@@ -49,6 +49,7 @@ const PropertyDetail = (params: { slug: string }) => {
 	const hasDatePassed = moment().isAfter(moment(data?.year, 'YYYY-MM-DD'))
 
 	const { createPDF, isLoadingPDF } = useCreatePDF()
+	
 
 	const address = !!data
 		? `${data[`district_${locale}`] || ''} ${data[`address_${locale}`] ? `, ` + data[`address_${locale}`] : ''}`
