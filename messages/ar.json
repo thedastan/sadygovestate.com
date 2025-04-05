@@ -61,7 +61,8 @@
 			"country_toast": "اختر البلد",
 			"hello": "مرحباً!",
 			"user_text": "أنا مهتم بشراء عقار في",
-			"phone": "هاتف"
+			"phone": "هاتف",
+			"link":"الرابط"
 		},
 		"placeholder": {
 			"name": "اسم",

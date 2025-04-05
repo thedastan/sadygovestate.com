@@ -63,7 +63,8 @@
 			"type_toast": "Select type",
 			"hello": "Hello!",
 			"user_text": "I am interested in buying real estate in",
-			"phone": "Phone"
+			"phone": "Phone",
+			"link":"Link"
 		},
 		"placeholder": {
 			"name": "Name",
