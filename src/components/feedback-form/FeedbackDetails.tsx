@@ -35,7 +35,7 @@ const FeedbackDetails = () => {
 		message: t('description_message'),
 		country: {} as Partial<IFormSelect>,
 		tipo: {} as Partial<IFormSelect>,
-		link: ""
+		link: propertyURL
 	})
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
@@ -56,7 +56,7 @@ const FeedbackDetails = () => {
 
 		const link = document.createElement('a')
 		link.setAttribute('target', '_blank')
-		const message = `${value.message}\n${t('form_submit.phone')}: ${value.phone}\n ${value.link}`
+		const message = `${value.message}\n${t('form_submit.phone')}: ${value.phone}\n${t('form_submit.link')}:${value.link}`
 		const wa_link = `${WHATSAPP_LINK}?text=${encodeURIComponent(message)}`
 
 		try {
